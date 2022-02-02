@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "heads:donkey_head",
+    "heads:horse_black_head",
+    "heads:horse_brown_head",
+    "heads:horse_chestnut_head",
+    "heads:horse_creamy_head",
+    "heads:horse_darkbrown_head",
+    "heads:horse_gray_head",
+    "heads:horse_skeleton_head",
+    "heads:horse_undead_head",
+    "heads:horse_white_head"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "heads:axolotl_lucy_head",
+    "heads:axolotl_wild_head",
+    "heads:axolotl_gold_head",
+    "heads:axolotl_cyan_head",
+    "heads:axolotl_blue_head"
+  ]
+}

@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[39,)"
+issueTrackerURL="https://github.com/Mrbysco/Heads/issues"
+license="MIT"
+
+[[mods]]
+modId="heads"
+version="${file.jarVersion}"
+displayName="Heads"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/heads"
+authors="Mrbysco"
+description='''
+Adds more mob heads to the game
+'''
+[[dependencies.heads]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.1,)"
+ordering="NONE"
+side="BOTH"

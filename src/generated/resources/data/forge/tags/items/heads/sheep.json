@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "heads:black_sheep_head",
+    "heads:blue_sheep_head",
+    "heads:brown_sheep_head",
+    "heads:cyan_sheep_head",
+    "heads:gray_sheep_head",
+    "heads:green_sheep_head",
+    "heads:light_blue_sheep_head",
+    "heads:light_gray_sheep_head",
+    "heads:lime_sheep_head",
+    "heads:magenta_sheep_head",
+    "heads:orange_sheep_head",
+    "heads:pink_sheep_head",
+    "heads:purple_sheep_head",
+    "heads:red_sheep_head",
+    "heads:sheep_head",
+    "heads:sheep_shaven_head",
+    "heads:yellow_sheep_head"
+  ]
+}

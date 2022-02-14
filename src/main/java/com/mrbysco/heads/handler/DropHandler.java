@@ -9,10 +9,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 public class DropHandler {
 	public static void onLivingDrop(LivingDropsEvent event) {
 		LivingEntity livingEntity = event.getEntityLiving();
-		ItemStack headStack = HeadUtil.getStackForEntity(livingEntity, event.getSource());
-		if(headStack.isEmpty() && (livingEntity.getRandom().nextDouble() <= (event.getLootingLevel() * 0.01d))) {
-			headStack = HeadUtil.getStackForEntity(livingEntity, event.getSource());
-		}
+		ItemStack headStack = HeadUtil.getStackForEntity(livingEntity, event.getSource(), event.getLootingLevel());
 		if(!headStack.isEmpty()) {
 			event.getDrops().add(new ItemEntity(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), headStack));
 		}

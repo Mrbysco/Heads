@@ -11,6 +11,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -620,7 +621,7 @@ public class HeadsDatagen {
 			super(dataGenerator, blockTagsProvider, Heads.MOD_ID, existingFileHelper);
 		}
 
-		public static final Tag.Named<Item> HEADS = forgeTag("heads");
+		public static final TagKey<Item> HEADS = forgeTag("heads");
 
 		@Override
 		protected void addTags() {
@@ -710,13 +711,13 @@ public class HeadsDatagen {
 		}
 
 		private void addHead(Item block, String mobName) {
-			Tag.Named<Item> headTag = forgeTag("heads/" + mobName);
+			TagKey<Item> headTag = forgeTag("heads/" + mobName);
 			this.tag(HEADS).addTag(headTag);
 			this.tag(headTag).add(block.asItem());
 		}
 
-		private static Tag.Named<Item> forgeTag(String name) {
-			return ItemTags.bind(new ResourceLocation("forge", name).toString());
+		private static TagKey<Item> forgeTag(String name) {
+			return ItemTags.create(new ResourceLocation("forge", name));
 		}
 	}
 }

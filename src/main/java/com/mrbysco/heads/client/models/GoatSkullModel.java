@@ -18,18 +18,18 @@ public class GoatSkullModel extends HeadModelBase {
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(2, 61).addBox("right ear", -5.5F, -10.0F, -1.0F, 3.0F, 2.0F, 1.0F)
-				.texOffs(2, 61).mirror().addBox("left ear", 2.5F, -10.0F, -1.0F, 3.0F, 2.0F, 1.0F)
-				.texOffs(23, 52).addBox("goatee", -0F, -2.0F, -5.0F, 0.0F, 7.0F, 5.0F),
+						.texOffs(2, 61).addBox("right ear", -5.5F, -10.0F, -1.0F, 3.0F, 2.0F, 1.0F)
+						.texOffs(2, 61).mirror().addBox("left ear", 2.5F, -10.0F, -1.0F, 3.0F, 2.0F, 1.0F)
+						.texOffs(23, 52).addBox("goatee", -0F, -2.0F, -5.0F, 0.0F, 7.0F, 5.0F),
 				PartPose.ZERO);
 		head.addOrReplaceChild("left_horn", CubeListBuilder.create()
-				.texOffs(12, 55).addBox(0.49F, -15.0F, -1.0F, 2.0F, 7.0F, 2.0F),
+						.texOffs(12, 55).addBox(0.49F, -15.0F, -1.0F, 2.0F, 7.0F, 2.0F),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 		head.addOrReplaceChild("right_horn", CubeListBuilder.create()
-				.texOffs(12, 55).addBox(-2.49F, -15.0F, -1.0F, 2.0F, 7.0F, 2.0F),
+						.texOffs(12, 55).addBox(-2.49F, -15.0F, -1.0F, 2.0F, 7.0F, 2.0F),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 		head.addOrReplaceChild("nose", CubeListBuilder.create()
-				.texOffs(34, 46).addBox(-2.5F, -7.0F, -1.0F, 5.0F, 7.0F, 10.0F),
+						.texOffs(34, 46).addBox(-2.5F, -7.0F, -1.0F, 5.0F, 7.0F, 10.0F),
 				PartPose.rotation(0.9599F, 0.0F, 0.0F));
 
 		return meshdefinition;

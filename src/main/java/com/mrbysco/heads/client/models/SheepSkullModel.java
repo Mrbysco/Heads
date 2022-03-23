@@ -14,6 +14,7 @@ public class SheepSkullModel extends SkullModelBase {
 	private final ModelPart root;
 	protected final ModelPart head;
 	protected final SheepSkullFurModel furModel;
+
 	public SheepSkullModel(ModelPart root) {
 		this.root = root;
 		this.head = root.getChild("head");
@@ -30,7 +31,7 @@ public class SheepSkullModel extends SkullModelBase {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(0, 0).addBox(-3.0F, -6.0F, -4.0F, 6.0F, 6.0F, 8.0F),
+						.texOffs(0, 0).addBox(-3.0F, -6.0F, -4.0F, 6.0F, 6.0F, 8.0F),
 				PartPose.ZERO);
 
 		return meshdefinition;
@@ -43,10 +44,10 @@ public class SheepSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float)Math.PI / 180F);
-		this.head.xRot = xRot * ((float)Math.PI / 180F);
+		this.head.yRot = yRot * ((float) Math.PI / 180F);
+		this.head.xRot = xRot * ((float) Math.PI / 180F);
 
-		if(furModel != null) {
+		if (furModel != null) {
 			furModel.setupAnim(mouthAnimation, yRot, xRot);
 		}
 	}
@@ -55,7 +56,7 @@ public class SheepSkullModel extends SkullModelBase {
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 
-		if(furModel != null) {
+		if (furModel != null) {
 			furModel.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 		}
 	}

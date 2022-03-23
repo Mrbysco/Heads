@@ -35,7 +35,7 @@ public class SheepSkullFurModel extends SkullModelBase {
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(0, 0).addBox(-3.0F, -6.0F, -2.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.6F)),
+						.texOffs(0, 0).addBox(-3.0F, -6.0F, -2.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.6F)),
 				PartPose.ZERO);
 
 		return meshdefinition;
@@ -48,8 +48,8 @@ public class SheepSkullFurModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float)Math.PI / 180F);
-		this.head.xRot = xRot * ((float)Math.PI / 180F);
+		this.head.yRot = yRot * ((float) Math.PI / 180F);
+		this.head.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

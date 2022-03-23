@@ -16,9 +16,9 @@ public class CowSkullModel extends HeadModelBase {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(0, 0).addBox(-4.0F, -8.0F, -2.0F, 8.0F, 8.0F, 6.0F)
-				.texOffs(22, 0).addBox("right_horn", -5.0F, -9.0F, 0.0F, 1.0F, 3.0F, 1.0F)
-				.texOffs(22, 0).addBox("left_horn", 4.0F, -9.0F, -0.0F, 1.0F, 3.0F, 1.0F),
+						.texOffs(0, 0).addBox(-4.0F, -8.0F, -2.0F, 8.0F, 8.0F, 6.0F)
+						.texOffs(22, 0).addBox("right_horn", -5.0F, -9.0F, 0.0F, 1.0F, 3.0F, 1.0F)
+						.texOffs(22, 0).addBox("left_horn", 4.0F, -9.0F, -0.0F, 1.0F, 3.0F, 1.0F),
 				PartPose.ZERO);
 
 		return meshdefinition;

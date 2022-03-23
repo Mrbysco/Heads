@@ -49,7 +49,7 @@ public class WallHeadBlock extends WallSkullBlock {
 		BlockPos blockpos = placeContext.getClickedPos();
 		Direction[] adirection = placeContext.getNearestLookingDirections();
 
-		for(Direction direction : adirection) {
+		for (Direction direction : adirection) {
 			if (direction.getAxis().isHorizontal()) {
 				Direction direction1 = direction.getOpposite();
 				blockstate = blockstate.setValue(FACING, direction1);

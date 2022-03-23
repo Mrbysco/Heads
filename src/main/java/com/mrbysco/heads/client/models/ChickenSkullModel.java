@@ -17,7 +17,7 @@ public class ChickenSkullModel extends HeadModelBase {
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(0, 0).addBox(-2.0F, -6.0F,  1F, 4.0F, 6.0F, 3.0F), PartPose.ZERO);
+				.texOffs(0, 0).addBox(-2.0F, -6.0F, 1F, 4.0F, 6.0F, 3.0F), PartPose.ZERO);
 		head.addOrReplaceChild("beak", CubeListBuilder.create()
 				.texOffs(14, 0).addBox(-2.0F, -4.0F, -1F, 4.0F, 2.0F, 2.0F), PartPose.ZERO);
 		head.addOrReplaceChild("red_thing", CubeListBuilder.create()

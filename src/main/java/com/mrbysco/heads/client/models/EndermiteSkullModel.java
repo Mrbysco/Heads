@@ -20,7 +20,7 @@ public class EndermiteSkullModel extends SkullModelBase {
 		this.root = root;
 		this.bodyParts = new ModelPart[2];
 
-		for(int i = 0; i < 2; ++i) {
+		for (int i = 0; i < 2; ++i) {
 			this.bodyParts[i] = root.getChild(createSegmentName(i));
 		}
 	}
@@ -35,12 +35,12 @@ public class EndermiteSkullModel extends SkullModelBase {
 
 		float f = -3.5F;
 
-		for(int i = 0; i < 2; ++i) {
+		for (int i = 0; i < 2; ++i) {
 			partdefinition.addOrReplaceChild(createSegmentName(i), CubeListBuilder.create()
-					.texOffs(BODY_TEXS[i][0], BODY_TEXS[i][1]).addBox((float)BODY_SIZES[i][0] * -0.5F, 3.0f, ((float)BODY_SIZES[i][2] * -0.5F) + 1.5F, (float)BODY_SIZES[i][0], (float)BODY_SIZES[i][1], (float)BODY_SIZES[i][2]),
-						PartPose.offset(0.0F, (-3 - (float)(BODY_SIZES[i][1])), f));
+							.texOffs(BODY_TEXS[i][0], BODY_TEXS[i][1]).addBox((float) BODY_SIZES[i][0] * -0.5F, 3.0f, ((float) BODY_SIZES[i][2] * -0.5F) + 1.5F, (float) BODY_SIZES[i][0], (float) BODY_SIZES[i][1], (float) BODY_SIZES[i][2]),
+					PartPose.offset(0.0F, (-3 - (float) (BODY_SIZES[i][1])), f));
 			if (i < 3) {
-				f += (float)(BODY_SIZES[i][2] + BODY_SIZES[i + 1][2]) * 0.5F;
+				f += (float) (BODY_SIZES[i][2] + BODY_SIZES[i + 1][2]) * 0.5F;
 			}
 		}
 
@@ -54,8 +54,8 @@ public class EndermiteSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float)Math.PI / 180F);
-		this.root.xRot = xRot * ((float)Math.PI / 180F);
+		this.root.yRot = yRot * ((float) Math.PI / 180F);
+		this.root.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

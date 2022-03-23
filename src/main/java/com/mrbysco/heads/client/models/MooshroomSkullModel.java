@@ -28,7 +28,7 @@ public class MooshroomSkullModel extends CowSkullModel {
 		poseStack.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
 		poseStack.scale(-1.0F, -1.0F, 1.0F);
 		poseStack.translate(-0.5D, -0.5D, -0.5D);
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot * ((float)Math.PI / 180F)));
+		poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot * ((float) Math.PI / 180F)));
 
 		blockrenderdispatcher.renderSingleBlock(mushroomState, poseStack, minecraft.renderBuffers().bufferSource(), packedLightIn, packedOverlayIn, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
 	}

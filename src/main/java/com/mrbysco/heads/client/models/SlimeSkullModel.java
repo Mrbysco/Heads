@@ -52,11 +52,11 @@ public class SlimeSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.cube.yRot = yRot * ((float)Math.PI / 180F);
-		this.cube.xRot = xRot * ((float)Math.PI / 180F);
+		this.cube.yRot = yRot * ((float) Math.PI / 180F);
+		this.cube.xRot = xRot * ((float) Math.PI / 180F);
 
-		this.cubeOuter.yRot = yRot * ((float)Math.PI / 180F);
-		this.cubeOuter.xRot = xRot * ((float)Math.PI / 180F);
+		this.cubeOuter.yRot = yRot * ((float) Math.PI / 180F);
+		this.cubeOuter.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

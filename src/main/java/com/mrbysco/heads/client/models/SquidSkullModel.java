@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 
 public class SquidSkullModel extends HeadModelBase {
 	private final boolean glow;
+
 	public SquidSkullModel(ModelPart root, boolean glow) {
 		super(root);
 		this.glow = glow;
@@ -32,7 +33,7 @@ public class SquidSkullModel extends HeadModelBase {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		if(glow) {
+		if (glow) {
 			super.renderToBuffer(poseStack, vertexConsumer, 15728880, OverlayTexture.NO_OVERLAY, red, green, blue, alpha);
 		} else {
 			super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);

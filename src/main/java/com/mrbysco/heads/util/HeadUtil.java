@@ -10,18 +10,18 @@ import net.minecraft.world.item.ItemStack;
 
 public class HeadUtil {
 	public static ItemStack getStackForEntity(LivingEntity livingEntity, DamageSource damageSource, int lootLevel) {
-		if(livingEntity.isBaby())
+		if (livingEntity.isBaby())
 			return ItemStack.EMPTY;
 
 		HeadTypes headType = HeadTypes.getMatchingHead(livingEntity);
-		if(headType != null) {
+		if (headType != null) {
 			Entity source = damageSource.getDirectEntity();
 			ItemStack headStack = new ItemStack(headType.getHeadItem());
 			double dropRate = headType.getDropRate() + (lootLevel * 0.01d);
 			System.out.println(dropRate);
 			boolean creeperDrop = headType.canDropFromCreeperExplosion() && source instanceof Creeper creeper && creeper.canDropMobsSkull();
 			boolean regularDrop = livingEntity instanceof Player && dropRate > 0 && (dropRate == 1 || livingEntity.getRandom().nextDouble() <= dropRate);
-			if(creeperDrop || regularDrop) {
+			if (creeperDrop || regularDrop) {
 				return headStack;
 			}
 		}

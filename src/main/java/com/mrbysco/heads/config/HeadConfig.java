@@ -251,15 +251,15 @@ public class HeadConfig {
 			axolotlDropRate = builder
 					.comment("Defines the drop rate for the Axolotl heads (0 to disable) [Default: 0.025]")
 					.defineInRange("axolotlDropRate", 0.025, 0, 1);
-			
+
 			batDropRate = builder
 					.comment("Defines the drop rate for the Bat head (0 to disable) [Default: 0.025]")
 					.defineInRange("batDropRate", 0.025, 0, 1);
-			
+
 			beeDropRate = builder
 					.comment("Defines the drop rate for the Bee head (0 to disable) [Default: 0.025]")
 					.defineInRange("beeDropRate", 0.025, 0, 1);
-			
+
 			blazeDropRate = builder
 					.comment("Defines the drop rate for the Blaze head (0 to disable) [Default: 0.025]")
 					.defineInRange("blazeDropRate", 0.025, 0, 1);

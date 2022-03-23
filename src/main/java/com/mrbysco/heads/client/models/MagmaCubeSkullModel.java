@@ -27,7 +27,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		for(int i = 0; i < 8; ++i) {
+		for (int i = 0; i < 8; ++i) {
 			int j = 0;
 			int k = i;
 			if (i == 2) {
@@ -39,7 +39,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 			}
 
 			partdefinition.addOrReplaceChild(getSegmentName(i), CubeListBuilder.create()
-					.texOffs(j, k).addBox(-4.0F, (float)(-8 + i), -4.0F, 8.0F, 1.0F, 8.0F), PartPose.ZERO);
+					.texOffs(j, k).addBox(-4.0F, (float) (-8 + i), -4.0F, 8.0F, 1.0F, 8.0F), PartPose.ZERO);
 		}
 
 		return meshdefinition;
@@ -56,8 +56,8 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float)Math.PI / 180F);
-		this.root.xRot = xRot * ((float)Math.PI / 180F);
+		this.root.yRot = yRot * ((float) Math.PI / 180F);
+		this.root.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

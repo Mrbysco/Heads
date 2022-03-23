@@ -41,19 +41,19 @@ public class SilverfishSkullModel extends SkullModelBase {
 		float[] afloat = new float[7];
 		float f = -3.5F;
 
-		for(int i = 0; i < 3; ++i) {
+		for (int i = 0; i < 3; ++i) {
 			partdefinition.addOrReplaceChild(getSegmentName(i), CubeListBuilder.create()
-					.texOffs(BODY_TEXS[i][0], BODY_TEXS[i][1]).addBox((float)BODY_SIZES[i][0] * -0.5F, 0.0F, ((float)BODY_SIZES[i][2] * -0.5F) + 1.5F, (float)BODY_SIZES[i][0], (float)BODY_SIZES[i][1], (float)BODY_SIZES[i][2]), PartPose.offset(0.0F, (float)(24 - BODY_SIZES[i][1]), f));
+					.texOffs(BODY_TEXS[i][0], BODY_TEXS[i][1]).addBox((float) BODY_SIZES[i][0] * -0.5F, 0.0F, ((float) BODY_SIZES[i][2] * -0.5F) + 1.5F, (float) BODY_SIZES[i][0], (float) BODY_SIZES[i][1], (float) BODY_SIZES[i][2]), PartPose.offset(0.0F, (float) (24 - BODY_SIZES[i][1]), f));
 			afloat[i] = f;
 			if (i < 6) {
-				f += (float)(BODY_SIZES[i][2] + BODY_SIZES[i + 1][2]) * 0.5F;
+				f += (float) (BODY_SIZES[i][2] + BODY_SIZES[i + 1][2]) * 0.5F;
 			}
 		}
 
 		partdefinition.addOrReplaceChild(getLayerName(0), CubeListBuilder.create()
-				.texOffs(20, 0).addBox(-5.0F, 0.0F, ((float)BODY_SIZES[2][2] * -0.5F) + 1.5F, 10.0F, 8.0F, (float)BODY_SIZES[2][2]), PartPose.offset(0.0F, 16.0F, afloat[2]));
+				.texOffs(20, 0).addBox(-5.0F, 0.0F, ((float) BODY_SIZES[2][2] * -0.5F) + 1.5F, 10.0F, 8.0F, (float) BODY_SIZES[2][2]), PartPose.offset(0.0F, 16.0F, afloat[2]));
 		partdefinition.addOrReplaceChild(getLayerName(1), CubeListBuilder.create()
-				.texOffs(20, 11).addBox(-3.0F, 0.0F, ((float)BODY_SIZES[4][2] * -0.5F) + 1.5F, 6.0F, 4.0F, (float)BODY_SIZES[4][2]), PartPose.offset(0.0F, 20.0F, afloat[4]));
+				.texOffs(20, 11).addBox(-3.0F, 0.0F, ((float) BODY_SIZES[4][2] * -0.5F) + 1.5F, 6.0F, 4.0F, (float) BODY_SIZES[4][2]), PartPose.offset(0.0F, 20.0F, afloat[4]));
 
 		return meshdefinition;
 	}
@@ -65,8 +65,8 @@ public class SilverfishSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float)Math.PI / 180F);
-		this.root.xRot = xRot * ((float)Math.PI / 180F);
+		this.root.yRot = yRot * ((float) Math.PI / 180F);
+		this.root.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

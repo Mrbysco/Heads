@@ -46,8 +46,8 @@ public class EndermanSkullModel extends HeadModelBase {
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
 		super.setupAnim(mouthAnimation, yRot, xRot);
-		this.eyes.yRot = yRot * ((float)Math.PI / 180F);
-		this.eyes.xRot = xRot * ((float)Math.PI / 180F);
+		this.eyes.yRot = yRot * ((float) Math.PI / 180F);
+		this.eyes.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

@@ -18,22 +18,22 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(Heads.MOD_ID)
 public class Heads {
-    public static final String MOD_ID = "heads";
-    public static final Logger LOGGER = LogManager.getLogger();
+	public static final String MOD_ID = "heads";
+	public static final Logger LOGGER = LogManager.getLogger();
 
-    public Heads() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModLoadingContext.get().registerConfig(Type.COMMON, HeadConfig.commonSpec);
-        eventBus.register(HeadConfig.class);
+	public Heads() {
+		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModLoadingContext.get().registerConfig(Type.COMMON, HeadConfig.commonSpec);
+		eventBus.register(HeadConfig.class);
 
-        HeadsRegistry.BLOCKS.register(eventBus);
-        HeadsRegistry.ITEMS.register(eventBus);
-        HeadsRegistry.BLOCK_ENTITIES.register(eventBus);
+		HeadsRegistry.BLOCKS.register(eventBus);
+		HeadsRegistry.ITEMS.register(eventBus);
+		HeadsRegistry.BLOCK_ENTITIES.register(eventBus);
 
-        MinecraftForge.EVENT_BUS.addListener(DropHandler::onLivingDrop);
+		MinecraftForge.EVENT_BUS.addListener(DropHandler::onLivingDrop);
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
-        });
-    }
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
+		});
+	}
 }

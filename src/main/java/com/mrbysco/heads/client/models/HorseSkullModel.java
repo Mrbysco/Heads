@@ -62,8 +62,8 @@ public class HorseSkullModel extends SkullModelBase {
 
 	@Override
 	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float)Math.PI / 180F);
-		this.head.xRot = xRot * ((float)Math.PI / 180F);
+		this.head.yRot = yRot * ((float) Math.PI / 180F);
+		this.head.xRot = xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

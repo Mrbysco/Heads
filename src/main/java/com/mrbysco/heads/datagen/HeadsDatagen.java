@@ -620,6 +620,7 @@ public class HeadsDatagen {
 			super(dataGenerator, blockTagsProvider, Heads.MOD_ID, existingFileHelper);
 		}
 
+		public static final List<String> knownHeads = new ArrayList<>();
 		public static final Tag.Named<Item> HEADS = forgeTag("heads");
 
 		@Override
@@ -711,7 +712,10 @@ public class HeadsDatagen {
 
 		private void addHead(Item block, String mobName) {
 			Tag.Named<Item> headTag = forgeTag("heads/" + mobName);
-			this.tag(HEADS).addTag(headTag);
+			if(!knownHeads.contains("heads/" + mobName)) {
+				knownHeads.add("heads/" + mobName);
+				this.tag(HEADS).addTag(headTag);
+			}
 			this.tag(headTag).add(block.asItem());
 		}
 

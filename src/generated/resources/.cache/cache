@@ -227,7 +227,7 @@ d5e1c9824cafbb698e2291c88c0ac69c7c702318 assets/heads/models/item/turtle_head.js
 d5e1c9824cafbb698e2291c88c0ac69c7c702318 assets/heads/models/item/yellow_sheep_head.json
 8994b947851e3280f1a41fac5c1c4d678c4a6d75 assets/heads/models/item/zombie_villager_head.json
 d5e1c9824cafbb698e2291c88c0ac69c7c702318 assets/heads/models/item/zombified_piglin_skull.json
-0dd052ee91db40250949784338d75a8ca6dfc9b5 data/forge/tags/items/heads.json
+36b344b1f5ebda57bb35ae4fe7c95d666825f381 data/forge/tags/items/heads.json
 a595683f50b705f5d47aba8df9ae52ca3bc54518 data/forge/tags/items/heads/axolotl.json
 d0aa39d4394474897c40ea94dec148d9874ca1ff data/forge/tags/items/heads/bat.json
 3e2a940c237011e7565873d725c93e1571038ced data/forge/tags/items/heads/bee.json

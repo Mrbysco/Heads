@@ -19,7 +19,7 @@ public class HeadUtil {
 			ItemStack headStack = new ItemStack(headType.getHeadItem());
 			double dropRate = headType.getDropRate() + (lootLevel * 0.01d);
 			boolean creeperDrop = headType.canDropFromCreeperExplosion() && source instanceof Creeper creeper && creeper.canDropMobsSkull();
-			boolean regularDrop = livingEntity instanceof Player && dropRate > 0 && (dropRate == 1 || livingEntity.getRandom().nextDouble() <= dropRate);
+			boolean regularDrop = source instanceof Player && (dropRate >= 1 || (dropRate > 0 && (dropRate == 1 || livingEntity.getRandom().nextDouble() <= dropRate)));
 			if (creeperDrop || regularDrop) {
 				return headStack;
 			}

@@ -420,6 +420,6 @@ public class HeadConfig {
 
 	@SubscribeEvent
 	public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
-		Heads.LOGGER.debug("Head's config just got changed on the file system!");
+		Heads.LOGGER.warn("Head's config just got changed on the file system!");
 	}
 }

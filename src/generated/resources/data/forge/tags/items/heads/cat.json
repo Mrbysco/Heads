@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "heads:cat_all_black_head",
+    "heads:cat_tabby_head",
     "heads:cat_black_head",
-    "heads:cat_british_shorthair_head",
-    "heads:cat_calico_head",
-    "heads:cat_jellie_head",
-    "heads:cat_persian_head",
-    "heads:cat_ragdoll_head",
     "heads:cat_red_head",
     "heads:cat_siamese_head",
-    "heads:cat_tabby_head",
-    "heads:cat_white_head"
+    "heads:cat_british_shorthair_head",
+    "heads:cat_calico_head",
+    "heads:cat_persian_head",
+    "heads:cat_ragdoll_head",
+    "heads:cat_white_head",
+    "heads:cat_jellie_head",
+    "heads:cat_all_black_head"
   ]
 }

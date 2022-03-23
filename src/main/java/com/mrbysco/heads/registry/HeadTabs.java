@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 public class HeadTabs {
 	public static final CreativeModeTab TAB_HEADS = new CreativeModeTab(Heads.MOD_ID) {
 		public ItemStack makeIcon() {
-			return new ItemStack(HeadsRegistry.WITCH_HEAD.get());
+			return new ItemStack(HeadsRegistry.WITCH.getHead().get());
 		}
 	};
 }

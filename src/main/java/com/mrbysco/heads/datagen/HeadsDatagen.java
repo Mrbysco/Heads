@@ -493,7 +493,7 @@ public class HeadsDatagen {
 
 		private void addHead(Item item, String mobName) {
 			TagKey<Item> headTag = forgeTag("heads/" + mobName);
-			if(!knownHeads.contains("heads/" + mobName)) {
+			if (!knownHeads.contains("heads/" + mobName)) {
 				knownHeads.add("heads/" + mobName);
 				this.tag(HEADS).addTag(headTag);
 			}

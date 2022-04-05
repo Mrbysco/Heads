@@ -10,9 +10,11 @@ buildscript {
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+plugins {
+    id 'maven-publish'
+}
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = "${version}"
@@ -155,4 +157,8 @@ publishing {
             }
         }
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }

@@ -10,10 +10,13 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 public class RenderHandler {
 	public static void onArmorRender(RenderLivingEvent event) {
 		final ItemStack headStack = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
-		if (event.getRenderer().getModel() instanceof HeadedModel headedModel) {
-			headedModel.getHead().visible = headStack.isEmpty() || (headStack.getItem().getRegistryName() != null && !headStack.getItem().getRegistryName().getNamespace().equals(Heads.MOD_ID));
+		final boolean isWearingHead = (headStack.getItem().getRegistryName() != null && headStack.getItem().getRegistryName().getNamespace().equals(Heads.MOD_ID));
+		if (event.getRenderer().getModel() instanceof HeadedModel headedModel && isWearingHead) {
 			if (event.getRenderer().getModel() instanceof HumanoidModel<?> humanoidModel) {
-				humanoidModel.hat.visible = headStack.isEmpty() || (headStack.getItem().getRegistryName() != null && !headStack.getItem().getRegistryName().getNamespace().equals(Heads.MOD_ID));
+				headedModel.getHead().visible = false;
+				humanoidModel.hat.visible = false;
+			} else {
+				headedModel.getHead().visible = !isWearingHead;
 			}
 		}
 	}

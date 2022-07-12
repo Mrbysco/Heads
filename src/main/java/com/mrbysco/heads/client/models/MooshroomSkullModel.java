@@ -5,9 +5,11 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.ModelData;
 
 public class MooshroomSkullModel extends CowSkullModel {
 	private final BlockState mushroomState;
@@ -30,7 +32,7 @@ public class MooshroomSkullModel extends CowSkullModel {
 		poseStack.translate(-0.5D, -0.5D, -0.5D);
 		poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot * ((float) Math.PI / 180F)));
 
-		blockrenderdispatcher.renderSingleBlock(mushroomState, poseStack, minecraft.renderBuffers().bufferSource(), packedLightIn, packedOverlayIn, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
+		blockrenderdispatcher.renderSingleBlock(mushroomState, poseStack, minecraft.renderBuffers().bufferSource(), packedLightIn, packedOverlayIn, ModelData.EMPTY, RenderType.cutout());
 	}
 
 	@Override

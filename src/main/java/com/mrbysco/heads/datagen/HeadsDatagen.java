@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.registry.HeadReg;
+import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
@@ -29,14 +30,14 @@ import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -47,7 +48,84 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.mrbysco.heads.registry.HeadsRegistry.*;
+import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_BLUE;
+import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_CYAN;
+import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_GOLD;
+import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_LUCY;
+import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_WILD;
+import static com.mrbysco.heads.registry.HeadsRegistry.BAT;
+import static com.mrbysco.heads.registry.HeadsRegistry.BEE;
+import static com.mrbysco.heads.registry.HeadsRegistry.BLACK_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.BLAZE;
+import static com.mrbysco.heads.registry.HeadsRegistry.BLOCKS;
+import static com.mrbysco.heads.registry.HeadsRegistry.BLUE_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.BROWN_MOOSHROOM;
+import static com.mrbysco.heads.registry.HeadsRegistry.BROWN_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_ALL_BLACK;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_BLACK;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_BRITISH_SHORTHAIR;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_CALICO;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_JELLIE;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_PERSIAN;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_RAGDOLL;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_RED;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_SIAMESE;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_TABBY;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAT_WHITE;
+import static com.mrbysco.heads.registry.HeadsRegistry.CAVE_SPIDER;
+import static com.mrbysco.heads.registry.HeadsRegistry.CHICKEN;
+import static com.mrbysco.heads.registry.HeadsRegistry.COW;
+import static com.mrbysco.heads.registry.HeadsRegistry.CYAN_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.DONKEY;
+import static com.mrbysco.heads.registry.HeadsRegistry.ENDERMAN;
+import static com.mrbysco.heads.registry.HeadsRegistry.ENDERMITE;
+import static com.mrbysco.heads.registry.HeadsRegistry.FOX;
+import static com.mrbysco.heads.registry.HeadsRegistry.FOX_SNOW;
+import static com.mrbysco.heads.registry.HeadsRegistry.GHAST;
+import static com.mrbysco.heads.registry.HeadsRegistry.GLOW_SQUID;
+import static com.mrbysco.heads.registry.HeadsRegistry.GOAT;
+import static com.mrbysco.heads.registry.HeadsRegistry.GRAY_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.GREEN_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_BLACK;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_BROWN;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_CHESTNUT;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_CREAMY;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_DARKBROWN;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_GRAY;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_SKELETON;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_UNDEAD;
+import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_WHITE;
+import static com.mrbysco.heads.registry.HeadsRegistry.IRON_GOLEM;
+import static com.mrbysco.heads.registry.HeadsRegistry.LIGHT_BLUE_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.LIGHT_GRAY_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.LIME_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.MAGENTA_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.MAGMA_CUBE;
+import static com.mrbysco.heads.registry.HeadsRegistry.OCELOT;
+import static com.mrbysco.heads.registry.HeadsRegistry.ORANGE_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.PIG;
+import static com.mrbysco.heads.registry.HeadsRegistry.PIGLIN;
+import static com.mrbysco.heads.registry.HeadsRegistry.PIGLIN_BRUTE;
+import static com.mrbysco.heads.registry.HeadsRegistry.PINK_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.PURPLE_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.RED_MOOSHROOM;
+import static com.mrbysco.heads.registry.HeadsRegistry.RED_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.SHEEP_SHAVEN;
+import static com.mrbysco.heads.registry.HeadsRegistry.SILVERFISH;
+import static com.mrbysco.heads.registry.HeadsRegistry.SLIME;
+import static com.mrbysco.heads.registry.HeadsRegistry.SNOW_GOLEM;
+import static com.mrbysco.heads.registry.HeadsRegistry.SPIDER;
+import static com.mrbysco.heads.registry.HeadsRegistry.SQUID;
+import static com.mrbysco.heads.registry.HeadsRegistry.TURTLE;
+import static com.mrbysco.heads.registry.HeadsRegistry.VILLAGER;
+import static com.mrbysco.heads.registry.HeadsRegistry.WANDERING_TRADER;
+import static com.mrbysco.heads.registry.HeadsRegistry.WITCH;
+import static com.mrbysco.heads.registry.HeadsRegistry.WOLF;
+import static com.mrbysco.heads.registry.HeadsRegistry.YELLOW_SHEEP;
+import static com.mrbysco.heads.registry.HeadsRegistry.ZOMBIE_VILLAGER;
+import static com.mrbysco.heads.registry.HeadsRegistry.ZOMBIFIED_PIGLIN;
+import static com.mrbysco.heads.registry.HeadsRegistry.headList;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HeadsDatagen {
@@ -57,15 +135,15 @@ public class HeadsDatagen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(new Loots(generator));
+			generator.addProvider(event.includeServer(), new Loots(generator));
 			BlockTagsProvider provider;
-			generator.addProvider(provider = new HeadBlockTags(generator, helper));
-			generator.addProvider(new HeadItemTags(generator, provider, helper));
+			generator.addProvider(event.includeServer(), provider = new HeadBlockTags(generator, helper));
+			generator.addProvider(event.includeServer(), new HeadItemTags(generator, provider, helper));
 		}
 		if (event.includeClient()) {
-			generator.addProvider(new Language(generator));
-			generator.addProvider(new ItemModels(generator, helper));
-			generator.addProvider(new BlockStates(generator, helper));
+			generator.addProvider(event.includeClient(), new Language(generator));
+			generator.addProvider(event.includeClient(), new ItemModels(generator, helper));
+			generator.addProvider(event.includeClient(), new BlockStates(generator, helper));
 		}
 	}
 
@@ -101,7 +179,7 @@ public class HeadsDatagen {
 			}
 		}
 
-		protected static <T> T applyExplosionCondition(ItemLike p_124135_, ConditionUserBuilder<T> p_124136_) {
+		protected static <T extends ConditionUserBuilder<T>> T applyExplosionCondition(ItemLike p_124135_, ConditionUserBuilder<T> p_124136_) {
 			return !RESISTANT.contains(p_124135_.asItem()) ? p_124136_.when(ExplosionCondition.survivesExplosion()) : p_124136_.unwrap();
 		}
 
@@ -308,117 +386,117 @@ public class HeadsDatagen {
 		}
 
 		private void makeHorse(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 45, 0)
 					.translation(0, 0, 0)
 					.scale(0.625F, 0.625F, 0.625F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(0.625F, 0.625F, 0.625F).end();
 		}
 
 		private void makeGoat(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 45, 0)
 					.translation(0, 0, 0)
 					.scale(0.625F, 0.625F, 0.625F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(0.625F, 0.625F, 0.625F).end();
 		}
 
 		private void makeMooshroom(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 45, 0)
 					.translation(0, 0, 0)
 					.scale(0.875F, 0.875F, 0.875F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(0.875F, 0.875F, 0.875F).end();
 		}
 
 		private void makeWitchHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(0, 1F, 0)
 					.scale(0.625F, 0.625F, 0.625F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(0.625F, 0.625F, 0.625F).end();
 		}
 
 		private void makeVillagerHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(0, 3, 0)
 					.scale(0.875F, 0.875F, 0.875F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(0.875F, 0.875F, 0.875F).end();
 		}
 
 		private void makeChickenHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1.5F, 3.5F, 0)
 					.scale(1.25F, 1.25F, 1.25F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.25F, 1.25F, 1.25F).end();
 		}
 
 		private void makeEndermiteHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1.5F, 4.5F, 0)
 					.scale(1.5F, 1.5F, 1.5F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.5F, 1.5F, 1.5F).end();
 		}
 
 		private void makeAxolotlHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1.5F, 3.5F, 0)
 					.scale(1.5F, 1.5F, 1.5F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.5F, 1.5F, 1.5F).end();
 		}
 
 		private void makeBatHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1.5F, 3.5F, 0)
 					.scale(1.5F, 1.5F, 1.5F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.5F, 1.5F, 1.5F).end();
@@ -426,33 +504,33 @@ public class HeadsDatagen {
 		}
 
 		private void makeOcelotHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1.5F, 4.5F, 0)
 					.scale(1.25F, 1.25F, 1.25F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.25F, 1.25F, 1.25F).end();
 		}
 
 		private void makeWolfHead(Block block) {
-			getBuilder(block.getRegistryName().getPath())
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
-					.transforms().transform(Perspective.GUI)
+					.transforms().transform(TransformType.GUI)
 					.rotation(30, 40, 0)
 					.translation(1, 3.5F, 0)
 					.scale(1.125F, 1.125F, 1.125F).end()
-					.transform(Perspective.FIXED)
+					.transform(TransformType.FIXED)
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.125F, 1.125F, 1.125F).end();
 		}
 
 		private void makeHead(Block block) {
-			withExistingParent(block.getRegistryName().getPath(), mcLoc("item/template_skull"));
+			withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(), mcLoc("item/template_skull"));
 		}
 	}
 

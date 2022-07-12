@@ -5,6 +5,7 @@ import com.mrbysco.heads.config.HeadConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.animal.Sheep;
@@ -42,27 +43,27 @@ public enum HeadTypes implements HeadBlock.Type {
 			HeadConfig.COMMON.sheepDropRate::get, HeadConfig.COMMON.sheepEnableCreeperDrop::get),
 	BROWN_MOOSHROOM((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getMushroomType() == MushroomCow.MushroomType.BROWN,
 			HeadConfig.COMMON.mooshroomDropRate::get, HeadConfig.COMMON.mooshroomEnableCreeperDrop::get),
-	CAT_TABBY((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 0,
+	CAT_TABBY((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.TABBY,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 1,
+	CAT_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.BLACK,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_RED((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 2,
+	CAT_RED((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.RED,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_SIAMESE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 3,
+	CAT_SIAMESE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.SIAMESE,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_BRITISH_SHORTHAIR((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 4,
+	CAT_BRITISH_SHORTHAIR((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.BRITISH_SHORTHAIR,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_CALICO((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 5,
+	CAT_CALICO((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.CALICO,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_PERSIAN((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 6,
+	CAT_PERSIAN((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.PERSIAN,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_RAGDOLL((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 7,
+	CAT_RAGDOLL((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.RAGDOLL,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_WHITE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 8,
+	CAT_WHITE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.WHITE,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_JELLIE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 9,
+	CAT_JELLIE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.JELLIE,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
-	CAT_ALL_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatType() == 10,
+	CAT_ALL_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.ALL_BLACK,
 			HeadConfig.COMMON.catDropRate::get, HeadConfig.COMMON.catEnableCreeperDrop::get),
 	BROWN_SHEEP((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BROWN,
 			HeadConfig.COMMON.sheepDropRate::get, HeadConfig.COMMON.sheepEnableCreeperDrop::get),

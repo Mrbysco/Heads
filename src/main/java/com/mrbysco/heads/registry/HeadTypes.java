@@ -115,7 +115,7 @@ public enum HeadTypes implements HeadBlock.Type {
 			HeadConfig.COMMON.horseSkeletonDropRate::get, HeadConfig.COMMON.horseSkeletonEnableCreeperDrop::get),
 	IRON_GOLEM((entity) -> entity.getType() == EntityType.IRON_GOLEM,
 			HeadConfig.COMMON.ironGolemDropRate::get, HeadConfig.COMMON.ironGolemEnableCreeperDrop::get),
-	LIGHT_BLUE_SHEEP((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BLUE,
+	LIGHT_BLUE_SHEEP((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_BLUE,
 			HeadConfig.COMMON.sheepDropRate::get, HeadConfig.COMMON.sheepEnableCreeperDrop::get),
 	LIGHT_GRAY_SHEEP((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_GRAY,
 			HeadConfig.COMMON.sheepDropRate::get, HeadConfig.COMMON.sheepEnableCreeperDrop::get),

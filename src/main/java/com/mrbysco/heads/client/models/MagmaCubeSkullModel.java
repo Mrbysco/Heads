@@ -23,7 +23,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 		Arrays.setAll(this.bodyCubes, (id) -> root.getChild(getSegmentName(id)));
 	}
 
-	public static MeshDefinition createSlimeModel() {
+	public static MeshDefinition createMagmaCubeHead() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -50,7 +50,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 	}
 
 	public static LayerDefinition createSkullModel() {
-		MeshDefinition meshdefinition = createSlimeModel();
+		MeshDefinition meshdefinition = createMagmaCubeHead();
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 

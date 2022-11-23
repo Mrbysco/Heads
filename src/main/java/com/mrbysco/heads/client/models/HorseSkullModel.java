@@ -45,6 +45,17 @@ public class HorseSkullModel extends SkullModelBase {
 		return meshdefinition;
 	}
 
+	public static LayerDefinition createMuleSkull() {
+		MeshDefinition meshdefinition = createHorseHead(CubeDeformation.NONE);
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		PartDefinition head = partdefinition.getChild("head_parts").getChild("head");
+		CubeListBuilder ear = CubeListBuilder.create().texOffs(0, 12).addBox(-1.0F, -5.0F, 0.0F, 2.0F, 7.0F, 1.0F);
+		head.addOrReplaceChild("left_ear", ear, PartPose.offsetAndRotation(1.25F, -16.0F, 3.0F, 0.2617994F, 0.0F, 0.2617994F));
+		head.addOrReplaceChild("right_ear", ear, PartPose.offsetAndRotation(-1.25F, -16.0F, 3.0F, 0.2617994F, 0.0F, -0.2617994F));
+
+		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
 	public static LayerDefinition createDonkeySkull() {
 		MeshDefinition meshdefinition = createHorseHead(CubeDeformation.NONE);
 		PartDefinition partdefinition = meshdefinition.getRoot();

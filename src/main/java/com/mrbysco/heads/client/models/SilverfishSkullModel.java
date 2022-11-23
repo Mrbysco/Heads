@@ -34,7 +34,7 @@ public class SilverfishSkullModel extends SkullModelBase {
 	}
 
 
-	public static MeshDefinition createEndermiteHead() {
+	public static MeshDefinition createSilverfishHead() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -59,7 +59,7 @@ public class SilverfishSkullModel extends SkullModelBase {
 	}
 
 	public static LayerDefinition createSkullModel() {
-		MeshDefinition meshdefinition = createEndermiteHead();
+		MeshDefinition meshdefinition = createSilverfishHead();
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 

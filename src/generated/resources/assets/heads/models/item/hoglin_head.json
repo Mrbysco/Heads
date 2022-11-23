@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:item/template_skull",
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        0.875,
+        0.875,
+        0.875
+      ],
+      "translation": [
+        0,
+        4,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        40,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ]
+    }
+  }
+}

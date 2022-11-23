@@ -48,84 +48,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_BLUE;
-import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_CYAN;
-import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_GOLD;
-import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_LUCY;
-import static com.mrbysco.heads.registry.HeadsRegistry.AXOLOTL_WILD;
-import static com.mrbysco.heads.registry.HeadsRegistry.BAT;
-import static com.mrbysco.heads.registry.HeadsRegistry.BEE;
-import static com.mrbysco.heads.registry.HeadsRegistry.BLACK_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.BLAZE;
-import static com.mrbysco.heads.registry.HeadsRegistry.BLOCKS;
-import static com.mrbysco.heads.registry.HeadsRegistry.BLUE_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.BROWN_MOOSHROOM;
-import static com.mrbysco.heads.registry.HeadsRegistry.BROWN_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_ALL_BLACK;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_BLACK;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_BRITISH_SHORTHAIR;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_CALICO;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_JELLIE;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_PERSIAN;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_RAGDOLL;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_RED;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_SIAMESE;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_TABBY;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAT_WHITE;
-import static com.mrbysco.heads.registry.HeadsRegistry.CAVE_SPIDER;
-import static com.mrbysco.heads.registry.HeadsRegistry.CHICKEN;
-import static com.mrbysco.heads.registry.HeadsRegistry.COW;
-import static com.mrbysco.heads.registry.HeadsRegistry.CYAN_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.DONKEY;
-import static com.mrbysco.heads.registry.HeadsRegistry.ENDERMAN;
-import static com.mrbysco.heads.registry.HeadsRegistry.ENDERMITE;
-import static com.mrbysco.heads.registry.HeadsRegistry.FOX;
-import static com.mrbysco.heads.registry.HeadsRegistry.FOX_SNOW;
-import static com.mrbysco.heads.registry.HeadsRegistry.GHAST;
-import static com.mrbysco.heads.registry.HeadsRegistry.GLOW_SQUID;
-import static com.mrbysco.heads.registry.HeadsRegistry.GOAT;
-import static com.mrbysco.heads.registry.HeadsRegistry.GRAY_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.GREEN_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_BLACK;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_BROWN;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_CHESTNUT;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_CREAMY;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_DARKBROWN;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_GRAY;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_SKELETON;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_UNDEAD;
-import static com.mrbysco.heads.registry.HeadsRegistry.HORSE_WHITE;
-import static com.mrbysco.heads.registry.HeadsRegistry.IRON_GOLEM;
-import static com.mrbysco.heads.registry.HeadsRegistry.LIGHT_BLUE_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.LIGHT_GRAY_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.LIME_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.MAGENTA_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.MAGMA_CUBE;
-import static com.mrbysco.heads.registry.HeadsRegistry.OCELOT;
-import static com.mrbysco.heads.registry.HeadsRegistry.ORANGE_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.PIG;
-import static com.mrbysco.heads.registry.HeadsRegistry.PIGLIN;
-import static com.mrbysco.heads.registry.HeadsRegistry.PIGLIN_BRUTE;
-import static com.mrbysco.heads.registry.HeadsRegistry.PINK_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.PURPLE_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.RED_MOOSHROOM;
-import static com.mrbysco.heads.registry.HeadsRegistry.RED_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.SHEEP_SHAVEN;
-import static com.mrbysco.heads.registry.HeadsRegistry.SILVERFISH;
-import static com.mrbysco.heads.registry.HeadsRegistry.SLIME;
-import static com.mrbysco.heads.registry.HeadsRegistry.SNOW_GOLEM;
-import static com.mrbysco.heads.registry.HeadsRegistry.SPIDER;
-import static com.mrbysco.heads.registry.HeadsRegistry.SQUID;
-import static com.mrbysco.heads.registry.HeadsRegistry.TURTLE;
-import static com.mrbysco.heads.registry.HeadsRegistry.VILLAGER;
-import static com.mrbysco.heads.registry.HeadsRegistry.WANDERING_TRADER;
-import static com.mrbysco.heads.registry.HeadsRegistry.WITCH;
-import static com.mrbysco.heads.registry.HeadsRegistry.WOLF;
-import static com.mrbysco.heads.registry.HeadsRegistry.YELLOW_SHEEP;
-import static com.mrbysco.heads.registry.HeadsRegistry.ZOMBIE_VILLAGER;
-import static com.mrbysco.heads.registry.HeadsRegistry.ZOMBIFIED_PIGLIN;
-import static com.mrbysco.heads.registry.HeadsRegistry.headList;
+import static com.mrbysco.heads.registry.HeadsRegistry.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HeadsDatagen {
@@ -202,80 +125,93 @@ public class HeadsDatagen {
 		protected void addTranslations() {
 			add("itemGroup.heads", "Heads");
 
+			this.addBlock(AXOLOTL_BLUE.getHead(), "Axolotl Head");
+			this.addBlock(AXOLOTL_CYAN.getHead(), "Axolotl Head");
+			this.addBlock(AXOLOTL_GOLD.getHead(), "Axolotl Head");
 			this.addBlock(AXOLOTL_LUCY.getHead(), "Axolotl Head");
 			this.addBlock(AXOLOTL_WILD.getHead(), "Axolotl Head");
-			this.addBlock(AXOLOTL_GOLD.getHead(), "Axolotl Head");
-			this.addBlock(AXOLOTL_CYAN.getHead(), "Axolotl Head");
-			this.addBlock(AXOLOTL_BLUE.getHead(), "Axolotl Head");
 			this.addBlock(BAT.getHead(), "Bat Head");
 			this.addBlock(BEE.getHead(), "Bee Head");
-			this.addBlock(BLACK_SHEEP.getHead(), "Sheep Head");
 			this.addBlock(BLAZE.getHead(), "Blaze Head");
-			this.addBlock(BLUE_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(BROWN_MOOSHROOM.getHead(), "Brown Mooshroom Head");
-			this.addBlock(BROWN_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(CAT_TABBY.getHead(), "Cat Head");
+			this.addBlock(CAT_ALL_BLACK.getHead(), "Cat Head");
 			this.addBlock(CAT_BLACK.getHead(), "Cat Head");
-			this.addBlock(CAT_RED.getHead(), "Cat Head");
-			this.addBlock(CAT_SIAMESE.getHead(), "Cat Head");
 			this.addBlock(CAT_BRITISH_SHORTHAIR.getHead(), "Cat Head");
 			this.addBlock(CAT_CALICO.getHead(), "Cat Head");
+			this.addBlock(CAT_JELLIE.getHead(), "Cat Head");
 			this.addBlock(CAT_PERSIAN.getHead(), "Cat Head");
 			this.addBlock(CAT_RAGDOLL.getHead(), "Cat Head");
+			this.addBlock(CAT_RED.getHead(), "Cat Head");
+			this.addBlock(CAT_SIAMESE.getHead(), "Cat Head");
+			this.addBlock(CAT_TABBY.getHead(), "Cat Head");
 			this.addBlock(CAT_WHITE.getHead(), "Cat Head");
-			this.addBlock(CAT_JELLIE.getHead(), "Cat Head");
-			this.addBlock(CAT_ALL_BLACK.getHead(), "Cat Head");
 			this.addBlock(CAVE_SPIDER.getHead(), "Cave Spider Head");
 			this.addBlock(CHICKEN.getHead(), "Chicken Head");
+			this.addBlock(COD.getHead(), "Cod Head");
 			this.addBlock(COW.getHead(), "Cow Head");
-			this.addBlock(CYAN_SHEEP.getHead(), "Sheep Head");
+			this.addBlock(DOLPHIN.getHead(), "Dolphin Head");
 			this.addBlock(DONKEY.getHead(), "Donkey Head");
+			this.addBlock(DROWNED.getHead(), "Drowned Head");
 			this.addBlock(ENDERMAN.getHead(), "Enderman Skull");
 			this.addBlock(ENDERMITE.getHead(), "Endermite Skull");
+			this.addBlock(EVOKER.getHead(), "Evoker Skull");
 			this.addBlock(FOX.getHead(), "Fox Skull");
 			this.addBlock(FOX_SNOW.getHead(), "Fox Skull");
 			this.addBlock(GHAST.getHead(), "Ghast Skull");
 			this.addBlock(GLOW_SQUID.getHead(), "Glow Squid Head");
 			this.addBlock(GOAT.getHead(), "Goat Head");
-			this.addBlock(GRAY_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(GREEN_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(HORSE_WHITE.getHead(), "Horse Head");
-			this.addBlock(HORSE_CREAMY.getHead(), "Horse Head");
-			this.addBlock(HORSE_CHESTNUT.getHead(), "Horse Head");
-			this.addBlock(HORSE_BROWN.getHead(), "Horse Head");
+			this.addBlock(HOGLIN.getHead(), "Hoglin Head");
 			this.addBlock(HORSE_BLACK.getHead(), "Horse Head");
-			this.addBlock(HORSE_GRAY.getHead(), "Horse Head");
+			this.addBlock(HORSE_BROWN.getHead(), "Horse Head");
+			this.addBlock(HORSE_CHESTNUT.getHead(), "Horse Head");
+			this.addBlock(HORSE_CREAMY.getHead(), "Horse Head");
 			this.addBlock(HORSE_DARKBROWN.getHead(), "Horse Head");
-			this.addBlock(HORSE_UNDEAD.getHead(), "Undead Horse Head");
+			this.addBlock(HORSE_GRAY.getHead(), "Horse Head");
 			this.addBlock(HORSE_SKELETON.getHead(), "Skeleton Horse Head");
+			this.addBlock(HORSE_UNDEAD.getHead(), "Undead Horse Head");
+			this.addBlock(HORSE_WHITE.getHead(), "Horse Head");
+			this.addBlock(HUSK.getHead(), "Husk Head");
+			this.addBlock(ILLUSIONER.getHead(), "Illusioner Head");
 			this.addBlock(IRON_GOLEM.getHead(), "Iron Golem Head");
-			this.addBlock(LIGHT_BLUE_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(LIGHT_GRAY_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(LIME_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(MAGENTA_SHEEP.getHead(), "Sheep Head");
 			this.addBlock(MAGMA_CUBE.getHead(), "Magma Cube");
+			this.addBlock(MULE.getHead(), "Mule Head");
+			this.addBlock(MOOSHROOM_BROWN.getHead(), "Brown Mooshroom Head");
+			this.addBlock(MOOSHROOM_RED.getHead(), "Red Mooshroom Head");
 			this.addBlock(OCELOT.getHead(), "Ocelot Head");
-			this.addBlock(ORANGE_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(PIGLIN_BRUTE.getHead(), "Piglin Brute Head");
-			this.addBlock(PIGLIN.getHead(), "Piglin Head");
 			this.addBlock(PIG.getHead(), "Pig Head");
-			this.addBlock(PINK_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(PURPLE_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(RED_MOOSHROOM.getHead(), "Red Mooshroom Head");
-			this.addBlock(RED_SHEEP.getHead(), "Sheep Head");
-			this.addBlock(SHEEP.getHead(), "Sheep Head");
+			this.addBlock(PIGLIN.getHead(), "Piglin Head");
+			this.addBlock(PIGLIN_BRUTE.getHead(), "Piglin Brute Head");
+			this.addBlock(PILLAGER.getHead(), "Pillager Head");
+			this.addBlock(SALMON.getHead(), "Salmon Head");
+			this.addBlock(SHEEP_BLACK.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_BLUE.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_BROWN.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_CYAN.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_GRAY.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_GREEN.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_LIGHT_BLUE.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_LIGHT_GRAY.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_LIME.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_MAGENTA.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_ORANGE.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_PINK.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_PURPLE.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_RED.getHead(), "Sheep Head");
 			this.addBlock(SHEEP_SHAVEN.getHead(), "Sheep Head (Shaven)");
+			this.addBlock(SHEEP_WHITE.getHead(), "Sheep Head");
+			this.addBlock(SHEEP_YELLOW.getHead(), "Sheep Head");
 			this.addBlock(SILVERFISH.getHead(), "Silverfish");
 			this.addBlock(SLIME.getHead(), "Slime");
 			this.addBlock(SNOW_GOLEM.getHead(), "Snow Golem Head");
 			this.addBlock(SPIDER.getHead(), "Spider Head");
 			this.addBlock(SQUID.getHead(), "Squid Head");
+			this.addBlock(STRAY.getHead(), "Stray Head");
 			this.addBlock(TURTLE.getHead(), "Turtle Head");
 			this.addBlock(VILLAGER.getHead(), "Villager Head");
+			this.addBlock(VINDICATOR.getHead(), "Vindicator Head");
 			this.addBlock(WANDERING_TRADER.getHead(), "Wandering Trader Head");
 			this.addBlock(WITCH.getHead(), "Witch Head");
 			this.addBlock(WOLF.getHead(), "Wolf Head");
-			this.addBlock(YELLOW_SHEEP.getHead(), "Sheep Head");
+			this.addBlock(ZOGLIN.getHead(), "Zoglin Head");
 			this.addBlock(ZOMBIE_VILLAGER.getHead(), "Zombie Villager Head");
 			this.addBlock(ZOMBIFIED_PIGLIN.getHead(), "Zombified Piglin Skull");
 		}
@@ -307,82 +243,95 @@ public class HeadsDatagen {
 
 		@Override
 		protected void registerModels() {
+			makeAxolotlHead(AXOLOTL_BLUE.getHead().get());
+			makeAxolotlHead(AXOLOTL_CYAN.getHead().get());
+			makeAxolotlHead(AXOLOTL_GOLD.getHead().get());
 			makeAxolotlHead(AXOLOTL_LUCY.getHead().get());
 			makeAxolotlHead(AXOLOTL_WILD.getHead().get());
-			makeAxolotlHead(AXOLOTL_GOLD.getHead().get());
-			makeAxolotlHead(AXOLOTL_CYAN.getHead().get());
-			makeAxolotlHead(AXOLOTL_BLUE.getHead().get());
 			makeBatHead(BAT.getHead().get());
+			makeChickenHead(CHICKEN.getHead().get());
+			makeEndermiteHead(ENDERMITE.getHead().get());
+			makeFishHead(COD.getHead().get());
+			makeFishHead(SALMON.getHead().get());
+			makeGoat(GOAT.getHead().get());
 			makeHead(BEE.getHead().get());
 			makeHead(BLAZE.getHead().get());
-			makeMooshroom(BROWN_MOOSHROOM.getHead().get());
-			makeOcelotHead(CAT_TABBY.getHead().get());
-			makeOcelotHead(CAT_BLACK.getHead().get());
-			makeOcelotHead(CAT_RED.getHead().get());
-			makeOcelotHead(CAT_SIAMESE.getHead().get());
-			makeOcelotHead(CAT_BRITISH_SHORTHAIR.getHead().get());
-			makeOcelotHead(CAT_CALICO.getHead().get());
-			makeOcelotHead(CAT_PERSIAN.getHead().get());
-			makeOcelotHead(CAT_RAGDOLL.getHead().get());
-			makeOcelotHead(CAT_WHITE.getHead().get());
-			makeOcelotHead(CAT_JELLIE.getHead().get());
-			makeOcelotHead(CAT_ALL_BLACK.getHead().get());
 			makeHead(CAVE_SPIDER.getHead().get());
-			makeChickenHead(CHICKEN.getHead().get());
 			makeHead(COW.getHead().get());
+			makeHead(DOLPHIN.getHead().get());
 			makeHead(DONKEY.getHead().get());
+			makeHead(DROWNED.getHead().get());
 			makeHead(ENDERMAN.getHead().get());
-			makeEndermiteHead(ENDERMITE.getHead().get());
 			makeHead(FOX.getHead().get());
 			makeHead(FOX_SNOW.getHead().get());
 			makeHead(GHAST.getHead().get());
 			makeHead(GLOW_SQUID.getHead().get());
-			makeGoat(GOAT.getHead().get());
-			makeHorse(HORSE_WHITE.getHead().get());
-			makeHorse(HORSE_CREAMY.getHead().get());
-			makeHorse(HORSE_CHESTNUT.getHead().get());
-			makeHorse(HORSE_BROWN.getHead().get());
-			makeHorse(HORSE_BLACK.getHead().get());
-			makeHorse(HORSE_GRAY.getHead().get());
-			makeHorse(HORSE_DARKBROWN.getHead().get());
-			makeHorse(HORSE_UNDEAD.getHead().get());
-			makeHorse(HORSE_SKELETON.getHead().get());
-			makeVillagerHead(IRON_GOLEM.getHead().get());
+			makeHead(HUSK.getHead().get());
 			makeHead(MAGMA_CUBE.getHead().get());
-			makeOcelotHead(OCELOT.getHead().get());
 			makeHead(PIG.getHead().get());
-			makeHead(PIGLIN_BRUTE.getHead().get());
 			makeHead(PIGLIN.getHead().get());
-			makeMooshroom(RED_MOOSHROOM.getHead().get());
-			makeHead(SHEEP.getHead().get());
-			makeHead(ORANGE_SHEEP.getHead().get());
-			makeHead(MAGENTA_SHEEP.getHead().get());
-			makeHead(LIGHT_BLUE_SHEEP.getHead().get());
-			makeHead(YELLOW_SHEEP.getHead().get());
-			makeHead(LIME_SHEEP.getHead().get());
-			makeHead(PINK_SHEEP.getHead().get());
-			makeHead(GRAY_SHEEP.getHead().get());
-			makeHead(LIGHT_GRAY_SHEEP.getHead().get());
-			makeHead(CYAN_SHEEP.getHead().get());
-			makeHead(PURPLE_SHEEP.getHead().get());
-			makeHead(BLUE_SHEEP.getHead().get());
-			makeHead(BROWN_SHEEP.getHead().get());
-			makeHead(GREEN_SHEEP.getHead().get());
-			makeHead(RED_SHEEP.getHead().get());
-			makeHead(BLACK_SHEEP.getHead().get());
+			makeHead(PIGLIN_BRUTE.getHead().get());
+			makeHead(SHEEP_BLACK.getHead().get());
+			makeHead(SHEEP_BLUE.getHead().get());
+			makeHead(SHEEP_BROWN.getHead().get());
+			makeHead(SHEEP_CYAN.getHead().get());
+			makeHead(SHEEP_GRAY.getHead().get());
+			makeHead(SHEEP_GREEN.getHead().get());
+			makeHead(SHEEP_LIGHT_BLUE.getHead().get());
+			makeHead(SHEEP_LIGHT_GRAY.getHead().get());
+			makeHead(SHEEP_LIME.getHead().get());
+			makeHead(SHEEP_MAGENTA.getHead().get());
+			makeHead(SHEEP_ORANGE.getHead().get());
+			makeHead(SHEEP_PINK.getHead().get());
+			makeHead(SHEEP_PURPLE.getHead().get());
+			makeHead(SHEEP_RED.getHead().get());
 			makeHead(SHEEP_SHAVEN.getHead().get());
+			makeHead(SHEEP_WHITE.getHead().get());
+			makeHead(SHEEP_YELLOW.getHead().get());
 			makeHead(SILVERFISH.getHead().get());
 			makeHead(SLIME.getHead().get());
 			makeHead(SNOW_GOLEM.getHead().get());
 			makeHead(SPIDER.getHead().get());
 			makeHead(SQUID.getHead().get());
+			makeHead(STRAY.getHead().get());
 			makeHead(TURTLE.getHead().get());
-			makeWolfHead(WOLF.getHead().get());
 			makeHead(ZOMBIFIED_PIGLIN.getHead().get());
+			makeHorse(HORSE_BLACK.getHead().get());
+			makeHorse(HORSE_BROWN.getHead().get());
+			makeHorse(HORSE_CHESTNUT.getHead().get());
+			makeHorse(HORSE_CREAMY.getHead().get());
+			makeHorse(HORSE_DARKBROWN.getHead().get());
+			makeHorse(HORSE_GRAY.getHead().get());
+			makeHorse(HORSE_SKELETON.getHead().get());
+			makeHorse(HORSE_UNDEAD.getHead().get());
+			makeHorse(HORSE_WHITE.getHead().get());
+			makeHorse(MULE.getHead().get());
+			makeMooshroom(MOOSHROOM_BROWN.getHead().get());
+			makeMooshroom(MOOSHROOM_RED.getHead().get());
+			makeOcelotHead(CAT_ALL_BLACK.getHead().get());
+			makeOcelotHead(CAT_BLACK.getHead().get());
+			makeOcelotHead(CAT_BRITISH_SHORTHAIR.getHead().get());
+			makeOcelotHead(CAT_CALICO.getHead().get());
+			makeOcelotHead(CAT_JELLIE.getHead().get());
+			makeOcelotHead(CAT_PERSIAN.getHead().get());
+			makeOcelotHead(CAT_RAGDOLL.getHead().get());
+			makeOcelotHead(CAT_RED.getHead().get());
+			makeOcelotHead(CAT_SIAMESE.getHead().get());
+			makeOcelotHead(CAT_TABBY.getHead().get());
+			makeOcelotHead(CAT_WHITE.getHead().get());
+			makeOcelotHead(OCELOT.getHead().get());
+			makeVillagerHead(EVOKER.getHead().get());
+			makeVillagerHead(ILLUSIONER.getHead().get());
+			makeVillagerHead(IRON_GOLEM.getHead().get());
+			makeVillagerHead(PILLAGER.getHead().get());
 			makeVillagerHead(VILLAGER.getHead().get());
+			makeVillagerHead(VINDICATOR.getHead().get());
 			makeVillagerHead(WANDERING_TRADER.getHead().get());
 			makeVillagerHead(ZOMBIE_VILLAGER.getHead().get());
 			makeWitchHead(WITCH.getHead().get());
+			makeHoglinHead(HOGLIN.getHead().get());
+			makeHoglinHead(ZOGLIN.getHead().get());
+			makeWolfHead(WOLF.getHead().get());
 		}
 
 		private void makeHorse(Block block) {
@@ -450,6 +399,19 @@ public class HeadsDatagen {
 					.scale(0.875F, 0.875F, 0.875F).end();
 		}
 
+		private void makeHoglinHead(Block block) {
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
+					.transforms().transform(TransformType.GUI)
+					.rotation(30, 40, 0)
+					.translation(0, 3, 0)
+					.scale(0.625F, 0.625F, 0.625F).end()
+					.transform(TransformType.FIXED)
+					.rotation(0, 180, 0)
+					.translation(0, 4, 0)
+					.scale(0.875F, 0.875F, 0.875F).end();
+		}
+
 		private void makeChickenHead(Block block) {
 			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
@@ -500,7 +462,19 @@ public class HeadsDatagen {
 					.rotation(0, 180, 0)
 					.translation(0, 4, 0)
 					.scale(1.5F, 1.5F, 1.5F).end();
-			;
+		}
+
+		private void makeFishHead(Block block) {
+			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
+					.transforms().transform(TransformType.GUI)
+					.rotation(30, 40, 0)
+					.translation(3.5F, 3.5F, 0)
+					.scale(1.5F, 1.5F, 1.5F).end()
+					.transform(TransformType.FIXED)
+					.rotation(0, 180, 0)
+					.translation(0, 4, 0)
+					.scale(1.5F, 1.5F, 1.5F).end();
 		}
 
 		private void makeOcelotHead(Block block) {
@@ -558,11 +532,11 @@ public class HeadsDatagen {
 			this.addHead(Items.CREEPER_HEAD, "creeper");
 			this.addHead(Items.DRAGON_HEAD, "dragon");
 			this.addHead(Items.PLAYER_HEAD, "player");
-			this.addHead(Items.ZOMBIE_HEAD, "zombie");
 			this.addHead(Items.SKELETON_SKULL, "skeleton");
 			this.addHead(Items.WITHER_SKELETON_SKULL, "wither_skeleton");
+			this.addHead(Items.ZOMBIE_HEAD, "zombie");
 
-			headList.forEach(headReg -> addHead(headReg));
+			headList.forEach(this::addHead);
 		}
 
 		private void addHead(HeadReg headRegObject) {

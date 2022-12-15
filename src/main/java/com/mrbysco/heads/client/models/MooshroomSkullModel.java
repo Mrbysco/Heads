@@ -2,7 +2,7 @@ package com.mrbysco.heads.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
@@ -27,10 +27,10 @@ public class MooshroomSkullModel extends CowSkullModel {
 		Minecraft minecraft = Minecraft.getInstance();
 		BlockRenderDispatcher blockrenderdispatcher = minecraft.getBlockRenderer();
 		poseStack.translate(0.0D, -1F, 0.05D);
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
+		poseStack.mulPose(Axis.YP.rotationDegrees(-78.0F));
 		poseStack.scale(-1.0F, -1.0F, 1.0F);
 		poseStack.translate(-0.5D, -0.5D, -0.5D);
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot * ((float) Math.PI / 180F)));
+		poseStack.mulPose(Axis.YP.rotationDegrees(yRot * ((float) Math.PI / 180F)));
 
 		blockrenderdispatcher.renderSingleBlock(mushroomState, poseStack, minecraft.renderBuffers().bufferSource(), packedLightIn, packedOverlayIn, ModelData.EMPTY, RenderType.cutout());
 	}

@@ -1,29 +1,27 @@
 package com.mrbysco.heads.datagen;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.registry.HeadReg;
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTable.Builder;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
@@ -32,6 +30,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -44,9 +43,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 import static com.mrbysco.heads.registry.HeadsRegistry.*;
 
@@ -55,39 +53,39 @@ public class HeadsDatagen {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
+		PackOutput packOutput = generator.getPackOutput();
 		ExistingFileHelper helper = event.getExistingFileHelper();
+		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 		if (event.includeServer()) {
-			generator.addProvider(event.includeServer(), new Loots(generator));
-			BlockTagsProvider provider;
-			generator.addProvider(event.includeServer(), provider = new HeadBlockTags(generator, helper));
-			generator.addProvider(event.includeServer(), new HeadItemTags(generator, provider, helper));
+			generator.addProvider(event.includeServer(), new Loots(packOutput));
+			BlockTagsProvider blockProvider;
+			generator.addProvider(event.includeServer(), blockProvider = new HeadBlockTags(packOutput, lookupProvider, helper));
+			generator.addProvider(event.includeServer(), new HeadItemTags(packOutput, lookupProvider, blockProvider, helper));
 		}
 		if (event.includeClient()) {
-			generator.addProvider(event.includeClient(), new Language(generator));
-			generator.addProvider(event.includeClient(), new ItemModels(generator, helper));
-			generator.addProvider(event.includeClient(), new BlockStates(generator, helper));
+			generator.addProvider(event.includeClient(), new Language(packOutput));
+			generator.addProvider(event.includeClient(), new ItemModels(packOutput, helper));
+			generator.addProvider(event.includeClient(), new BlockStates(packOutput, helper));
 		}
 	}
 
 	static class Loots extends LootTableProvider {
+		public Loots(PackOutput packOutput) {
+			super(packOutput, Set.of(), List.of(
+					new SubProviderEntry(HeadsBlockTables::new, LootContextParamSets.BLOCK)
+			));
+		}
+
 		public static final List<Item> RESISTANT = new ArrayList<>();
 
-		public Loots(DataGenerator gen) {
-			super(gen);
-		}
-
-		@Override
-		protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> getTables() {
-			return ImmutableList.of(
-					Pair.of(GeOreBlockTables::new, LootContextParamSets.BLOCK)
-			);
-		}
-
-		public static class GeOreBlockTables extends BlockLoot {
+		public static class HeadsBlockTables extends BlockLootSubProvider {
+			protected HeadsBlockTables() {
+				super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+			}
 
 			@Override
-			protected void addTables() {
+			protected void generate() {
 				headList.forEach(headReg -> this.dropSkull(headReg.getHead().get()));
 			}
 
@@ -102,12 +100,12 @@ public class HeadsDatagen {
 			}
 		}
 
-		protected static <T extends ConditionUserBuilder<T>> T applyExplosionCondition(ItemLike p_124135_, ConditionUserBuilder<T> p_124136_) {
-			return !RESISTANT.contains(p_124135_.asItem()) ? p_124136_.when(ExplosionCondition.survivesExplosion()) : p_124136_.unwrap();
+		protected static <T extends ConditionUserBuilder<T>> T applyExplosionCondition(ItemLike itemLike, ConditionUserBuilder<T> conditionUserBuilder) {
+			return !RESISTANT.contains(itemLike.asItem()) ? conditionUserBuilder.when(ExplosionCondition.survivesExplosion()) : conditionUserBuilder.unwrap();
 		}
 
-		protected static LootTable.Builder createSingleItemTable(ItemLike p_124127_) {
-			return LootTable.lootTable().withPool(applyExplosionCondition(p_124127_, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(p_124127_))));
+		protected static LootTable.Builder createSingleItemTable(ItemLike itemLike) {
+			return LootTable.lootTable().withPool(applyExplosionCondition(itemLike, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(itemLike))));
 		}
 
 		@Override
@@ -117,8 +115,8 @@ public class HeadsDatagen {
 	}
 
 	static class Language extends LanguageProvider {
-		public Language(DataGenerator gen) {
-			super(gen, Heads.MOD_ID, "en_us");
+		public Language(PackOutput packOutput) {
+			super(packOutput, Heads.MOD_ID, "en_us");
 		}
 
 		@Override
@@ -218,8 +216,8 @@ public class HeadsDatagen {
 	}
 
 	static class BlockStates extends BlockStateProvider {
-		public BlockStates(DataGenerator gen, ExistingFileHelper helper) {
-			super(gen, Heads.MOD_ID, helper);
+		public BlockStates(PackOutput packOutput, ExistingFileHelper helper) {
+			super(packOutput, Heads.MOD_ID, helper);
 		}
 
 		@Override
@@ -237,8 +235,8 @@ public class HeadsDatagen {
 	}
 
 	static class ItemModels extends ItemModelProvider {
-		public ItemModels(DataGenerator gen, ExistingFileHelper helper) {
-			super(gen, Heads.MOD_ID, helper);
+		public ItemModels(PackOutput packOutput, ExistingFileHelper helper) {
+			super(packOutput, Heads.MOD_ID, helper);
 		}
 
 		@Override
@@ -509,26 +507,26 @@ public class HeadsDatagen {
 	}
 
 	public static class HeadBlockTags extends BlockTagsProvider {
-		public HeadBlockTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-			super(generator, Heads.MOD_ID, existingFileHelper);
+		public HeadBlockTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+			super(packOutput, lookupProvider, Heads.MOD_ID, existingFileHelper);
 		}
 
 		@Override
-		protected void addTags() {
+		protected void addTags(HolderLookup.Provider provider) {
 
 		}
 	}
 
 	public static class HeadItemTags extends ItemTagsProvider {
-		public HeadItemTags(DataGenerator dataGenerator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
-			super(dataGenerator, blockTagsProvider, Heads.MOD_ID, existingFileHelper);
+		public HeadItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
+			super(packOutput, lookupProvider, blockTagsProvider, Heads.MOD_ID, existingFileHelper);
 		}
 
 		public static final List<String> knownHeads = new ArrayList<>();
 		public static final TagKey<Item> HEADS = forgeTag("heads");
 
 		@Override
-		protected void addTags() {
+		protected void addTags(HolderLookup.Provider provider) {
 			this.addHead(Items.CREEPER_HEAD, "creeper");
 			this.addHead(Items.DRAGON_HEAD, "dragon");
 			this.addHead(Items.PLAYER_HEAD, "player");

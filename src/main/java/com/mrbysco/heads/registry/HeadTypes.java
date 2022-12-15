@@ -2,6 +2,7 @@ package com.mrbysco.heads.registry;
 
 import com.mrbysco.heads.block.HeadBlock;
 import com.mrbysco.heads.config.HeadConfig;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cat;
@@ -21,7 +22,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public enum HeadTypes implements HeadBlock.Type {
-//	ALLAY((entity) -> entity.getType() == EntityType.ALLAY, HeadConfig.COMMON.allay.dropRate::get, HeadConfig.COMMON.allay.enableCreeperDrop::get),
+	//	ALLAY((entity) -> entity.getType() == EntityType.ALLAY, HeadConfig.COMMON.allay.dropRate::get, HeadConfig.COMMON.allay.enableCreeperDrop::get),
 	AXOLOTL_BLUE((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.BLUE, HeadConfig.COMMON.axolotl.dropRate::get, HeadConfig.COMMON.axolotl.enableCreeperDrop::get),
 	AXOLOTL_CYAN((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.CYAN, HeadConfig.COMMON.axolotl.dropRate::get, HeadConfig.COMMON.axolotl.enableCreeperDrop::get),
 	AXOLOTL_GOLD((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.GOLD, HeadConfig.COMMON.axolotl.dropRate::get, HeadConfig.COMMON.axolotl.enableCreeperDrop::get),
@@ -30,17 +31,17 @@ public enum HeadTypes implements HeadBlock.Type {
 	BAT((entity) -> entity.getType() == EntityType.BAT, HeadConfig.COMMON.bat.dropRate::get, HeadConfig.COMMON.bat.enableCreeperDrop::get),
 	BEE((entity) -> entity.getType() == EntityType.BEE, HeadConfig.COMMON.bee.dropRate::get, HeadConfig.COMMON.bee.enableCreeperDrop::get),
 	BLAZE((entity) -> entity.getType() == EntityType.BLAZE, HeadConfig.COMMON.blaze.dropRate::get, HeadConfig.COMMON.blaze.enableCreeperDrop::get),
-	CAT_ALL_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.ALL_BLACK, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_BLACK((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.BLACK, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_BRITISH_SHORTHAIR((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.BRITISH_SHORTHAIR, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_CALICO((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.CALICO, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_JELLIE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.JELLIE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_PERSIAN((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.PERSIAN, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_RAGDOLL((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.RAGDOLL, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_RED((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.RED, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_SIAMESE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.SIAMESE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_TABBY((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.TABBY, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
-	CAT_WHITE((entity) -> entity.getType() == EntityType.CAT && ((Cat) entity).getCatVariant() == CatVariant.WHITE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_ALL_BLACK((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.ALL_BLACK, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_BLACK((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.BLACK, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_BRITISH_SHORTHAIR((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.BRITISH_SHORTHAIR, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_CALICO((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.CALICO, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_JELLIE((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.JELLIE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_PERSIAN((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.PERSIAN, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_RAGDOLL((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.RAGDOLL, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_RED((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.RED, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_SIAMESE((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.SIAMESE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_TABBY((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.TABBY, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
+	CAT_WHITE((entity) -> entity.getType() == EntityType.CAT && BuiltInRegistries.CAT_VARIANT.getResourceKey(((Cat) entity).getVariant()).orElse(null) == CatVariant.WHITE, HeadConfig.COMMON.cat.dropRate::get, HeadConfig.COMMON.cat.enableCreeperDrop::get),
 	CAVE_SPIDER((entity) -> entity.getType() == EntityType.CAVE_SPIDER, HeadConfig.COMMON.caveSpider.dropRate::get, HeadConfig.COMMON.caveSpider.enableCreeperDrop::get),
 	CHICKEN((entity) -> entity.getType() == EntityType.CHICKEN, HeadConfig.COMMON.chicken.dropRate::get, HeadConfig.COMMON.chicken.enableCreeperDrop::get),
 	COD((entity) -> entity.getType() == EntityType.COD, HeadConfig.COMMON.cod.dropRate::get, HeadConfig.COMMON.cod.enableCreeperDrop::get),
@@ -51,8 +52,8 @@ public enum HeadTypes implements HeadBlock.Type {
 	ENDERMAN((entity) -> entity.getType() == EntityType.ENDERMAN, HeadConfig.COMMON.enderman.dropRate::get, HeadConfig.COMMON.enderman.enableCreeperDrop::get),
 	ENDERMITE((entity) -> entity.getType() == EntityType.ENDERMITE, HeadConfig.COMMON.endermite.dropRate::get, HeadConfig.COMMON.endermite.enableCreeperDrop::get),
 	EVOKER((entity) -> entity.getType() == EntityType.EVOKER, HeadConfig.COMMON.evoker.dropRate::get, HeadConfig.COMMON.evoker.enableCreeperDrop::get),
-	FOX((entity) -> entity.getType() == EntityType.FOX && ((Fox) entity).getFoxType() == Fox.Type.RED, HeadConfig.COMMON.fox.dropRate::get, HeadConfig.COMMON.fox.enableCreeperDrop::get),
-	FOX_SNOW((entity) -> entity.getType() == EntityType.FOX && ((Fox) entity).getFoxType() == Fox.Type.SNOW, HeadConfig.COMMON.fox.dropRate::get, HeadConfig.COMMON.fox.enableCreeperDrop::get),
+	FOX((entity) -> entity.getType() == EntityType.FOX && ((Fox) entity).getVariant() == Fox.Type.RED, HeadConfig.COMMON.fox.dropRate::get, HeadConfig.COMMON.fox.enableCreeperDrop::get),
+	FOX_SNOW((entity) -> entity.getType() == EntityType.FOX && ((Fox) entity).getVariant() == Fox.Type.SNOW, HeadConfig.COMMON.fox.dropRate::get, HeadConfig.COMMON.fox.enableCreeperDrop::get),
 	GHAST((entity) -> entity.getType() == EntityType.GHAST, HeadConfig.COMMON.ghast.dropRate::get, HeadConfig.COMMON.ghast.enableCreeperDrop::get),
 	GLOW_SQUID((entity) -> entity.getType() == EntityType.GLOW_SQUID, HeadConfig.COMMON.glowSquid.dropRate::get, HeadConfig.COMMON.glowSquid.enableCreeperDrop::get),
 	GOAT((entity) -> entity.getType() == EntityType.GOAT, HeadConfig.COMMON.goat.dropRate::get, HeadConfig.COMMON.goat.enableCreeperDrop::get),
@@ -61,7 +62,7 @@ public enum HeadTypes implements HeadBlock.Type {
 	HORSE_BROWN((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.BROWN, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
 	HORSE_CHESTNUT((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.CHESTNUT, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
 	HORSE_CREAMY((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.CREAMY, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
-	HORSE_DARKBROWN((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.DARKBROWN, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
+	HORSE_DARKBROWN((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.DARK_BROWN, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
 	HORSE_GRAY((entity) -> entity.getType() == EntityType.HORSE && ((Horse) entity).getVariant() == Variant.GRAY, HeadConfig.COMMON.horse.dropRate::get, HeadConfig.COMMON.horse.enableCreeperDrop::get),
 	HORSE_SKELETON((entity) -> entity.getType() == EntityType.SKELETON_HORSE, HeadConfig.COMMON.horseSkeleton.dropRate::get, HeadConfig.COMMON.horseSkeleton.enableCreeperDrop::get),
 	HORSE_UNDEAD((entity) -> entity.getType() == EntityType.ZOMBIE_HORSE, HeadConfig.COMMON.horseUndead.dropRate::get, HeadConfig.COMMON.horseUndead.enableCreeperDrop::get),
@@ -71,8 +72,8 @@ public enum HeadTypes implements HeadBlock.Type {
 	IRON_GOLEM((entity) -> entity.getType() == EntityType.IRON_GOLEM, HeadConfig.COMMON.ironGolem.dropRate::get, HeadConfig.COMMON.ironGolem.enableCreeperDrop::get),
 	MAGMA_CUBE((entity) -> entity.getType() == EntityType.MAGMA_CUBE, HeadConfig.COMMON.magmaCube.dropRate::get, HeadConfig.COMMON.magmaCube.enableCreeperDrop::get),
 	MULE((entity) -> entity.getType() == EntityType.MULE, HeadConfig.COMMON.mule.dropRate::get, HeadConfig.COMMON.mule.enableCreeperDrop::get),
-	MOOSHROOM_BROWN((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getMushroomType() == MushroomCow.MushroomType.BROWN, HeadConfig.COMMON.mooshroom.dropRate::get, HeadConfig.COMMON.mooshroom.enableCreeperDrop::get),
-	MOOSHROOM_RED((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getMushroomType() == MushroomCow.MushroomType.RED, HeadConfig.COMMON.mooshroom.dropRate::get, HeadConfig.COMMON.mooshroom.enableCreeperDrop::get),
+	MOOSHROOM_BROWN((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getVariant() == MushroomCow.MushroomType.BROWN, HeadConfig.COMMON.mooshroom.dropRate::get, HeadConfig.COMMON.mooshroom.enableCreeperDrop::get),
+	MOOSHROOM_RED((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getVariant() == MushroomCow.MushroomType.RED, HeadConfig.COMMON.mooshroom.dropRate::get, HeadConfig.COMMON.mooshroom.enableCreeperDrop::get),
 	OCELOT((entity) -> entity.getType() == EntityType.OCELOT, HeadConfig.COMMON.ocelot.dropRate::get, HeadConfig.COMMON.ocelot.enableCreeperDrop::get),
 	PIG((entity) -> entity.getType() == EntityType.PIG, HeadConfig.COMMON.pig.dropRate::get, HeadConfig.COMMON.pig.enableCreeperDrop::get),
 	PIGLIN((entity) -> entity.getType() == EntityType.PIGLIN, HeadConfig.COMMON.piglin.dropRate::get, HeadConfig.COMMON.piglin.enableCreeperDrop::get),

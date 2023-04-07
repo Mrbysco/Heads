@@ -20,7 +20,7 @@ public class HeadTabs {
 		TAB_HEADS = event.registerCreativeModeTab(new ResourceLocation(Heads.MOD_ID, "tab"), builder ->
 				builder.icon(() -> new ItemStack(HeadsRegistry.WITCH.getHead().get()))
 						.title(Component.translatable("itemGroup.heads"))
-						.displayItems((features, output, hasPermissions) -> {
+						.displayItems((displayParameters, output) -> {
 							List<ItemStack> stacks = HeadsRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
 							output.acceptAll(stacks);
 						}));

@@ -11,7 +11,7 @@ public class DropHandler {
 		final LivingEntity livingEntity = event.getEntity();
 		ItemStack headStack = HeadUtil.getStackForEntity(livingEntity, event.getSource(), event.getLootingLevel());
 		if (!headStack.isEmpty()) {
-			event.getDrops().add(new ItemEntity(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), headStack));
+			event.getDrops().add(new ItemEntity(livingEntity.level(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), headStack));
 		}
 	}
 }

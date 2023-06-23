@@ -2,7 +2,11 @@ package com.mrbysco.heads.registry;
 
 import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.blockentity.HeadBlockEntity;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,6 +23,7 @@ import java.util.Map;
 public class HeadsRegistry {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Heads.MOD_ID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Heads.MOD_ID);
+	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Heads.MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Heads.MOD_ID);
 
 	public static final Map<HeadTypes, HeadReg> headMap = new HashMap<>();
@@ -113,6 +118,14 @@ public class HeadsRegistry {
 	public static final HeadReg ZOGLIN = new HeadReg("zoglin", "head", HeadTypes.ZOGLIN);
 	public static final HeadReg ZOMBIE_VILLAGER = new HeadReg("zombie_villager", "head", HeadTypes.ZOMBIE_VILLAGER);
 	public static final HeadReg ZOMBIFIED_PIGLIN = new HeadReg("zombified_piglin", "skull", HeadTypes.ZOMBIFIED_PIGLIN);
+
+	public static final RegistryObject<CreativeModeTab> HEAD_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
+			.icon(() -> new ItemStack(HeadsRegistry.WITCH.getHead().get()))
+			.title(Component.translatable("itemGroup.heads"))
+			.displayItems((displayParameters, output) -> {
+				List<ItemStack> stacks = HeadsRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
+				output.acceptAll(stacks);
+			}).build());
 
 	public static final RegistryObject<BlockEntityType<HeadBlockEntity>> HEAD = BLOCK_ENTITIES.register("head", () -> BlockEntityType.Builder.of(HeadBlockEntity::new,
 			getSkulls()).build(null));

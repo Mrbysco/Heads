@@ -7,8 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 
 public class HeadReg {
@@ -43,9 +43,9 @@ public class HeadReg {
 		this.mobName = mobName;
 		this.headName = headName;
 		this.headType = headType;
-		this.HEAD = HeadsRegistry.BLOCKS.register(headName + "_" + suffix, () -> new HeadBlock(headType, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
-		this.WALL_HEAD = HeadsRegistry.BLOCKS.register(headName + "_wall_" + suffix, () -> new WallHeadBlock(headType, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).lootFrom(HEAD)));
-		this.HEAD_ITEM = HeadsRegistry.ITEMS.register(headName + "_" + suffix, () -> new StandingAndWallBlockItem(HEAD.get(), WALL_HEAD.get(), (new Item.Properties()).rarity(Rarity.UNCOMMON),  Direction.DOWN));
+		this.HEAD = HeadsRegistry.BLOCKS.register(headName + "_" + suffix, () -> new HeadBlock(headType, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).strength(1.0F)));
+		this.WALL_HEAD = HeadsRegistry.BLOCKS.register(headName + "_wall_" + suffix, () -> new WallHeadBlock(headType, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).strength(1.0F).lootFrom(HEAD)));
+		this.HEAD_ITEM = HeadsRegistry.ITEMS.register(headName + "_" + suffix, () -> new StandingAndWallBlockItem(HEAD.get(), WALL_HEAD.get(), (new Item.Properties()).rarity(Rarity.UNCOMMON), Direction.DOWN));
 		HeadsRegistry.headList.add(this);
 		HeadsRegistry.headMap.put(headType, this);
 	}

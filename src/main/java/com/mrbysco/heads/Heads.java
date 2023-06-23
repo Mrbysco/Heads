@@ -3,7 +3,6 @@ package com.mrbysco.heads;
 import com.mrbysco.heads.client.RenderHandler;
 import com.mrbysco.heads.config.HeadConfig;
 import com.mrbysco.heads.handler.DropHandler;
-import com.mrbysco.heads.registry.HeadTabs;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,10 +26,9 @@ public class Heads {
 		ModLoadingContext.get().registerConfig(Type.COMMON, HeadConfig.commonSpec);
 		eventBus.register(HeadConfig.class);
 
-		eventBus.register(new HeadTabs());
-
 		HeadsRegistry.BLOCKS.register(eventBus);
 		HeadsRegistry.ITEMS.register(eventBus);
+		HeadsRegistry.CREATIVE_MODE_TABS.register(eventBus);
 		HeadsRegistry.BLOCK_ENTITIES.register(eventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(DropHandler::onLivingDrop);

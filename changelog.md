@@ -1,1 +1,1 @@
-* Fix creative tab ordering
+* Fix head visibility

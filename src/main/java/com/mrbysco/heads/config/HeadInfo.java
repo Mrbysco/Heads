@@ -11,7 +11,6 @@ public class HeadInfo {
 
 	public HeadInfo(ForgeConfigSpec.Builder builder, String mobName, double rate) {
 		String configName = getCamelCase(mobName);
-		System.out.println(configName);
 
 		builder.comment(mobName + " settings")
 				.push(configName);

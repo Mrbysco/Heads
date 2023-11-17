@@ -10,6 +10,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlags;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -509,9 +511,43 @@ public class HeadsDatagen {
 			super(packOutput, lookupProvider, Heads.MOD_ID, existingFileHelper);
 		}
 
+		public static final List<String> knownHeads = new ArrayList<>();
+		public static final TagKey<Block> HEADS = forgeTag("heads");
+
 		@Override
 		protected void addTags(HolderLookup.Provider provider) {
+			this.addHead(Blocks.CREEPER_HEAD, "creeper");
+			this.addHead(Blocks.CREEPER_WALL_HEAD, "creeper");
+			this.addHead(Blocks.DRAGON_HEAD, "dragon");
+			this.addHead(Blocks.DRAGON_WALL_HEAD, "dragon");
+			this.addHead(Blocks.PLAYER_HEAD, "player");
+			this.addHead(Blocks.PLAYER_WALL_HEAD, "player");
+			this.addHead(Blocks.SKELETON_SKULL, "skeleton");
+			this.addHead(Blocks.SKELETON_WALL_SKULL, "skeleton");
+			this.addHead(Blocks.WITHER_SKELETON_SKULL, "wither_skeleton");
+			this.addHead(Blocks.WITHER_SKELETON_WALL_SKULL, "wither_skeleton");
+			this.addHead(Blocks.ZOMBIE_HEAD, "zombie");
+			this.addHead(Blocks.ZOMBIE_WALL_HEAD, "zombie");
 
+			HeadsRegistry.headList.forEach(this::addHead);
+		}
+
+		private void addHead(HeadReg headRegObject) {
+			this.addHead(headRegObject.getHead().get(), headRegObject.getMobName());
+			this.addHead(headRegObject.getWallHead().get(), headRegObject.getMobName());
+		}
+
+		private void addHead(Block block, String mobName) {
+			TagKey<Block> headTag = forgeTag("heads/" + mobName);
+			if (!knownHeads.contains("heads/" + mobName)) {
+				knownHeads.add("heads/" + mobName);
+				this.tag(HEADS).addTag(headTag);
+			}
+			this.tag(headTag).add(block);
+		}
+
+		private static TagKey<Block> forgeTag(String name) {
+			return BlockTags.create(new ResourceLocation("forge", name));
 		}
 	}
 

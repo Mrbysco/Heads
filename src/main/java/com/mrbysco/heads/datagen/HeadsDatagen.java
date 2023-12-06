@@ -4,6 +4,7 @@ import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -28,20 +29,18 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +95,7 @@ public class HeadsDatagen {
 
 			@Override
 			protected Iterable<Block> getKnownBlocks() {
-				return HeadsRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+				return HeadsRegistry.BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
 			}
 		}
 
@@ -333,7 +332,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeHorse(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 45, 0)
@@ -346,7 +345,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeGoat(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 45, 0)
@@ -359,7 +358,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeMooshroom(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 45, 0)
@@ -372,7 +371,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeWitchHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -385,7 +384,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeVillagerHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -398,7 +397,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeHoglinHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -411,7 +410,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeChickenHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -424,7 +423,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeEndermiteHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -437,7 +436,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeAxolotlHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -450,7 +449,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeBatHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -463,7 +462,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeFishHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -476,7 +475,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeOcelotHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -489,7 +488,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeWolfHead(Block block) {
-			getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
 					.parent(new UncheckedModelFile(mcLoc("item/template_skull")))
 					.transforms().transform(ItemDisplayContext.GUI)
 					.rotation(30, 40, 0)
@@ -502,7 +501,7 @@ public class HeadsDatagen {
 		}
 
 		private void makeHead(Block block) {
-			withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(), mcLoc("item/template_skull"));
+			withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), mcLoc("item/template_skull"));
 		}
 	}
 

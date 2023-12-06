@@ -1,9 +1,9 @@
 package com.mrbysco.heads.config;
 
 import com.mrbysco.heads.Heads;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class HeadConfig {
@@ -60,7 +60,7 @@ public class HeadConfig {
 		public final HeadInfo zombieVillager;
 		public final HeadInfo zombifiedPiglin;
 
-		Common(ForgeConfigSpec.Builder builder) {
+		Common(ModConfigSpec.Builder builder) {
 			axolotl = new HeadInfo(builder, "Axolotl", 0.025);
 			bat = new HeadInfo(builder, "Bat", 0.025);
 			bee = new HeadInfo(builder, "Bee", 0.025);
@@ -115,11 +115,11 @@ public class HeadConfig {
 		}
 	}
 
-	public static final ForgeConfigSpec commonSpec;
+	public static final ModConfigSpec commonSpec;
 	public static final Common COMMON;
 
 	static {
-		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
 		commonSpec = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}

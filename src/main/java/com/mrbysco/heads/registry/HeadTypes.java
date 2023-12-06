@@ -15,9 +15,9 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -136,7 +136,7 @@ public enum HeadTypes implements HeadBlock.Type {
 	}
 
 	@Nullable
-	public static HeadTypes getMatchingHead(@Nonnull LivingEntity livingEntity) {
+	public static HeadTypes getMatchingHead(@NotNull LivingEntity livingEntity) {
 		for (HeadTypes headType : values()) {
 			if (headType.getEntityPredicate().test(livingEntity)) {
 				return headType;

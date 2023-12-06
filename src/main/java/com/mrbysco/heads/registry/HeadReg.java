@@ -6,18 +6,18 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.StandingAndWallBlockItem;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class HeadReg {
 	protected final String mobName;
 	protected final String headName;
 	protected final HeadTypes headType;
-	protected final RegistryObject<Block> HEAD;
-	protected final RegistryObject<Block> WALL_HEAD;
-	protected final RegistryObject<Item> HEAD_ITEM;
+	protected final DeferredBlock<HeadBlock> HEAD;
+	protected final DeferredBlock<WallHeadBlock> WALL_HEAD;
+	protected final DeferredItem<StandingAndWallBlockItem> HEAD_ITEM;
 
 	public String getMobName() {
 		return mobName;
@@ -27,15 +27,15 @@ public class HeadReg {
 		return headName;
 	}
 
-	public RegistryObject<Block> getHead() {
+	public DeferredBlock<HeadBlock> getHead() {
 		return HEAD;
 	}
 
-	public RegistryObject<Block> getWallHead() {
+	public DeferredBlock<WallHeadBlock> getWallHead() {
 		return WALL_HEAD;
 	}
 
-	public RegistryObject<Item> getHeadItem() {
+	public DeferredItem<StandingAndWallBlockItem> getHeadItem() {
 		return HEAD_ITEM;
 	}
 

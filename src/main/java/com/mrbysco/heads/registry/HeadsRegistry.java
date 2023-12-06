@@ -6,26 +6,24 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class HeadsRegistry {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Heads.MOD_ID);
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Heads.MOD_ID);
+	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Heads.MOD_ID);
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Heads.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Heads.MOD_ID);
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Heads.MOD_ID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Heads.MOD_ID);
 
 	public static final Map<HeadTypes, HeadReg> headMap = new HashMap<>();
 	public static final List<HeadReg> headList = new ArrayList<>();
@@ -120,7 +118,7 @@ public class HeadsRegistry {
 	public static final HeadReg ZOMBIE_VILLAGER = new HeadReg("zombie_villager", "head", HeadTypes.ZOMBIE_VILLAGER);
 	public static final HeadReg ZOMBIFIED_PIGLIN = new HeadReg("zombified_piglin", "skull", HeadTypes.ZOMBIFIED_PIGLIN);
 
-	public static final RegistryObject<CreativeModeTab> HEAD_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
+	public static final Supplier<CreativeModeTab> HEAD_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
 			.icon(() -> new ItemStack(HeadsRegistry.WITCH.getHead().get()))
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.title(Component.translatable("itemGroup.heads"))
@@ -129,17 +127,8 @@ public class HeadsRegistry {
 				output.acceptAll(stacks);
 			}).build());
 
-	public static final RegistryObject<BlockEntityType<HeadBlockEntity>> HEAD = BLOCK_ENTITIES.register("head", () -> BlockEntityType.Builder.of(HeadBlockEntity::new,
-			getSkulls()).build(null));
-
-	public static Block[] getSkulls() {
-		Collection<RegistryObject<Block>> blocks = BLOCKS.getEntries();
-		ArrayList<Block> heads = new ArrayList<>();
-		for (RegistryObject<Block> registryObject : blocks) {
-			if (registryObject.get() instanceof AbstractSkullBlock) {
-				heads.add(registryObject.get());
-			}
-		}
-		return heads.toArray(new Block[0]);
-	}
+	public static final Supplier<BlockEntityType<HeadBlockEntity>> HEAD = BLOCK_ENTITIES.register("head", () ->
+			BlockEntityType.Builder.of(HeadBlockEntity::new,
+					BLOCKS.getEntries().stream().map(DeferredHolder::get).toList().toArray(new Block[0])
+			).build(null));
 }

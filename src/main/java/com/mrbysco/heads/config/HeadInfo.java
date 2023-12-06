@@ -1,15 +1,15 @@
 package com.mrbysco.heads.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.Locale;
 
 public class HeadInfo {
-	public final ForgeConfigSpec.BooleanValue enableCreeperDrop;
-	public final ForgeConfigSpec.DoubleValue dropRate;
+	public final ModConfigSpec.BooleanValue enableCreeperDrop;
+	public final ModConfigSpec.DoubleValue dropRate;
 
 
-	public HeadInfo(ForgeConfigSpec.Builder builder, String mobName, double rate) {
+	public HeadInfo(ModConfigSpec.Builder builder, String mobName, double rate) {
 		String configName = getCamelCase(mobName);
 
 		builder.comment(mobName + " settings")

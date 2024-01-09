@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class HeadsRegistry {
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Heads.MOD_ID);

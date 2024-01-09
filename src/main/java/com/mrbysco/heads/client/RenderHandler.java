@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 
 public class RenderHandler {
-	public static void onArmorRender(RenderLivingEvent.Post<? extends LivingEntity, ? extends EntityModel<? extends LivingEntity>> event) {
+	public static void onArmorRender(RenderLivingEvent.Pre<? extends LivingEntity, ? extends EntityModel<? extends LivingEntity>> event) {
 		final ItemStack headStack = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
 		final ResourceLocation headLocation = BuiltInRegistries.ITEM.getKey(headStack.getItem());
 		final boolean isWearingHead = (headLocation != null && headLocation.getNamespace().equals(Heads.MOD_ID));

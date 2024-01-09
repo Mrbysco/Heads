@@ -43,8 +43,8 @@ public class HeadReg {
 		this.mobName = mobName;
 		this.headName = headName;
 		this.headType = headType;
-		this.HEAD = HeadsRegistry.BLOCKS.register(headName + "_" + suffix, () -> new HeadBlock(headType, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).strength(1.0F)));
-		this.WALL_HEAD = HeadsRegistry.BLOCKS.register(headName + "_wall_" + suffix, () -> new WallHeadBlock(headType, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).strength(1.0F).lootFrom(HEAD)));
+		this.HEAD = HeadsRegistry.BLOCKS.register(headName + "_" + suffix, () -> new HeadBlock(headType, BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).strength(1.0F)));
+		this.WALL_HEAD = HeadsRegistry.BLOCKS.register(headName + "_wall_" + suffix, () -> new WallHeadBlock(headType, BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).strength(1.0F).lootFrom(HEAD)));
 		this.HEAD_ITEM = HeadsRegistry.ITEMS.register(headName + "_" + suffix, () -> new StandingAndWallBlockItem(HEAD.get(), WALL_HEAD.get(), (new Item.Properties()).rarity(Rarity.UNCOMMON), Direction.DOWN));
 		HeadsRegistry.headList.add(this);
 		HeadsRegistry.headMap.put(headType, this);

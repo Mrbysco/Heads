@@ -43,13 +43,12 @@ import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Bus.MOD, modid = Heads.MOD_ID)
+@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD, modid = Heads.MOD_ID)
 public class ClientHandler {
 	public static final ModelLayerLocation AXOLOTL = new ModelLayerLocation(new ResourceLocation(Heads.MOD_ID, "axolotl"), "head");
 	public static final ModelLayerLocation BAT = new ModelLayerLocation(new ResourceLocation(Heads.MOD_ID, "bat"), "head");

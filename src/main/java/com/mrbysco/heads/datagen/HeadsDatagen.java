@@ -4,6 +4,7 @@ import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.WritableRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -14,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -30,7 +32,7 @@ import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -43,11 +45,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class HeadsDatagen {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
@@ -57,7 +58,7 @@ public class HeadsDatagen {
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 		if (event.includeServer()) {
-			generator.addProvider(event.includeServer(), new Loots(packOutput));
+			generator.addProvider(event.includeServer(), new Loots(packOutput, lookupProvider));
 			BlockTagsProvider blockProvider;
 			generator.addProvider(event.includeServer(), blockProvider = new HeadBlockTags(packOutput, lookupProvider, helper));
 			generator.addProvider(event.includeServer(), new HeadItemTags(packOutput, lookupProvider, blockProvider, helper));
@@ -70,10 +71,10 @@ public class HeadsDatagen {
 	}
 
 	static class Loots extends LootTableProvider {
-		public Loots(PackOutput packOutput) {
+		public Loots(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 			super(packOutput, Set.of(), List.of(
 					new SubProviderEntry(HeadsBlockTables::new, LootContextParamSets.BLOCK)
-			));
+			), lookupProvider);
 		}
 
 		public static final List<Item> RESISTANT = new ArrayList<>();
@@ -108,8 +109,8 @@ public class HeadsDatagen {
 		}
 
 		@Override
-		protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationContext) {
-			map.forEach((name, table) -> table.validate(validationContext));
+		protected void validate(WritableRegistry<LootTable> writableregistry, ValidationContext validationcontext, ProblemReporter.Collector problemreporter$collector) {
+			super.validate(writableregistry, validationcontext, problemreporter$collector);
 		}
 	}
 

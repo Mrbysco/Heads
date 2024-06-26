@@ -78,7 +78,7 @@ public class HorseSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 	}
 }

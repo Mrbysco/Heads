@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Arrays;
 
 public class MagmaCubeSkullModel extends SkullModelBase {
-	private static final ResourceLocation SLIME_LOCATION = new ResourceLocation("textures/entity/slime/slime.png");
+	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
 	private final ModelPart root;
 	private final ModelPart[] bodyCubes = new ModelPart[8];
 
@@ -61,7 +61,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 	}
 }

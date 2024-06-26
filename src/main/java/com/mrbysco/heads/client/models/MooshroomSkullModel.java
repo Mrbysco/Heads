@@ -21,8 +21,8 @@ public class MooshroomSkullModel extends CowSkullModel {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 
 		Minecraft minecraft = Minecraft.getInstance();
 		BlockRenderDispatcher blockrenderdispatcher = minecraft.getBlockRenderer();

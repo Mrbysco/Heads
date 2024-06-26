@@ -18,7 +18,7 @@ import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
 
 public class SheepSkullFurModel extends SkullModelBase {
-	private static final ResourceLocation SHEEP_FUR_LOCATION = new ResourceLocation("textures/entity/sheep/sheep_fur.png");
+	private static final ResourceLocation SHEEP_FUR_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep_fur.png");
 	private final ModelPart root;
 	protected final ModelPart head;
 	protected final DyeColor color;
@@ -53,15 +53,12 @@ public class SheepSkullFurModel extends SkullModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
 		Minecraft minecraft = Minecraft.getInstance();
 		RenderType renderType = RenderType.entityCutoutNoCullZOffset(SHEEP_FUR_LOCATION);
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 		VertexConsumer furConsumer = bufferSource.getBuffer(renderType);
-		float[] afloat = Sheep.getColorArray(color);
-		float f = afloat[0];
-		float f1 = afloat[1];
-		float f2 = afloat[2];
-		this.root.render(poseStack, furConsumer, packedLightIn, packedOverlayIn, f, f1, f2, alpha);
+
+		this.root.render(poseStack, furConsumer, packedLightIn, packedOverlayIn, Sheep.getColor(this.color));
 	}
 }

@@ -56,13 +56,13 @@ public class LayeredSkullModel extends HeadModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 
 		Minecraft minecraft = Minecraft.getInstance();
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 		VertexConsumer cutoutConsumer = bufferSource.getBuffer(OUTER_LAYER);
-		this.hat.render(poseStack, cutoutConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		this.hat.render(poseStack, cutoutConsumer, packedLightIn, packedOverlayIn, color);
 		bufferSource.endBatch(OUTER_LAYER);
 	}
 }

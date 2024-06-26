@@ -32,14 +32,17 @@ public class WallHeadBlock extends WallSkullBlock {
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 
+	@Override
 	public String getDescriptionId() {
 		return this.asItem().getDescriptionId();
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
 		return AABBS.get(state.getValue(FACING));
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext placeContext) {
 		BlockState blockstate = this.defaultBlockState();
 		BlockGetter blockgetter = placeContext.getLevel();
@@ -59,14 +62,17 @@ public class WallHeadBlock extends WallSkullBlock {
 		return null;
 	}
 
+	@Override
 	public BlockState rotate(BlockState state, Rotation rotation) {
 		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
+	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 
+	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockStateBuilder) {
 		super.createBlockStateDefinition(blockStateBuilder);
 	}

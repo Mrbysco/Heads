@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 public class SlimeSkullModel extends SkullModelBase {
-	private static final ResourceLocation SLIME_LOCATION = new ResourceLocation("textures/entity/slime/slime.png");
+	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
 	protected final ModelPart root;
 	protected final ModelPart cube;
 	protected final ModelPart cubeOuter;
@@ -60,14 +60,14 @@ public class SlimeSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.cube.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		this.cube.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 
 		Minecraft minecraft = Minecraft.getInstance();
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 		final RenderType renderType = RenderType.entityTranslucent(SLIME_LOCATION);
 		VertexConsumer slimeConsumer = bufferSource.getBuffer(renderType);
-		this.cubeOuter.render(poseStack, slimeConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		this.cubeOuter.render(poseStack, slimeConsumer, packedLightIn, packedOverlayIn, color);
 		bufferSource.endBatch(renderType);
 	}
 }

@@ -80,8 +80,8 @@ public class HeadsDatagen {
 		public static final List<Item> RESISTANT = new ArrayList<>();
 
 		public static class HeadsBlockTables extends BlockLootSubProvider {
-			protected HeadsBlockTables() {
-				super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+			protected HeadsBlockTables(HolderLookup.Provider provider) {
+				super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
 			}
 
 			@Override
@@ -512,7 +512,7 @@ public class HeadsDatagen {
 		}
 
 		public static final List<String> knownHeads = new ArrayList<>();
-		public static final TagKey<Block> HEADS = forgeTag("heads");
+		public static final TagKey<Block> HEADS = commonTag("heads");
 
 		@Override
 		protected void addTags(HolderLookup.Provider provider) {
@@ -538,16 +538,16 @@ public class HeadsDatagen {
 		}
 
 		private void addHead(Block block, String mobName) {
-			TagKey<Block> headTag = forgeTag("heads/" + mobName);
-			if (!knownHeads.contains("heads/" + mobName)) {
-				knownHeads.add("heads/" + mobName);
+			TagKey<Block> headTag = commonTag("skulls/" + mobName);
+			if (!knownHeads.contains("skulls/" + mobName)) {
+				knownHeads.add("skulls/" + mobName);
 				this.tag(HEADS).addTag(headTag);
 			}
 			this.tag(headTag).add(block);
 		}
 
-		private static TagKey<Block> forgeTag(String name) {
-			return BlockTags.create(new ResourceLocation("forge", name));
+		private static TagKey<Block> commonTag(String name) {
+			return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 	}
 
@@ -557,7 +557,7 @@ public class HeadsDatagen {
 		}
 
 		public static final List<String> knownHeads = new ArrayList<>();
-		public static final TagKey<Item> HEADS = forgeTag("heads");
+		public static final TagKey<Item> HEADS = commonTag("skulls");
 
 		@Override
 		protected void addTags(HolderLookup.Provider provider) {
@@ -576,7 +576,7 @@ public class HeadsDatagen {
 		}
 
 		private void addHead(Item item, String mobName) {
-			TagKey<Item> headTag = forgeTag("heads/" + mobName);
+			TagKey<Item> headTag = commonTag("heads/" + mobName);
 			if (!knownHeads.contains("heads/" + mobName)) {
 				knownHeads.add("heads/" + mobName);
 				this.tag(HEADS).addTag(headTag);
@@ -584,8 +584,8 @@ public class HeadsDatagen {
 			this.tag(headTag).add(item);
 		}
 
-		private static TagKey<Item> forgeTag(String name) {
-			return ItemTags.create(new ResourceLocation("forge", name));
+		private static TagKey<Item> commonTag(String name) {
+			return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 	}
 }

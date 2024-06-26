@@ -32,11 +32,11 @@ public class SquidSkullModel extends HeadModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
 		if (glow) {
-			super.renderToBuffer(poseStack, vertexConsumer, 15728880, OverlayTexture.NO_OVERLAY, red, green, blue, alpha);
+			super.renderToBuffer(poseStack, vertexConsumer, 15728880, OverlayTexture.NO_OVERLAY, color);
 		} else {
-			super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+			super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 		}
 	}
 }

@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class EndermanSkullModel extends HeadModelBase {
-	private static final RenderType ENDERMAN_EYES = RenderType.eyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
+	private static final RenderType ENDERMAN_EYES = RenderType.eyes(ResourceLocation.withDefaultNamespace("textures/entity/enderman/enderman_eyes.png"));
 	protected final ModelPart eyes;
 
 	public EndermanSkullModel(ModelPart root) {
@@ -51,14 +51,14 @@ public class EndermanSkullModel extends HeadModelBase {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
+		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 
 		Minecraft minecraft = Minecraft.getInstance();
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 		VertexConsumer eyeConsumer = bufferSource.getBuffer(ENDERMAN_EYES);
 		poseStack.scale(1.01f, 1.01f, 1.01f);
-		this.eyes.render(poseStack, eyeConsumer, 15728640, OverlayTexture.NO_OVERLAY, red, green, blue, alpha);
+		this.eyes.render(poseStack, eyeConsumer, 15728640, OverlayTexture.NO_OVERLAY, color);
 		bufferSource.endBatch(ENDERMAN_EYES);
 	}
 }

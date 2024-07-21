@@ -1,6 +1,7 @@
 package com.mrbysco.heads.datagen;
 
 import com.mrbysco.heads.Heads;
+import com.mrbysco.heads.config.HeadInfo;
 import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.core.HolderLookup;
@@ -213,6 +214,67 @@ public class HeadsDatagen {
 			this.addBlock(HeadsRegistry.ZOGLIN.getHead(), "Zoglin Head");
 			this.addBlock(HeadsRegistry.ZOMBIE_VILLAGER.getHead(), "Zombie Villager Head");
 			this.addBlock(HeadsRegistry.ZOMBIFIED_PIGLIN.getHead(), "Zombified Piglin Skull");
+
+			addConfig("title", "Heads Config", null);
+			addMobConfig("axolotl", "Axolotl");
+			addMobConfig("bat", "Bat");
+			addMobConfig("bee", "Bee");
+			addMobConfig("blaze", "Blaze");
+			addMobConfig("cat", "Cat");
+			addMobConfig("caveSpider", "Cave Spider");
+			addMobConfig("chicken", "Chicken");
+			addMobConfig("cod", "Cod");
+			addMobConfig("cow", "Cow");
+			addMobConfig("dolphin", "Dolphin");
+			addMobConfig("donkey", "Donkey");
+			addMobConfig("drowned", "Drowned");
+			addMobConfig("enderman", "Enderman");
+			addMobConfig("endermite", "Endermite");
+			addMobConfig("evoker", "Evoker");
+			addMobConfig("fox", "Fox");
+			addMobConfig("ghast", "Ghast");
+			addMobConfig("glowSquid", "Glow Squid");
+			addMobConfig("goat", "Goat");
+			addMobConfig("hoglin", "Hoglin");
+			addMobConfig("horse", "Horse");
+			addMobConfig("skeletonHorse", "Skeleton Horse");
+			addMobConfig("undeadHorse", "Undead Horse");
+			addMobConfig("husk", "Husk");
+			addMobConfig("illusioner", "Illusioner");
+			addMobConfig("ironGolem", "Iron Golem");
+			addMobConfig("magmaCube", "Magma Cube");
+			addMobConfig("mule", "Mule");
+			addMobConfig("mooshroom", "Mooshroom");
+			addMobConfig("ocelot", "Ocelot");
+			addMobConfig("pig", "Pig");
+			addMobConfig("piglin", "Piglin");
+			addMobConfig("piglinBrute", "Piglin Brute");
+			addMobConfig("pillager", "Pillager");
+			addMobConfig("salmon", "Salmon");
+			addMobConfig("sheep", "Sheep");
+			addMobConfig("silverfish", "Silverfish");
+			addMobConfig("slime", "Slime");
+			addMobConfig("snowGolem", "Snow Golem");
+			addMobConfig("spider", "Spider");
+			addMobConfig("squid", "Squid");
+			addMobConfig("stray", "Stray");
+			addMobConfig("turtle", "Turtle");
+			addMobConfig("villager", "Villager");
+			addMobConfig("vindicator", "Vindicator");
+			addMobConfig("wanderingTrader", "Wandering Trader");
+			addMobConfig("witch", "Witch");
+			addMobConfig("wolf", "Wolf");
+			addMobConfig("zoglin", "Zoglin");
+			addMobConfig("zombieVillager", "Zombie Villager");
+			addMobConfig("zombifiedPiglin", "Zombified Piglin");
+		}
+
+		private void addMobConfig(String mobPath, String mobName) {
+			addConfig(mobPath, mobName, mobName + " Settings");
+			addConfig(mobPath + "EnableCreeperDrop", "Enable " + mobName + " Creeper drop",
+					"Enable charged creeper explosion to drop a " + mobName + " head");
+			addConfig(mobPath + "DropRate", mobName + " Drop Rate",
+					"Defines the drop rate for the " + mobName + " head (0 to disable) [Default: 0.025]");
 		}
 
 		/**

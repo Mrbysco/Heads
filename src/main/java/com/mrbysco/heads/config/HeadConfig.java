@@ -81,7 +81,7 @@ public class HeadConfig {
 			glowSquid = new HeadInfo(builder, "Glow Squid", 0.025);
 			goat = new HeadInfo(builder, "Goat", 0.025);
 			hoglin = new HeadInfo(builder, "Hoglin", 0.025);
-			horse = new HeadInfo(builder, "Gorse", 0.025);
+			horse = new HeadInfo(builder, "Horse", 0.025);
 			horseSkeleton = new HeadInfo(builder, "Skeleton Horse", 0.025);
 			horseUndead = new HeadInfo(builder, "Undead Horse", 0.025);
 			husk = new HeadInfo(builder, "Husk", 0.025);

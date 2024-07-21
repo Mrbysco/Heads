@@ -10,6 +10,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig.Type;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,6 +34,7 @@ public class Heads {
 
 		if (dist.isClient()) {
 			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
+			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 	}
 }

@@ -214,6 +214,19 @@ public class HeadsDatagen {
 			this.addBlock(HeadsRegistry.ZOMBIE_VILLAGER.getHead(), "Zombie Villager Head");
 			this.addBlock(HeadsRegistry.ZOMBIFIED_PIGLIN.getHead(), "Zombified Piglin Skull");
 		}
+
+		/**
+		 * Add the translation for a config entry
+		 *
+		 * @param path        The path of the config entry
+		 * @param name        The name of the config entry
+		 * @param description The description of the config entry (optional in case of targeting "title" or similar entries that have no tooltip)
+		 */
+		private void addConfig(String path, String name, @Nullable String description) {
+			this.add("heads.configuration." + path, name);
+			if (description != null && !description.isEmpty())
+				this.add("heads.configuration." + path + ".tooltip", description);
+		}
 	}
 
 	static class BlockStates extends BlockStateProvider {
@@ -557,7 +570,6 @@ public class HeadsDatagen {
 		}
 
 		public static final List<String> knownHeads = new ArrayList<>();
-		public static final TagKey<Item> HEADS = commonTag("skulls");
 
 		@Override
 		protected void addTags(HolderLookup.Provider provider) {
@@ -579,7 +591,7 @@ public class HeadsDatagen {
 			TagKey<Item> headTag = commonTag("skulls/" + mobName);
 			if (!knownHeads.contains("skulls/" + mobName)) {
 				knownHeads.add("skulls/" + mobName);
-				this.tag(HEADS).addTag(headTag);
+				this.tag(ItemTags.SKULLS).addTag(headTag);
 			}
 			this.tag(headTag).add(item);
 		}

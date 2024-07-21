@@ -1,5 +1,4 @@
-// 1.21	2024-07-21T14:28:07.8594553	Tags for minecraft:item mod id heads
-404ebffe40257f62adca5dd8e0f0fe141cc7b852 data/c/tags/item/skulls.json
+// 1.21	2024-07-21T14:49:50.090343	Tags for minecraft:item mod id heads
 296470a972b2a5515205ca03116d2fcf6f2e1e85 data/c/tags/item/skulls/axolotl.json
 81f04632914e8a2f1583f1eb587a704fcf51c0a8 data/c/tags/item/skulls/bat.json
 48ecfe7881692251dff9936e99909db8feafb17a data/c/tags/item/skulls/bee.json
@@ -56,3 +55,4 @@ e351729987dc6011055299a33d62d621b82e664e data/c/tags/item/skulls/wolf.json
 e3dc123f024cd679283f0743a177fcbc95e40e52 data/c/tags/item/skulls/zombie.json
 d4369f14b5fc0750ae6e238de1e9a574c29f0fe5 data/c/tags/item/skulls/zombie_villager.json
 fd55b99eee38db50a679fd6be831617cdffada7a data/c/tags/item/skulls/zombified_piglin.json
+404ebffe40257f62adca5dd8e0f0fe141cc7b852 data/minecraft/tags/item/skulls.json

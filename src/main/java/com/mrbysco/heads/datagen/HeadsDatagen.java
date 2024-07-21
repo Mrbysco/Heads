@@ -37,6 +37,7 @@ import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -512,7 +513,6 @@ public class HeadsDatagen {
 		}
 
 		public static final List<String> knownHeads = new ArrayList<>();
-		public static final TagKey<Block> HEADS = commonTag("heads");
 
 		@Override
 		protected void addTags(HolderLookup.Provider provider) {
@@ -541,7 +541,7 @@ public class HeadsDatagen {
 			TagKey<Block> headTag = commonTag("skulls/" + mobName);
 			if (!knownHeads.contains("skulls/" + mobName)) {
 				knownHeads.add("skulls/" + mobName);
-				this.tag(HEADS).addTag(headTag);
+				this.tag(Tags.Blocks.SKULLS).addTag(headTag);
 			}
 			this.tag(headTag).add(block);
 		}
@@ -576,9 +576,9 @@ public class HeadsDatagen {
 		}
 
 		private void addHead(Item item, String mobName) {
-			TagKey<Item> headTag = commonTag("heads/" + mobName);
-			if (!knownHeads.contains("heads/" + mobName)) {
-				knownHeads.add("heads/" + mobName);
+			TagKey<Item> headTag = commonTag("skulls/" + mobName);
+			if (!knownHeads.contains("skulls/" + mobName)) {
+				knownHeads.add("skulls/" + mobName);
 				this.tag(HEADS).addTag(headTag);
 			}
 			this.tag(headTag).add(item);

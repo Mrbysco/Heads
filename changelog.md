@@ -1,2 +1,1 @@
-* Fix block and item tags being incorrect
-* Enable the in-game config (Requires NeoForge 21.0.110-beta or higher)
+* Change the player head visibility re-enabling from pre render to post render

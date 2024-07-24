@@ -34,6 +34,7 @@ public class Heads {
 
 		if (dist.isClient()) {
 			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
+			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRenderPost);
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 	}

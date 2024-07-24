@@ -16,12 +16,28 @@ public class RenderHandler {
 		final ItemStack headStack = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
 		final ResourceLocation headLocation = BuiltInRegistries.ITEM.getKey(headStack.getItem());
 		final boolean isWearingHead = (headLocation != null && headLocation.getNamespace().equals(Heads.MOD_ID));
+		if (!isWearingHead) return;
 		if (event.getRenderer().getModel() instanceof HeadedModel headedModel) {
 			if (event.getRenderer().getModel() instanceof HumanoidModel<?> humanoidModel) {
-				headedModel.getHead().visible = !isWearingHead;
-				humanoidModel.hat.visible = !isWearingHead;
+				headedModel.getHead().visible = false;
+				humanoidModel.hat.visible = false;
 			} else {
-				headedModel.getHead().visible = !isWearingHead;
+				headedModel.getHead().visible = false;
+			}
+		}
+	}
+
+	public static void onArmorRenderPost(RenderLivingEvent.Post<? extends LivingEntity, ? extends EntityModel<? extends LivingEntity>> event) {
+		final ItemStack headStack = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
+		final ResourceLocation headLocation = BuiltInRegistries.ITEM.getKey(headStack.getItem());
+		final boolean isWearingHead = (headLocation != null && headLocation.getNamespace().equals(Heads.MOD_ID));
+		if (isWearingHead) return;
+		if (event.getRenderer().getModel() instanceof HeadedModel headedModel) {
+			if (event.getRenderer().getModel() instanceof HumanoidModel<?> humanoidModel) {
+				headedModel.getHead().visible = true;
+				humanoidModel.hat.visible = true;
+			} else {
+				headedModel.getHead().visible = true;
 			}
 		}
 	}

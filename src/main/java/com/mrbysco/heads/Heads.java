@@ -35,6 +35,7 @@ public class Heads {
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
+			MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRenderPost);
 		});
 	}
 }

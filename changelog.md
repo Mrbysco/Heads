@@ -1,1 +1,1 @@
-* Fix head visibility
+* Change the player head visibility re-enabling from pre render to post render

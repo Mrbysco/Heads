@@ -15,4 +15,9 @@ public class HeadBlockEntity extends SkullBlockEntity {
 	public BlockEntityType<?> getType() {
 		return HeadsRegistry.HEAD.get();
 	}
+
+	@Override
+	public boolean isValidBlockState(BlockState state) {
+		return this.getType().isValid(state);
+	}
 }

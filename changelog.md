@@ -1,1 +1,1 @@
-* Change the player head visibility re-enabling from pre render to post render
+* Fix crash when placing a head in 1.21.1

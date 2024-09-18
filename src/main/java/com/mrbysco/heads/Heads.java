@@ -4,6 +4,7 @@ import com.mrbysco.heads.client.RenderHandler;
 import com.mrbysco.heads.config.HeadConfig;
 import com.mrbysco.heads.handler.DropHandler;
 import com.mrbysco.heads.registry.HeadsRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -25,6 +26,7 @@ public class Heads {
 		container.registerConfig(Type.COMMON, HeadConfig.commonSpec);
 		eventBus.register(HeadConfig.class);
 
+		HeadsRegistry.SOUND_EVENTS.register(eventBus);
 		HeadsRegistry.BLOCKS.register(eventBus);
 		HeadsRegistry.ITEMS.register(eventBus);
 		HeadsRegistry.CREATIVE_MODE_TABS.register(eventBus);
@@ -37,5 +39,9 @@ public class Heads {
 			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRenderPost);
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
+	}
+
+	public static ResourceLocation modLoc(String path) {
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

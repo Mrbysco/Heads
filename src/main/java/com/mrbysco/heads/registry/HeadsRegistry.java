@@ -4,6 +4,7 @@ import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.blockentity.HeadBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,7 @@ import java.util.function.Supplier;
 public class HeadsRegistry {
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Heads.MOD_ID);
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Heads.MOD_ID);
+	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Heads.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Heads.MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Heads.MOD_ID);
 

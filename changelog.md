@@ -1,1 +1,1 @@
-* Fix crash when placing a head in 1.21.1
+* Add custom noteblock sounds for each mob head

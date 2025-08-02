@@ -17,6 +17,7 @@ public class HeadItemModelsProvider extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
+		makeHead(HeadsRegistry.ALLAY.getHead().get());
 		makeAxolotlHead(HeadsRegistry.AXOLOTL_BLUE.getHead().get());
 		makeAxolotlHead(HeadsRegistry.AXOLOTL_CYAN.getHead().get());
 		makeAxolotlHead(HeadsRegistry.AXOLOTL_GOLD.getHead().get());

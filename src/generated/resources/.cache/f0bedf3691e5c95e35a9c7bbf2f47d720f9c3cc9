@@ -1,5 +1,6 @@
-// 1.21.1	2024-09-18T16:32:31.8078301	Tags for minecraft:block mod id heads
-404ebffe40257f62adca5dd8e0f0fe141cc7b852 data/c/tags/block/skulls.json
+// 1.21.1	2025-08-02T22:45:08.472732	Tags for minecraft:block mod id heads
+e6954c959f14fa2fddba8fe7c033e9ee5c096df8 data/c/tags/block/skulls.json
+245bb8f95ae7d55138111c9fe6eda8a46c833725 data/c/tags/block/skulls/allay.json
 c140dd4dc8101fc43d4a947782394f78da0f2d9d data/c/tags/block/skulls/axolotl.json
 fe94064d7a699f48cec1c674e6c3477886221fba data/c/tags/block/skulls/bat.json
 3d4bc8be51fdb6d691dfe7485beda8407e9c14a5 data/c/tags/block/skulls/bee.json

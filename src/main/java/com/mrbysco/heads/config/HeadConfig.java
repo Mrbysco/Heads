@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class HeadConfig {
 	public static class Common {
+		public final HeadInfo allay;
 		public final HeadInfo axolotl;
 		public final HeadInfo bat;
 		public final HeadInfo bee;
@@ -61,6 +62,7 @@ public class HeadConfig {
 		public final HeadInfo zombifiedPiglin;
 
 		Common(ModConfigSpec.Builder builder) {
+			allay = new HeadInfo(builder, "Allay", 0.025);
 			axolotl = new HeadInfo(builder, "Axolotl", 0.025);
 			bat = new HeadInfo(builder, "Bat", 0.025);
 			bee = new HeadInfo(builder, "Bee", 0.025);

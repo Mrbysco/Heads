@@ -1,6 +1,7 @@
 package com.mrbysco.heads.client;
 
 import com.mrbysco.heads.Heads;
+import com.mrbysco.heads.client.models.AllaySkullModel;
 import com.mrbysco.heads.client.models.AxolotlSkullModel;
 import com.mrbysco.heads.client.models.BatSkullModel;
 import com.mrbysco.heads.client.models.BeeSkullModel;
@@ -50,6 +51,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD, modid = Heads.MOD_ID)
 public class ClientHandler {
+	public static final ModelLayerLocation ALLAY = new ModelLayerLocation(Heads.modLoc("allay"), "head");
 	public static final ModelLayerLocation AXOLOTL = new ModelLayerLocation(Heads.modLoc("axolotl"), "head");
 	public static final ModelLayerLocation BAT = new ModelLayerLocation(Heads.modLoc("bat"), "head");
 	public static final ModelLayerLocation BEE = new ModelLayerLocation(Heads.modLoc("bee"), "head");
@@ -105,6 +107,7 @@ public class ClientHandler {
 	@SubscribeEvent
 	static void clientSetupEvent(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
+			SkullBlockRenderer.SKIN_BY_TYPE.put(HeadTypes.ALLAY, ResourceLocation.withDefaultNamespace("textures/entity/allay/allay.png"));
 			SkullBlockRenderer.SKIN_BY_TYPE.put(HeadTypes.AXOLOTL_BLUE, ResourceLocation.withDefaultNamespace("textures/entity/axolotl/axolotl_blue.png"));
 			SkullBlockRenderer.SKIN_BY_TYPE.put(HeadTypes.AXOLOTL_CYAN, ResourceLocation.withDefaultNamespace("textures/entity/axolotl/axolotl_cyan.png"));
 			SkullBlockRenderer.SKIN_BY_TYPE.put(HeadTypes.AXOLOTL_GOLD, ResourceLocation.withDefaultNamespace("textures/entity/axolotl/axolotl_gold.png"));
@@ -204,6 +207,7 @@ public class ClientHandler {
 
 	@SubscribeEvent
 	static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(ALLAY, AllaySkullModel::createSkullModel);
 		event.registerLayerDefinition(AXOLOTL, AxolotlSkullModel::createSkullModel);
 		event.registerLayerDefinition(BAT, BatSkullModel::createSkullModel);
 		event.registerLayerDefinition(BEE, BeeSkullModel::createSkullModel);
@@ -260,6 +264,7 @@ public class ClientHandler {
 	@SubscribeEvent
 	static void registerSkullModel(EntityRenderersEvent.CreateSkullModels event) {
 		EntityModelSet entityModelSet = event.getEntityModelSet();
+		event.registerSkullModel(HeadTypes.ALLAY, new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.ALLAY)));
 		event.registerSkullModel(HeadTypes.AXOLOTL_BLUE, new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)));
 		event.registerSkullModel(HeadTypes.AXOLOTL_CYAN, new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)));
 		event.registerSkullModel(HeadTypes.AXOLOTL_GOLD, new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)));

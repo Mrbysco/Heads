@@ -23,7 +23,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public enum HeadTypes implements HeadBlock.Type {
-	//	ALLAY((entity) -> entity.getType() == EntityType.ALLAY, HeadConfig.COMMON.allay.dropRate, HeadConfig.COMMON.allay.enableCreeperDrop),
+	ALLAY((entity) -> entity.getType() == EntityType.ALLAY, HeadConfig.COMMON.allay.dropRate, HeadConfig.COMMON.allay.enableCreeperDrop),
 	AXOLOTL_BLUE((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.BLUE, HeadConfig.COMMON.axolotl.dropRate, HeadConfig.COMMON.axolotl.enableCreeperDrop),
 	AXOLOTL_CYAN((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.CYAN, HeadConfig.COMMON.axolotl.dropRate, HeadConfig.COMMON.axolotl.enableCreeperDrop),
 	AXOLOTL_GOLD((entity) -> entity.getType() == EntityType.AXOLOTL && ((Axolotl) entity).getVariant() == Axolotl.Variant.GOLD, HeadConfig.COMMON.axolotl.dropRate, HeadConfig.COMMON.axolotl.enableCreeperDrop),

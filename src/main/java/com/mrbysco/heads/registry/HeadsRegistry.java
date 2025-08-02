@@ -29,6 +29,7 @@ public class HeadsRegistry {
 	public static final Map<HeadTypes, HeadReg> headMap = new HashMap<>();
 	public static final List<HeadReg> headList = new ArrayList<>();
 
+	public static final HeadReg ALLAY = new HeadReg("allay", "allay", "head", HeadTypes.ALLAY);
 	public static final HeadReg AXOLOTL_BLUE = new HeadReg("axolotl", "axolotl_blue", "head", HeadTypes.AXOLOTL_BLUE);
 	public static final HeadReg AXOLOTL_CYAN = new HeadReg("axolotl", "axolotl_cyan", "head", HeadTypes.AXOLOTL_CYAN);
 	public static final HeadReg AXOLOTL_GOLD = new HeadReg("axolotl", "axolotl_gold", "head", HeadTypes.AXOLOTL_GOLD);

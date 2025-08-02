@@ -19,6 +19,7 @@ public class HeadLanguageProvider extends LanguageProvider {
 	protected void addTranslations() {
 		add("itemGroup.heads", "Heads");
 
+		this.addHead(HeadsRegistry.ALLAY, "Allay");
 		this.addHead(HeadsRegistry.AXOLOTL_BLUE, "Axolotl");
 		this.addHead(HeadsRegistry.AXOLOTL_CYAN, "Axolotl");
 		this.addHead(HeadsRegistry.AXOLOTL_GOLD, "Axolotl");

@@ -1,4 +1,13 @@
 {
+  "heads.block.note_block.imitate.allay": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.allay.ambient_without_item"
+      }
+    ],
+    "subtitle": "subtitles.entity.allay.ambient_without_item"
+  },
   "heads.block.note_block.imitate.axolotl_blue": {
     "sounds": [
       {

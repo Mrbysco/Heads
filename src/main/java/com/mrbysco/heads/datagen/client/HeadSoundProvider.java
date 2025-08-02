@@ -17,6 +17,10 @@ public class HeadSoundProvider extends SoundDefinitionsProvider {
 
 	@Override
 	public void registerSounds() {
+		addSounds(definition().with(sound("entity.allay.ambient_without_item", SoundDefinition.SoundType.EVENT))
+						.subtitle("subtitles.entity.allay.ambient_without_item"),
+				HeadsRegistry.ALLAY
+		);
 		addSounds(definition().with(sound("entity.axolotl.idle_water", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.axolotl.idle_water"),
 				HeadsRegistry.AXOLOTL_BLUE, HeadsRegistry.AXOLOTL_CYAN, HeadsRegistry.AXOLOTL_GOLD,

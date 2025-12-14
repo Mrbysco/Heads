@@ -73,7 +73,6 @@ public class HeadLanguageProvider extends LanguageProvider {
 		this.addHead(HeadsRegistry.MOOSHROOM_RED, "Red Mooshroom");
 		this.addHead(HeadsRegistry.OCELOT, "Ocelot");
 		this.addHead(HeadsRegistry.PIG, "Pig");
-		this.addHead(HeadsRegistry.PIGLIN, "Piglin");
 		this.addHead(HeadsRegistry.PIGLIN_BRUTE, "Piglin Brute");
 		this.addHead(HeadsRegistry.PILLAGER, "Pillager");
 		this.addHead(HeadsRegistry.SALMON, "Salmon");
@@ -198,7 +197,7 @@ public class HeadLanguageProvider extends LanguageProvider {
 	 * @param text  The subtitle text
 	 */
 	public void addSubtitle(SoundEvent sound, String text) {
-		String path = Heads.MOD_ID + ".subtitle." + sound.getLocation().getPath();
+		String path = Heads.MOD_ID + ".subtitle." + sound.location().getPath();
 		this.add(path, text);
 	}
 

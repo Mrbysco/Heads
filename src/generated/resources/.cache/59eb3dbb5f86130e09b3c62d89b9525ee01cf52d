@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-02T22:45:08.4687285	Loot Tables
+// 1.21.10	2025-12-14T19:42:50.8888967	Loot Tables
 aa90307b029ae9a258906eeb71b3547d40c3e4df data/heads/loot_table/blocks/allay_head.json
 e8fe9c68b5f1b06f10575f5cbad858a7905af350 data/heads/loot_table/blocks/axolotl_blue_head.json
 1bdb28de7e77035d4b9f8a30c0ce86a5f930266f data/heads/loot_table/blocks/axolotl_cyan_head.json
@@ -63,7 +63,6 @@ ed5cce683018a6aab30c6c232abb9a935e7eaf4a data/heads/loot_table/blocks/mule_head.
 fa5cfb1ab6297b3edb9986d74416ed2013cdb1fe data/heads/loot_table/blocks/ocelot_head.json
 90e9295f196dfe5483e2c7d7dd757b80ba3f354a data/heads/loot_table/blocks/orange_sheep_head.json
 1d575550aba0855b402c6453e958d33aea1d1637 data/heads/loot_table/blocks/piglin_brute_head.json
-b617ca63a338bd3edd1ce2ed3627bc505d7485a2 data/heads/loot_table/blocks/piglin_head.json
 c3484d8f7618bfbbd1d52f63fc20f205c7fa19d8 data/heads/loot_table/blocks/pig_head.json
 16d824f3fca37f64fe937b9d52914cd222b88857 data/heads/loot_table/blocks/pillager_head.json
 45bb9d170c79bd38205f54a7851bef4d0fc9242b data/heads/loot_table/blocks/pink_sheep_head.json

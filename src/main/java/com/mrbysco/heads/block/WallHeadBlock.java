@@ -33,11 +33,6 @@ public class WallHeadBlock extends WallSkullBlock {
 	}
 
 	@Override
-	public String getDescriptionId() {
-		return this.asItem().getDescriptionId();
-	}
-
-	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
 		return AABBS.get(state.getValue(FACING));
 	}

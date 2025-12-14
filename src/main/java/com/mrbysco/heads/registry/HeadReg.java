@@ -6,11 +6,13 @@ import com.mrbysco.heads.block.WallHeadBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.waypoints.Waypoint;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -48,6 +50,10 @@ public class HeadReg {
 		return IMITATE_SOUND;
 	}
 
+	public HeadTypes getHeadType() {
+		return headType;
+	}
+
 	public HeadReg(String mobName, String headName, String suffix, HeadTypes headType) {
 		this.mobName = mobName;
 		this.headName = headName;
@@ -56,15 +62,17 @@ public class HeadReg {
 		this.IMITATE_SOUND = HeadsRegistry.SOUND_EVENTS.register(soundLocation, () ->
 				SoundEvent.createVariableRangeEvent(Heads.modLoc(soundLocation)));
 		this.HEAD = HeadsRegistry.BLOCKS.registerBlock(headName + "_" + suffix, (properties) -> new HeadBlock(headType, properties),
-				BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).instrument(NoteBlockInstrument.CUSTOM_HEAD)
-				.strength(1.0F));
+				() -> BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).instrument(NoteBlockInstrument.CUSTOM_HEAD)
+						.strength(1.0F));
 		this.WALL_HEAD = HeadsRegistry.BLOCKS.registerBlock(headName + "_wall_" + suffix, (properties) -> new WallHeadBlock(headType, properties),
-				BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).instrument(NoteBlockInstrument.CUSTOM_HEAD)
-				.strength(1.0F).lootFrom(HEAD));
+				() -> BlockBehaviour.Properties.ofFullCopy(Blocks.ZOMBIE_HEAD).instrument(NoteBlockInstrument.CUSTOM_HEAD)
+						.strength(1.0F).overrideLootTable(HEAD.get().getLootTable()));
 		this.HEAD_ITEM = HeadsRegistry.ITEMS.registerItem(headName + "_" + suffix, (properties) -> new StandingAndWallBlockItem(
-				HEAD.get(), WALL_HEAD.get(), properties
+				HEAD.get(), WALL_HEAD.get(), Direction.DOWN, Waypoint.addHideAttribute(properties)
+				.useBlockDescriptionPrefix()
 				.component(DataComponents.NOTE_BLOCK_SOUND, this.IMITATE_SOUND.getId())
-				.rarity(Rarity.UNCOMMON), Direction.DOWN));
+				.rarity(Rarity.UNCOMMON)
+				.equippableUnswappable(EquipmentSlot.HEAD)));
 		HeadsRegistry.headList.add(this);
 		HeadsRegistry.headMap.put(headType, this);
 	}

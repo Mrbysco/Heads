@@ -575,15 +575,6 @@
     ],
     "subtitle": "subtitles.entity.pig.ambient"
   },
-  "heads.block.note_block.imitate.piglin": {
-    "sounds": [
-      {
-        "type": "event",
-        "name": "entity.piglin.ambient"
-      }
-    ],
-    "subtitle": "subtitles.entity.piglin.ambient"
-  },
   "heads.block.note_block.imitate.piglin_brute": {
     "sounds": [
       {

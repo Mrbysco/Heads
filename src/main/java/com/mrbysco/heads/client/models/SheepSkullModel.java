@@ -11,18 +11,17 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class SheepSkullModel extends SkullModelBase {
-	private final ModelPart root;
 	protected final ModelPart head;
 	protected final SheepSkullFurModel furModel;
 
 	public SheepSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.head = root.getChild("head");
 		this.furModel = null;
 	}
 
 	public SheepSkullModel(ModelPart root, SheepSkullFurModel furModel) {
-		this.root = root;
+		super(root);
 		this.head = root.getChild("head");
 		this.furModel = furModel;
 	}
@@ -43,12 +42,13 @@ public class SheepSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float) Math.PI / 180F);
-		this.head.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.head.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.head.xRot = state.xRot * ((float) Math.PI / 180F);
 
 		if (furModel != null) {
-			furModel.setupAnim(mouthAnimation, yRot, xRot);
+			furModel.setupAnim(state);
 		}
 	}
 

@@ -5,14 +5,13 @@ import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class HeadSoundProvider extends SoundDefinitionsProvider {
 
-	public HeadSoundProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
-		super(packOutput, Heads.MOD_ID, existingFileHelper);
+	public HeadSoundProvider(PackOutput packOutput) {
+		super(packOutput, Heads.MOD_ID);
 	}
 
 	@Override
@@ -40,14 +39,14 @@ public class HeadSoundProvider extends SoundDefinitionsProvider {
 		);
 		addSounds(definition().with(sound("entity.cat.ambient", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.cat.ambient"),
-				HeadsRegistry.CAT_ALL_BLACK,  HeadsRegistry.CAT_BLACK,  HeadsRegistry.CAT_BRITISH_SHORTHAIR,
-				HeadsRegistry.CAT_CALICO,  HeadsRegistry.CAT_JELLIE,  HeadsRegistry.CAT_PERSIAN,
-				HeadsRegistry.CAT_RAGDOLL,  HeadsRegistry.CAT_RED,  HeadsRegistry.CAT_SIAMESE,
-				HeadsRegistry.CAT_TABBY,  HeadsRegistry.CAT_WHITE
+				HeadsRegistry.CAT_ALL_BLACK, HeadsRegistry.CAT_BLACK, HeadsRegistry.CAT_BRITISH_SHORTHAIR,
+				HeadsRegistry.CAT_CALICO, HeadsRegistry.CAT_JELLIE, HeadsRegistry.CAT_PERSIAN,
+				HeadsRegistry.CAT_RAGDOLL, HeadsRegistry.CAT_RED, HeadsRegistry.CAT_SIAMESE,
+				HeadsRegistry.CAT_TABBY, HeadsRegistry.CAT_WHITE
 		);
 		addSounds(definition().with(sound("entity.spider.ambient", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.spider.ambient"),
-				HeadsRegistry.SPIDER,  HeadsRegistry.CAVE_SPIDER
+				HeadsRegistry.SPIDER, HeadsRegistry.CAVE_SPIDER
 		);
 		addSounds(definition().with(sound("entity.chicken.ambient", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.chicken.ambient"),
@@ -142,10 +141,6 @@ public class HeadSoundProvider extends SoundDefinitionsProvider {
 		addSounds(definition().with(sound("entity.pig.ambient", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.pig.ambient"),
 				HeadsRegistry.PIG
-		);
-		addSounds(definition().with(sound("entity.piglin.ambient", SoundDefinition.SoundType.EVENT))
-						.subtitle("subtitles.entity.piglin.ambient"),
-				HeadsRegistry.PIGLIN
 		);
 		addSounds(definition().with(sound("entity.piglin_brute.ambient", SoundDefinition.SoundType.EVENT))
 						.subtitle("subtitles.entity.piglin_brute.ambient"),

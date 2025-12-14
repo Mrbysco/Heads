@@ -1,5 +1,5 @@
-// 1.21.1	2025-08-02T22:45:08.472732	Tags for minecraft:block mod id heads
-e6954c959f14fa2fddba8fe7c033e9ee5c096df8 data/c/tags/block/skulls.json
+// 1.21.10	2025-12-14T19:42:50.8898961	Tags for minecraft:block mod id heads
+8b2406319d54b2208a958f865989c120da8f0efe data/c/tags/block/skulls.json
 245bb8f95ae7d55138111c9fe6eda8a46c833725 data/c/tags/block/skulls/allay.json
 c140dd4dc8101fc43d4a947782394f78da0f2d9d data/c/tags/block/skulls/axolotl.json
 fe94064d7a699f48cec1c674e6c3477886221fba data/c/tags/block/skulls/bat.json
@@ -33,7 +33,6 @@ d2b70f1fd112892efdd99094fb7f8f85e40e37f9 data/c/tags/block/skulls/mooshroom.json
 9b09ea43d80902bbc2625fc5ce79e81bfa92a904 data/c/tags/block/skulls/mule.json
 d2534a305cce1a37aa6b065fa6f19810361bd6e5 data/c/tags/block/skulls/ocelot.json
 2961c18ce64580e6b899de7badfc5f31328e3991 data/c/tags/block/skulls/pig.json
-d3c329ee23b6740123f6481e9f4480904eed6dbf data/c/tags/block/skulls/piglin.json
 4db90690fc8dfd12378f7009d70d82296c11d89f data/c/tags/block/skulls/piglin_brute.json
 60a8a4edf100a75f09c5dfe4b8a8335d50a6332f data/c/tags/block/skulls/pillager.json
 3a32c6d80efdd9c1cbad804193b806ac99734d7e data/c/tags/block/skulls/player.json

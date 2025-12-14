@@ -15,11 +15,10 @@ import java.util.Arrays;
 
 public class MagmaCubeSkullModel extends SkullModelBase {
 	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
-	private final ModelPart root;
 	private final ModelPart[] bodyCubes = new ModelPart[8];
 
 	public MagmaCubeSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		Arrays.setAll(this.bodyCubes, (id) -> root.getChild(getSegmentName(id)));
 	}
 
@@ -55,9 +54,10 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float) Math.PI / 180F);
-		this.root.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.root.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.root.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

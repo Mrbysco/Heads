@@ -14,7 +14,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
 
 public class SheepSkullFurModel extends SkullModelBase {
@@ -24,6 +23,7 @@ public class SheepSkullFurModel extends SkullModelBase {
 	protected final DyeColor color;
 
 	public SheepSkullFurModel(ModelPart root, DyeColor color) {
+		super(root);
 		this.root = root;
 		this.head = root.getChild("head");
 
@@ -47,9 +47,10 @@ public class SheepSkullFurModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float) Math.PI / 180F);
-		this.head.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State renderState) {
+		super.setupAnim(renderState);
+		this.head.yRot = renderState.yRot * (float) (Math.PI / 180.0);
+		this.head.xRot = renderState.xRot * (float) (Math.PI / 180.0);
 	}
 
 	@Override
@@ -59,6 +60,6 @@ public class SheepSkullFurModel extends SkullModelBase {
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 		VertexConsumer furConsumer = bufferSource.getBuffer(renderType);
 
-		this.root.render(poseStack, furConsumer, packedLightIn, packedOverlayIn, Sheep.getColor(this.color));
+		this.root.render(poseStack, furConsumer, packedLightIn, packedOverlayIn, this.color.getTextureDiffuseColor());
 	}
 }

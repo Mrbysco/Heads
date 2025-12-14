@@ -35,7 +35,7 @@ public class BatSkullModel extends HeadModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		super.setupAnim(mouthAnimation, yRot, xRot);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
 	}
 }

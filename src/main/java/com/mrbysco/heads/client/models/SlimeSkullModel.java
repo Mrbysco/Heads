@@ -16,12 +16,11 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SlimeSkullModel extends SkullModelBase {
 	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
-	protected final ModelPart root;
 	protected final ModelPart cube;
 	protected final ModelPart cubeOuter;
 
 	public SlimeSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.cube = root.getChild("cube");
 		this.cubeOuter = root.getChild("cube_outer");
 	}
@@ -51,12 +50,13 @@ public class SlimeSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.cube.yRot = yRot * ((float) Math.PI / 180F);
-		this.cube.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.cube.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.cube.xRot = state.xRot * ((float) Math.PI / 180F);
 
-		this.cubeOuter.yRot = yRot * ((float) Math.PI / 180F);
-		this.cubeOuter.xRot = xRot * ((float) Math.PI / 180F);
+		this.cubeOuter.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.cubeOuter.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

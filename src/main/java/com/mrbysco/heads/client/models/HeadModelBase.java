@@ -1,7 +1,5 @@
 package com.mrbysco.heads.client.models;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,11 +9,10 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class HeadModelBase extends SkullModelBase {
-	protected final ModelPart root;
 	protected final ModelPart head;
 
 	public HeadModelBase(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.head = root.getChild("head");
 	}
 
@@ -32,13 +29,9 @@ public class HeadModelBase extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float) Math.PI / 180F);
-		this.head.xRot = xRot * ((float) Math.PI / 180F);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
+	public void setupAnim(State renderState) {
+		super.setupAnim(renderState);
+		this.head.yRot = renderState.yRot * ((float) Math.PI / 180F);
+		this.head.xRot = renderState.xRot * ((float) Math.PI / 180F);
 	}
 }

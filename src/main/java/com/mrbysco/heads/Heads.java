@@ -1,12 +1,10 @@
 package com.mrbysco.heads;
 
-import com.mrbysco.heads.client.RenderHandler;
 import com.mrbysco.heads.config.HeadConfig;
 import com.mrbysco.heads.handler.DropHandler;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -35,8 +33,6 @@ public class Heads {
 		NeoForge.EVENT_BUS.addListener(DropHandler::onLivingDrop);
 
 		if (dist.isClient()) {
-			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRender);
-			NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RenderHandler::onArmorRenderPost);
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 	}

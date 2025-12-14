@@ -12,11 +12,10 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class HorseSkullModel extends SkullModelBase {
-	protected final ModelPart root;
 	protected final ModelPart head;
 
 	public HorseSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.head = root.getChild("head_parts");
 	}
 
@@ -72,9 +71,10 @@ public class HorseSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.head.yRot = yRot * ((float) Math.PI / 180F);
-		this.head.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.head.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.head.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

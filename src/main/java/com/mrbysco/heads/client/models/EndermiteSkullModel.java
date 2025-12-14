@@ -13,11 +13,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class EndermiteSkullModel extends SkullModelBase {
 	private static final int[][] BODY_SIZES = new int[][]{{4, 3, 2}, {6, 4, 5}, {3, 3, 1}, {1, 2, 1}};
 	private static final int[][] BODY_TEXS = new int[][]{{0, 0}, {0, 5}, {0, 14}, {0, 18}};
-	private final ModelPart root;
 	private final ModelPart[] bodyParts;
 
 	public EndermiteSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.bodyParts = new ModelPart[2];
 
 		for (int i = 0; i < 2; ++i) {
@@ -53,9 +52,10 @@ public class EndermiteSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float) Math.PI / 180F);
-		this.root.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.root.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.root.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

@@ -13,14 +13,13 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import java.util.Arrays;
 
 public class SilverfishSkullModel extends SkullModelBase {
-	private final ModelPart root;
 	private final ModelPart[] bodyParts = new ModelPart[3];
 	private final ModelPart[] bodyLayers = new ModelPart[2];
 	private static final int[][] BODY_SIZES = new int[][]{{3, 2, 2}, {4, 3, 2}, {6, 4, 3}, {3, 3, 3}, {2, 2, 3}, {2, 1, 2}, {1, 1, 2}};
 	private static final int[][] BODY_TEXS = new int[][]{{0, 0}, {0, 4}, {0, 9}, {0, 16}, {0, 22}, {11, 0}, {13, 4}};
 
 	public SilverfishSkullModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		Arrays.setAll(this.bodyParts, (i) -> root.getChild(getSegmentName(i)));
 		Arrays.setAll(this.bodyLayers, (i) -> root.getChild(getLayerName(i)));
 	}
@@ -64,9 +63,10 @@ public class SilverfishSkullModel extends SkullModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		this.root.yRot = yRot * ((float) Math.PI / 180F);
-		this.root.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.root.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.root.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

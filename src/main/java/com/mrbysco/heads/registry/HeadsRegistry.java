@@ -83,7 +83,6 @@ public class HeadsRegistry {
 	public static final HeadReg MOOSHROOM_RED = new HeadReg("mooshroom", "red_mooshroom", "head", HeadTypes.MOOSHROOM_RED);
 	public static final HeadReg OCELOT = new HeadReg("ocelot", "head", HeadTypes.OCELOT);
 	public static final HeadReg PIG = new HeadReg("pig", "head", HeadTypes.PIG);
-	public static final HeadReg PIGLIN = new HeadReg("piglin", "head", HeadTypes.PIGLIN);
 	public static final HeadReg PIGLIN_BRUTE = new HeadReg("piglin_brute", "head", HeadTypes.PIGLIN_BRUTE);
 	public static final HeadReg PILLAGER = new HeadReg("pillager", "head", HeadTypes.PILLAGER);
 	public static final HeadReg SALMON = new HeadReg("salmon", "head", HeadTypes.SALMON);
@@ -130,7 +129,7 @@ public class HeadsRegistry {
 			}).build());
 
 	public static final Supplier<BlockEntityType<HeadBlockEntity>> HEAD = BLOCK_ENTITIES.register("head", () ->
-			BlockEntityType.Builder.of(HeadBlockEntity::new,
+			new BlockEntityType<>(HeadBlockEntity::new,
 					BLOCKS.getEntries().stream().map(DeferredHolder::get).toList().toArray(new Block[0])
-			).build(null));
+			));
 }

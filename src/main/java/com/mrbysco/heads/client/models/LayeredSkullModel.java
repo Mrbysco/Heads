@@ -49,10 +49,10 @@ public class LayeredSkullModel extends HeadModelBase {
 	}
 
 	@Override
-	public void setupAnim(float mouthAnimation, float yRot, float xRot) {
-		super.setupAnim(mouthAnimation, yRot, xRot);
-		this.hat.yRot = yRot * ((float) Math.PI / 180F);
-		this.hat.xRot = xRot * ((float) Math.PI / 180F);
+	public void setupAnim(State state) {
+		super.setupAnim(state);
+		this.hat.yRot = state.yRot * ((float) Math.PI / 180F);
+		this.hat.xRot = state.xRot * ((float) Math.PI / 180F);
 	}
 
 	@Override

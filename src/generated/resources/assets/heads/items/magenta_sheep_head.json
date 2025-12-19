@@ -3,8 +3,9 @@
     "type": "minecraft:special",
     "base": "minecraft:item/template_skull",
     "model": {
-      "type": "minecraft:head",
-      "kind": "sheep_magenta"
+      "type": "heads:head",
+      "kind": "sheep_magenta",
+      "texture2": "minecraft:textures/entity/sheep/sheep_wool.png"
     }
   }
 }

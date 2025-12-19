@@ -1,7 +1,5 @@
 package com.mrbysco.heads.client.models;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -56,10 +54,5 @@ public class EndermiteSkullModel extends SkullModelBase {
 		super.setupAnim(state);
 		this.root.yRot = state.yRot * ((float) Math.PI / 180F);
 		this.root.xRot = state.xRot * ((float) Math.PI / 180F);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 	}
 }

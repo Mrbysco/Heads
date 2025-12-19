@@ -40,7 +40,6 @@ public class HeadConfig {
 		public final HeadInfo mooshroom;
 		public final HeadInfo ocelot;
 		public final HeadInfo pig;
-		public final HeadInfo piglin;
 		public final HeadInfo piglinBrute;
 		public final HeadInfo pillager;
 		public final HeadInfo salmon;
@@ -94,7 +93,6 @@ public class HeadConfig {
 			mooshroom = new HeadInfo(builder, "Mooshroom", 0.025);
 			ocelot = new HeadInfo(builder, "Ocelot", 0.025);
 			pig = new HeadInfo(builder, "Pig", 0.025);
-			piglin = new HeadInfo(builder, "Piglin", 0.025);
 			piglinBrute = new HeadInfo(builder, "Piglin Brute", 0.025);
 			pillager = new HeadInfo(builder, "Pillager", 0.025);
 			salmon = new HeadInfo(builder, "Salmon", 0.025);

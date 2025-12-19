@@ -1,7 +1,5 @@
 package com.mrbysco.heads.client.models;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Arrays;
 
 public class MagmaCubeSkullModel extends SkullModelBase {
-	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
 	private final ModelPart[] bodyCubes = new ModelPart[8];
 
 	public MagmaCubeSkullModel(ModelPart root) {
@@ -26,21 +23,20 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		for (int i = 0; i < 8; ++i) {
+		for (int i = 0; i < 8; i++) {
 			int j = 0;
-			int k = i;
-			if (i == 2) {
-				j = 24;
-				k = 10;
-			} else if (i == 3) {
-				j = 24;
-				k = 19;
+			int k = 0;
+			if (i > 0 && i < 4) {
+				k += 9 * i;
+			} else if (i > 3) {
+				j = 32;
+				k += 9 * i - 36;
 			}
 
-			partdefinition.addOrReplaceChild(getSegmentName(i), CubeListBuilder.create()
-					.texOffs(j, k).addBox(-4.0F, (float) (-8 + i), -4.0F, 8.0F, 1.0F, 8.0F), PartPose.ZERO);
+			partdefinition.addOrReplaceChild(
+					getSegmentName(i), CubeListBuilder.create().texOffs(j, k).addBox(-4.0F, (float) (-8 + i), -4.0F, 8.0F, 1.0F, 8.0F), PartPose.ZERO
+			);
 		}
-
 		return meshdefinition;
 	}
 
@@ -50,7 +46,7 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 
 	public static LayerDefinition createSkullModel() {
 		MeshDefinition meshdefinition = createMagmaCubeHead();
-		return LayerDefinition.create(meshdefinition, 64, 32);
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
 	@Override
@@ -58,10 +54,5 @@ public class MagmaCubeSkullModel extends SkullModelBase {
 		super.setupAnim(state);
 		this.root.yRot = state.yRot * ((float) Math.PI / 180F);
 		this.root.xRot = state.xRot * ((float) Math.PI / 180F);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 	}
 }

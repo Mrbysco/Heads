@@ -1,6 +1,7 @@
 package com.mrbysco.heads.client;
 
 import com.mrbysco.heads.Heads;
+import com.mrbysco.heads.client.ber.HeadsBlockRenderer;
 import com.mrbysco.heads.client.models.AllaySkullModel;
 import com.mrbysco.heads.client.models.AxolotlSkullModel;
 import com.mrbysco.heads.client.models.BatSkullModel;
@@ -35,18 +36,19 @@ import com.mrbysco.heads.client.models.TurtleSkullModel;
 import com.mrbysco.heads.client.models.VillagerSkullModel;
 import com.mrbysco.heads.client.models.WitchSkullModel;
 import com.mrbysco.heads.client.models.WolfSkullModel;
+import com.mrbysco.heads.client.renderer.HeadsSpecialRenderer;
+import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadTypes;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.client.event.RegisterSpecialBlockModelRendererEvent;
+import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = Heads.MOD_ID)
 public class ClientHandler {
@@ -81,7 +83,6 @@ public class ClientHandler {
 	public static final ModelLayerLocation MOOSHROOM_RED = new ModelLayerLocation(Heads.modLoc("red_mooshroom"), "head");
 	public static final ModelLayerLocation OCELOT = new ModelLayerLocation(Heads.modLoc("ocelot"), "head");
 	public static final ModelLayerLocation PIG = new ModelLayerLocation(Heads.modLoc("pig"), "head");
-	public static final ModelLayerLocation PIGLIN = new ModelLayerLocation(Heads.modLoc("piglin"), "head");
 	public static final ModelLayerLocation PIGLIN_BRUTE = new ModelLayerLocation(Heads.modLoc("piglin_brute"), "head");
 	public static final ModelLayerLocation PILLAGER = new ModelLayerLocation(Heads.modLoc("pillager"), "head");
 	public static final ModelLayerLocation SALMON = new ModelLayerLocation(Heads.modLoc("salmon"), "head");
@@ -104,64 +105,76 @@ public class ClientHandler {
 	public static final ModelLayerLocation ZOMBIFIED_PIGLIN = new ModelLayerLocation(Heads.modLoc("zombified_piglin"), "skull");
 
 	@SubscribeEvent
+	public static void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
+		event.register(Heads.modLoc("head"), HeadsSpecialRenderer.Unbaked.MAP_CODEC);
+	}
+
+	@SubscribeEvent
 	static void registerLayerDefinitions(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerBlockEntityRenderer(HeadsRegistry.HEAD.get(), SkullBlockRenderer::new);
+		event.registerBlockEntityRenderer(HeadsRegistry.HEAD.get(), HeadsBlockRenderer::new);
+	}
+
+	@SubscribeEvent
+	static void registerSpecialBlockModelRenderer(RegisterSpecialBlockModelRendererEvent event) {
+		for (HeadReg reg : HeadsRegistry.headList) {
+			event.register(reg.getHead().get(), new HeadsSpecialRenderer.Unbaked(reg.getHeadType()));
+			event.register(reg.getWallHead().get(), new HeadsSpecialRenderer.Unbaked(reg.getHeadType()));
+		}
 	}
 
 	@SubscribeEvent
 	static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(ALLAY, Lazy.of(AllaySkullModel::createSkullModel));
-		event.registerLayerDefinition(AXOLOTL, Lazy.of(AxolotlSkullModel::createSkullModel));
-		event.registerLayerDefinition(BAT, Lazy.of(BatSkullModel::createSkullModel));
-		event.registerLayerDefinition(BEE, Lazy.of(BeeSkullModel::createSkullModel));
-		event.registerLayerDefinition(BLAZE, Lazy.of(SkullModel::createMobHeadLayer));
-		event.registerLayerDefinition(CAT, Lazy.of(OcelotSkullModel::createSkullModel));
-		event.registerLayerDefinition(CAVE_SPIDER, Lazy.of(SpiderSkullModel::createSkullModel));
-		event.registerLayerDefinition(CHICKEN, Lazy.of(ChickenSkullModel::createSkullModel));
-		event.registerLayerDefinition(COD, Lazy.of(CodSkullModel::createSkullModel));
-		event.registerLayerDefinition(COW, Lazy.of(CowSkullModel::createSkullModel));
-		event.registerLayerDefinition(DOLPHIN, Lazy.of(DolphinSkullModel::createSkullModel));
-		event.registerLayerDefinition(DONKEY, Lazy.of(HorseSkullModel::createDonkeySkull));
-		event.registerLayerDefinition(DROWNED, Lazy.of(LayeredSkullModel::createSkullModel));
-		event.registerLayerDefinition(ENDERMAN, Lazy.of(EndermanSkullModel::createSkullModel));
-		event.registerLayerDefinition(ENDERMITE, Lazy.of(EndermiteSkullModel::createSkullModel));
-		event.registerLayerDefinition(EVOKER, Lazy.of(IllagerSkullModel::createIllagerSkullModel));
-		event.registerLayerDefinition(FOX, Lazy.of(FoxSkullModel::createSkullModel));
-		event.registerLayerDefinition(GHAST, Lazy.of(() -> HeadModelBase.createMobHead(32, 16)));
-		event.registerLayerDefinition(GLOW_SQUID, Lazy.of(SquidSkullModel::createSkullModel));
-		event.registerLayerDefinition(GOAT, Lazy.of(GoatSkullModel::createSkullModel));
-		event.registerLayerDefinition(HOGLIN, Lazy.of(HoglinSkullModel::createSkullModel));
-		event.registerLayerDefinition(HORSE, Lazy.of(HorseSkullModel::createHorseSkull));
-		event.registerLayerDefinition(HUSK, Lazy.of(SkullModel::createHumanoidHeadLayer));
-		event.registerLayerDefinition(ILLUSIONER, Lazy.of(IllagerSkullModel::createIllagerSkullModel));
-		event.registerLayerDefinition(IRON_GOLEM, Lazy.of(IronGolemSkullModel::createSkullModel));
-		event.registerLayerDefinition(MAGMA_CUBE, Lazy.of(MagmaCubeSkullModel::createSkullModel));
-		event.registerLayerDefinition(MULE, Lazy.of(HorseSkullModel::createMuleSkull));
-		event.registerLayerDefinition(MOOSHROOM_BROWN, Lazy.of(MooshroomSkullModel::createSkullModel));
-		event.registerLayerDefinition(MOOSHROOM_RED, Lazy.of(MooshroomSkullModel::createSkullModel));
-		event.registerLayerDefinition(OCELOT, Lazy.of(OcelotSkullModel::createSkullModel));
-		event.registerLayerDefinition(PIG, Lazy.of(PigSkullModel::createSkullModel));
-		event.registerLayerDefinition(PIGLIN, Lazy.of(PiglinSkullModel::createSkullModel));
-		event.registerLayerDefinition(PIGLIN_BRUTE, Lazy.of(PiglinSkullModel::createSkullModel));
-		event.registerLayerDefinition(PILLAGER, Lazy.of(IllagerSkullModel::createIllagerSkullModel));
-		event.registerLayerDefinition(SALMON, Lazy.of(SalmonSkullModel::createSkullModel));
-		event.registerLayerDefinition(SHEEP, Lazy.of(SheepSkullModel::createSkullModel));
-		event.registerLayerDefinition(SHEEP_FUR, Lazy.of(SheepSkullFurModel::createSkullModel));
-		event.registerLayerDefinition(SILVERFISH, Lazy.of(SilverfishSkullModel::createSkullModel));
-		event.registerLayerDefinition(SLIME, Lazy.of(SlimeSkullModel::createSkullModel));
-		event.registerLayerDefinition(SNOW_GOLEM, Lazy.of(() -> HeadModelBase.createMobHead(64, 64)));
-		event.registerLayerDefinition(SPIDER, Lazy.of(SpiderSkullModel::createSkullModel));
-		event.registerLayerDefinition(SQUID, Lazy.of(SquidSkullModel::createSkullModel));
-		event.registerLayerDefinition(STRAY, Lazy.of(() -> LayeredSkullModel.createSkullModel(64, 32)));
-		event.registerLayerDefinition(TURTLE, Lazy.of(TurtleSkullModel::createSkullModel));
-		event.registerLayerDefinition(VILLAGER, Lazy.of(VillagerSkullModel::createVillagerSkullModel));
-		event.registerLayerDefinition(VINDICATOR, Lazy.of(IllagerSkullModel::createIllagerSkullModel));
-		event.registerLayerDefinition(WANDERING_TRADER, Lazy.of(VillagerSkullModel::createVillagerSkullModel));
-		event.registerLayerDefinition(WITCH, Lazy.of(WitchSkullModel::createSkullModel));
-		event.registerLayerDefinition(WOLF, Lazy.of(WolfSkullModel::createSkullModel));
-		event.registerLayerDefinition(ZOGLIN, Lazy.of(HoglinSkullModel::createSkullModel));
-		event.registerLayerDefinition(ZOMBIE_VILLAGER, Lazy.of(VillagerSkullModel::createVillagerSkullModel));
-		event.registerLayerDefinition(ZOMBIFIED_PIGLIN, Lazy.of(PiglinSkullModel::createSkullModel));
+		event.registerLayerDefinition(ALLAY, AllaySkullModel::createSkullModel);
+		event.registerLayerDefinition(AXOLOTL, AxolotlSkullModel::createSkullModel);
+		event.registerLayerDefinition(BAT, BatSkullModel::createSkullModel);
+		event.registerLayerDefinition(BEE, BeeSkullModel::createSkullModel);
+		event.registerLayerDefinition(BLAZE, SkullModel::createMobHeadLayer);
+		event.registerLayerDefinition(CAT, OcelotSkullModel::createSkullModel);
+		event.registerLayerDefinition(CAVE_SPIDER, SpiderSkullModel::createSkullModel);
+		event.registerLayerDefinition(CHICKEN, ChickenSkullModel::createSkullModel);
+		event.registerLayerDefinition(COD, CodSkullModel::createSkullModel);
+		event.registerLayerDefinition(COW, CowSkullModel::createSkullModel);
+		event.registerLayerDefinition(DOLPHIN, DolphinSkullModel::createSkullModel);
+		event.registerLayerDefinition(DONKEY, HorseSkullModel::createDonkeySkull);
+		event.registerLayerDefinition(DROWNED, LayeredSkullModel::createSkullModel);
+		event.registerLayerDefinition(ENDERMAN, EndermanSkullModel::createSkullModel);
+		event.registerLayerDefinition(ENDERMITE, EndermiteSkullModel::createSkullModel);
+		event.registerLayerDefinition(EVOKER, IllagerSkullModel::createIllagerSkullModel);
+		event.registerLayerDefinition(FOX, FoxSkullModel::createSkullModel);
+		event.registerLayerDefinition(GHAST, () -> HeadModelBase.createMobHead(32, 16));
+		event.registerLayerDefinition(GLOW_SQUID, SquidSkullModel::createSkullModel);
+		event.registerLayerDefinition(GOAT, GoatSkullModel::createSkullModel);
+		event.registerLayerDefinition(HOGLIN, HoglinSkullModel::createSkullModel);
+		event.registerLayerDefinition(HORSE, HorseSkullModel::createHorseSkull);
+		event.registerLayerDefinition(HUSK, SkullModel::createHumanoidHeadLayer);
+		event.registerLayerDefinition(ILLUSIONER, IllagerSkullModel::createIllagerSkullModel);
+		event.registerLayerDefinition(IRON_GOLEM, IronGolemSkullModel::createSkullModel);
+		event.registerLayerDefinition(MAGMA_CUBE, MagmaCubeSkullModel::createSkullModel);
+		event.registerLayerDefinition(MULE, HorseSkullModel::createMuleSkull);
+		event.registerLayerDefinition(MOOSHROOM_BROWN, MooshroomSkullModel::createSkullModel);
+		event.registerLayerDefinition(MOOSHROOM_RED, MooshroomSkullModel::createSkullModel);
+		event.registerLayerDefinition(OCELOT, OcelotSkullModel::createSkullModel);
+		event.registerLayerDefinition(PIG, PigSkullModel::createSkullModel);
+		event.registerLayerDefinition(PIGLIN_BRUTE, PiglinSkullModel::createSkullModel);
+		event.registerLayerDefinition(PILLAGER, IllagerSkullModel::createIllagerSkullModel);
+		event.registerLayerDefinition(SALMON, SalmonSkullModel::createSkullModel);
+		event.registerLayerDefinition(SHEEP, SheepSkullModel::createSkullModel);
+		event.registerLayerDefinition(SHEEP_FUR, SheepSkullFurModel::createSkullModel);
+		event.registerLayerDefinition(SILVERFISH, SilverfishSkullModel::createSkullModel);
+		event.registerLayerDefinition(SLIME, SlimeSkullModel::createSkullModel);
+		event.registerLayerDefinition(SNOW_GOLEM, () -> HeadModelBase.createMobHead(64, 64));
+		event.registerLayerDefinition(SPIDER, SpiderSkullModel::createSkullModel);
+		event.registerLayerDefinition(SQUID, SquidSkullModel::createSkullModel);
+		event.registerLayerDefinition(STRAY, () -> LayeredSkullModel.createSkullModel(64, 32));
+		event.registerLayerDefinition(TURTLE, TurtleSkullModel::createSkullModel);
+		event.registerLayerDefinition(VILLAGER, VillagerSkullModel::createVillagerSkullModel);
+		event.registerLayerDefinition(VINDICATOR, IllagerSkullModel::createIllagerSkullModel);
+		event.registerLayerDefinition(WANDERING_TRADER, VillagerSkullModel::createVillagerSkullModel);
+		event.registerLayerDefinition(WITCH, WitchSkullModel::createSkullModel);
+		event.registerLayerDefinition(WOLF, WolfSkullModel::createSkullModel);
+		event.registerLayerDefinition(ZOGLIN, HoglinSkullModel::createSkullModel);
+		event.registerLayerDefinition(ZOMBIE_VILLAGER, VillagerSkullModel::createVillagerSkullModel);
+		event.registerLayerDefinition(ZOMBIFIED_PIGLIN, PiglinSkullModel::createSkullModel);
 	}
 
 	@SubscribeEvent
@@ -189,7 +202,7 @@ public class ClientHandler {
 		event.registerSkullModel(HeadTypes.CAVE_SPIDER, (entityModelSet) -> new SpiderSkullModel(entityModelSet.bakeLayer(ClientHandler.CAVE_SPIDER)), ResourceLocation.withDefaultNamespace("textures/entity/spider/cave_spider.png"));
 		event.registerSkullModel(HeadTypes.CHICKEN, (entityModelSet) -> new ChickenSkullModel(entityModelSet.bakeLayer(ClientHandler.CHICKEN)), ResourceLocation.withDefaultNamespace("textures/entity/chicken.png"));
 		event.registerSkullModel(HeadTypes.COD, (entityModelSet) -> new CodSkullModel(entityModelSet.bakeLayer(ClientHandler.COD)), ResourceLocation.withDefaultNamespace("textures/entity/fish/cod.png"));
-		event.registerSkullModel(HeadTypes.COW, (entityModelSet) -> new CowSkullModel(entityModelSet.bakeLayer(ClientHandler.COW)), ResourceLocation.withDefaultNamespace("textures/entity/cow/cow.png"));
+		event.registerSkullModel(HeadTypes.COW, (entityModelSet) -> new CowSkullModel(entityModelSet.bakeLayer(ClientHandler.COW)), ResourceLocation.withDefaultNamespace("textures/entity/cow/temperate_cow.png"));
 		event.registerSkullModel(HeadTypes.DOLPHIN, (entityModelSet) -> new DolphinSkullModel(entityModelSet.bakeLayer(ClientHandler.DOLPHIN)), ResourceLocation.withDefaultNamespace("textures/entity/dolphin.png"));
 		event.registerSkullModel(HeadTypes.DONKEY, (entityModelSet) -> new HorseSkullModel(entityModelSet.bakeLayer(ClientHandler.DONKEY)), ResourceLocation.withDefaultNamespace("textures/entity/horse/donkey.png"));
 		event.registerSkullModel(HeadTypes.DROWNED, (entityModelSet) -> new LayeredSkullModel(entityModelSet.bakeLayer(ClientHandler.DROWNED), ResourceLocation.withDefaultNamespace("textures/entity/zombie/drowned_outer_layer.png")), ResourceLocation.withDefaultNamespace("textures/entity/zombie/drowned.png"));
@@ -219,28 +232,27 @@ public class ClientHandler {
 		event.registerSkullModel(HeadTypes.MOOSHROOM_BROWN, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_BROWN), false), ResourceLocation.withDefaultNamespace("textures/entity/cow/brown_mooshroom.png"));
 		event.registerSkullModel(HeadTypes.MOOSHROOM_RED, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_RED), true), ResourceLocation.withDefaultNamespace("textures/entity/cow/red_mooshroom.png"));
 		event.registerSkullModel(HeadTypes.OCELOT, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.OCELOT)), ResourceLocation.withDefaultNamespace("textures/entity/cat/ocelot.png"));
-		event.registerSkullModel(HeadTypes.PIG, (entityModelSet) -> new PigSkullModel(entityModelSet.bakeLayer(ClientHandler.PIG)), ResourceLocation.withDefaultNamespace("textures/entity/pig/pig.png"));
-		event.registerSkullModel(HeadTypes.PIGLIN, (entityModelSet) -> new PiglinSkullModel(entityModelSet.bakeLayer(ClientHandler.PIGLIN)), ResourceLocation.withDefaultNamespace("textures/entity/piglin/piglin.png"));
+		event.registerSkullModel(HeadTypes.PIG, (entityModelSet) -> new PigSkullModel(entityModelSet.bakeLayer(ClientHandler.PIG)), ResourceLocation.withDefaultNamespace("textures/entity/pig/temperate_pig.png"));
 		event.registerSkullModel(HeadTypes.PIGLIN_BRUTE, (entityModelSet) -> new PiglinSkullModel(entityModelSet.bakeLayer(ClientHandler.PIGLIN_BRUTE)), ResourceLocation.withDefaultNamespace("textures/entity/piglin/piglin_brute.png"));
 		event.registerSkullModel(HeadTypes.PILLAGER, (entityModelSet) -> new IllagerSkullModel(entityModelSet.bakeLayer(ClientHandler.PILLAGER)), ResourceLocation.withDefaultNamespace("textures/entity/illager/pillager.png"));
 		event.registerSkullModel(HeadTypes.SALMON, (entityModelSet) -> new SalmonSkullModel(entityModelSet.bakeLayer(ClientHandler.SALMON)), ResourceLocation.withDefaultNamespace("textures/entity/fish/salmon.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_BLACK, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.BLACK)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_BLUE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.BLUE)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_BROWN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.BROWN)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_CYAN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.CYAN)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_GRAY, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.GRAY)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_GREEN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.GREEN)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_LIGHT_BLUE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.LIGHT_BLUE)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_LIGHT_GRAY, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.LIGHT_GRAY)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_LIME, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.LIME)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_MAGENTA, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.MAGENTA)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_ORANGE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.ORANGE)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_PINK, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.PINK)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_PURPLE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.PURPLE)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_RED, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.RED)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_BLACK, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_BLUE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_BROWN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_CYAN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_GRAY, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_GREEN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_LIGHT_BLUE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_LIGHT_GRAY, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_LIME, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_MAGENTA, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_ORANGE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_PINK, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_PURPLE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_RED, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
 		event.registerSkullModel(HeadTypes.SHEEP_SHAVEN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_WHITE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.WHITE)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SHEEP_YELLOW, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP), new SheepSkullFurModel(entityModelSet.bakeLayer(ClientHandler.SHEEP_FUR), DyeColor.YELLOW)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_WHITE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
+		event.registerSkullModel(HeadTypes.SHEEP_YELLOW, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), ResourceLocation.withDefaultNamespace("textures/entity/sheep/sheep.png"));
 		event.registerSkullModel(HeadTypes.SILVERFISH, (entityModelSet) -> new SilverfishSkullModel(entityModelSet.bakeLayer(ClientHandler.SILVERFISH)), ResourceLocation.withDefaultNamespace("textures/entity/silverfish.png"));
 		event.registerSkullModel(HeadTypes.SLIME, (entityModelSet) -> new SlimeSkullModel(entityModelSet.bakeLayer(ClientHandler.SLIME)), ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png"));
 		event.registerSkullModel(HeadTypes.SNOW_GOLEM, (entityModelSet) -> new HeadModelBase(entityModelSet.bakeLayer(ClientHandler.SNOW_GOLEM)), ResourceLocation.withDefaultNamespace("textures/entity/snow_golem.png"));

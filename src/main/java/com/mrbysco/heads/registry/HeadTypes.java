@@ -76,27 +76,26 @@ public enum HeadTypes implements HeadBlock.Type {
 	MOOSHROOM_RED((entity) -> entity.getType() == EntityType.MOOSHROOM && ((MushroomCow) entity).getVariant() == MushroomCow.Variant.RED, HeadConfig.COMMON.mooshroom.dropRate, HeadConfig.COMMON.mooshroom.enableCreeperDrop),
 	OCELOT((entity) -> entity.getType() == EntityType.OCELOT, HeadConfig.COMMON.ocelot.dropRate, HeadConfig.COMMON.ocelot.enableCreeperDrop),
 	PIG((entity) -> entity.getType() == EntityType.PIG, HeadConfig.COMMON.pig.dropRate, HeadConfig.COMMON.pig.enableCreeperDrop),
-	PIGLIN((entity) -> entity.getType() == EntityType.PIGLIN, HeadConfig.COMMON.piglin.dropRate, HeadConfig.COMMON.piglin.enableCreeperDrop),
 	PIGLIN_BRUTE((entity) -> entity.getType() == EntityType.PIGLIN_BRUTE, HeadConfig.COMMON.piglinBrute.dropRate, HeadConfig.COMMON.piglinBrute.enableCreeperDrop),
 	PILLAGER((entity) -> entity.getType() == EntityType.PILLAGER, HeadConfig.COMMON.pillager.dropRate, HeadConfig.COMMON.pillager.enableCreeperDrop),
 	SALMON((entity) -> entity.getType() == EntityType.SALMON, HeadConfig.COMMON.salmon.dropRate, HeadConfig.COMMON.salmon.enableCreeperDrop),
-	SHEEP_BLACK((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BLACK, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_BLUE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BLUE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_BROWN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BROWN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_CYAN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.CYAN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_GRAY((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.GRAY, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_GREEN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.GREEN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_LIGHT_BLUE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_BLUE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_LIGHT_GRAY((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_GRAY, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_LIME((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIME, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_MAGENTA((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.MAGENTA, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_ORANGE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.ORANGE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_PINK((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.PINK, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_PURPLE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.PURPLE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_RED((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.RED, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_SHAVEN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && sheep.isSheared(), HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_WHITE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.WHITE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
-	SHEEP_YELLOW((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.YELLOW, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop),
+	SHEEP_BLACK((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BLACK, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_BLUE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BLUE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_BROWN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.BROWN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_CYAN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.CYAN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_GRAY((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.GRAY, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_GREEN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.GREEN, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_LIGHT_BLUE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_BLUE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_LIGHT_GRAY((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIGHT_GRAY, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_LIME((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.LIME, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_MAGENTA((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.MAGENTA, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_ORANGE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.ORANGE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_PINK((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.PINK, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_PURPLE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.PURPLE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_RED((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.RED, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_SHAVEN((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && sheep.isSheared(), HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_WHITE((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.WHITE, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
+	SHEEP_YELLOW((entity) -> entity.getType() == EntityType.SHEEP && entity instanceof Sheep sheep && !sheep.isSheared() && sheep.getColor() == DyeColor.YELLOW, HeadConfig.COMMON.sheep.dropRate, HeadConfig.COMMON.sheep.enableCreeperDrop, true),
 	SILVERFISH((entity) -> entity.getType() == EntityType.SILVERFISH, HeadConfig.COMMON.silverfish.dropRate, HeadConfig.COMMON.silverfish.enableCreeperDrop),
 	SLIME((entity) -> entity.getType() == EntityType.SLIME, HeadConfig.COMMON.slime.dropRate, HeadConfig.COMMON.slime.enableCreeperDrop),
 	SNOW_GOLEM((entity) -> entity.getType() == EntityType.SNOW_GOLEM, HeadConfig.COMMON.snowGolem.dropRate, HeadConfig.COMMON.snowGolem.enableCreeperDrop),
@@ -116,11 +115,22 @@ public enum HeadTypes implements HeadBlock.Type {
 	private final Predicate<LivingEntity> entityPredicate;
 	private final Supplier<Double> dropRate;
 	private final Supplier<Boolean> creeperExplosion;
+	private final boolean multiModel;
+
+	HeadTypes(Predicate<LivingEntity> entityPredicate, Supplier<Double> dropRateSupplier, Supplier<Boolean> creeperExplosionSupplier, boolean multiModel) {
+		this.entityPredicate = entityPredicate;
+		this.dropRate = dropRateSupplier;
+		this.creeperExplosion = creeperExplosionSupplier;
+		TYPES.put(getSerializedName(), this);
+		this.multiModel = multiModel;
+	}
 
 	HeadTypes(Predicate<LivingEntity> entityPredicate, Supplier<Double> dropRateSupplier, Supplier<Boolean> creeperExplosionSupplier) {
 		this.entityPredicate = entityPredicate;
 		this.dropRate = dropRateSupplier;
 		this.creeperExplosion = creeperExplosionSupplier;
+		TYPES.put(getSerializedName(), this);
+		this.multiModel = false;
 	}
 
 	public Predicate<LivingEntity> getEntityPredicate() {
@@ -133,6 +143,10 @@ public enum HeadTypes implements HeadBlock.Type {
 
 	public boolean canDropFromCreeperExplosion() {
 		return creeperExplosion.get();
+	}
+
+	public boolean isMultiModel() {
+		return multiModel;
 	}
 
 	@Nullable

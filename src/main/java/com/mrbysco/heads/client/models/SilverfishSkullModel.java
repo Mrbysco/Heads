@@ -72,6 +72,6 @@ public class SilverfishSkullModel extends SkullModelBase {
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLightIn, int packedOverlayIn, int color) {
 		poseStack.translate(0, -1.5F, 0);
-		this.root.render(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
+		super.renderToBuffer(poseStack, vertexConsumer, packedLightIn, packedOverlayIn, color);
 	}
 }

@@ -1,14 +1,24 @@
 package com.mrbysco.heads.datagen.client;
 
 import com.mrbysco.heads.Heads;
+import com.mrbysco.heads.client.models.SheepSkullFurModel;
+import com.mrbysco.heads.client.renderer.HeadsSpecialRenderer;
 import com.mrbysco.heads.registry.HeadReg;
+import com.mrbysco.heads.registry.HeadTypes;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.renderer.special.SkullSpecialRenderer;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SkullBlock;
+
+import java.util.Optional;
 
 public class HeadsModelProvider extends ModelProvider {
 	public HeadsModelProvider(PackOutput packOutput) {
@@ -19,7 +29,13 @@ public class HeadsModelProvider extends ModelProvider {
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 		ResourceLocation resourcelocation = ModelLocationUtils.decorateItemModelLocation("template_skull");
 		for (HeadReg reg : HeadsRegistry.headList) {
-			blockModels.createHead(reg.getHead().get(), reg.getWallHead().get(), reg.getHeadType(), resourcelocation);
+			HeadTypes type = reg.getHeadType();
+			switch (type) {
+				case SHEEP_BLACK, SHEEP_BLUE, SHEEP_BROWN, SHEEP_CYAN, SHEEP_GRAY, SHEEP_GREEN, SHEEP_LIGHT_BLUE,
+				     SHEEP_LIGHT_GRAY, SHEEP_LIME, SHEEP_MAGENTA, SHEEP_ORANGE, SHEEP_WHITE, SHEEP_RED, SHEEP_PURPLE,
+				     SHEEP_PINK -> createHead(blockModels, reg.getHead().get(), reg.getWallHead().get(), type, resourcelocation, SheepSkullFurModel.SHEEP_FUR_LOCATION);
+				default -> createHead(blockModels, reg.getHead().get(), reg.getWallHead().get(), type, resourcelocation);
+			}
 		}
 	}
 
@@ -195,4 +211,22 @@ public class HeadsModelProvider extends ModelProvider {
 //	private void makeHead(Block block) {
 //		withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), mcLoc("item/template_skull"));
 //	}
+
+	public void createHead(BlockModelGenerators blockModels,
+	                       Block headBlock, Block wallHeadBlock, HeadTypes type,
+	                       ResourceLocation modelLocation) {
+		MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation("skull"));
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(headBlock, multivariant));
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(wallHeadBlock, multivariant));
+		blockModels.itemModelOutput.accept(headBlock.asItem(), ItemModelUtils.specialModel(modelLocation, new HeadsSpecialRenderer.Unbaked(type)));
+	}
+
+	public void createHead(BlockModelGenerators blockModels,
+	                       Block headBlock, Block wallHeadBlock, HeadTypes type,
+	                       ResourceLocation modelLocation, ResourceLocation texture2) {
+		MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation("skull"));
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(headBlock, multivariant));
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(wallHeadBlock, multivariant));
+		blockModels.itemModelOutput.accept(headBlock.asItem(), ItemModelUtils.specialModel(modelLocation, new HeadsSpecialRenderer.Unbaked(type, texture2)));
+	}
 }

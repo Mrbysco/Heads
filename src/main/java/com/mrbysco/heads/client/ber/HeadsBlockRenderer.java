@@ -5,32 +5,27 @@ import com.mrbysco.heads.client.ClientHandler;
 import com.mrbysco.heads.client.HeadBlockRenderState;
 import com.mrbysco.heads.client.models.SheepSkullFurModel;
 import com.mrbysco.heads.registry.HeadTypes;
-import net.minecraft.Util;
-import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.object.skull.SkullModelBase;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.blockentity.state.SkullBlockRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Function;
-
 public class HeadsBlockRenderer extends SkullBlockRenderer {
 	private final EntityModelSet entityModelSet;
-	private final Function<SkullBlock.Type, SkullModelBase> modelByType2;
 
 	public HeadsBlockRenderer(BlockEntityRendererProvider.Context context) {
 		super(context);
 		this.entityModelSet = context.entityModelSet();
-		this.modelByType2 = Util.memoize(type -> createModel(entityModelSet, type, true));
 	}
 
 	@Override
@@ -43,7 +38,7 @@ public class HeadsBlockRenderer extends SkullBlockRenderer {
 	                               Vec3 p_445526_, @Nullable ModelFeatureRenderer.CrumblingOverlay p_446270_) {
 		super.extractRenderState(blockEntity, renderState, partialTick, p_445526_, p_446270_);
 		if (renderState instanceof HeadBlockRenderState headRenderState && headRenderState.skullType instanceof HeadTypes type && type.isMultiModel()) {
-			ResourceLocation skull2Location = getOtherTexture(type);
+			Identifier skull2Location = getOtherTexture(type);
 			headRenderState.renderType2 = getSkullRenderType(type, skull2Location);
 		}
 	}
@@ -70,7 +65,7 @@ public class HeadsBlockRenderer extends SkullBlockRenderer {
 	}
 
 	@Nullable
-	public static ResourceLocation getOtherTexture(HeadTypes type) {
+	public static Identifier getOtherTexture(HeadTypes type) {
 		switch (type) {
 			case SHEEP_BLACK, SHEEP_BLUE, SHEEP_BROWN, SHEEP_CYAN, SHEEP_GRAY, SHEEP_GREEN, SHEEP_LIGHT_BLUE,
 			     SHEEP_LIGHT_GRAY, SHEEP_LIME, SHEEP_MAGENTA, SHEEP_ORANGE, SHEEP_WHITE, SHEEP_RED, SHEEP_PURPLE,

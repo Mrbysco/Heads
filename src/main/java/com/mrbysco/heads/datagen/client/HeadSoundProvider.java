@@ -4,7 +4,7 @@ import com.mrbysco.heads.Heads;
 import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
@@ -223,11 +223,11 @@ public class HeadSoundProvider extends SoundDefinitionsProvider {
 		}
 	}
 
-	public String modSubtitle(ResourceLocation id) {
+	public String modSubtitle(Identifier id) {
 		return Heads.MOD_ID + ".subtitle." + id.getPath();
 	}
 
-	public ResourceLocation mcLoc(String name) {
-		return ResourceLocation.withDefaultNamespace(name);
+	public Identifier mcLoc(String name) {
+		return Identifier.withDefaultNamespace(name);
 	}
 }

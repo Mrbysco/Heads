@@ -5,7 +5,7 @@ import com.mrbysco.heads.registry.HeadReg;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -57,6 +57,6 @@ public class HeadBlockTags extends BlockTagsProvider {
 	}
 
 	private static TagKey<Block> commonTag(String name) {
-		return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
+		return BlockTags.create(Identifier.fromNamespaceAndPath("c", name));
 	}
 }

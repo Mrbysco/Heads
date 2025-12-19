@@ -11,17 +11,18 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 
 public class LayeredSkullModel extends HeadModelBase {
 	private final RenderType OUTER_LAYER;
 	protected final ModelPart hat;
 
-	public LayeredSkullModel(ModelPart root, ResourceLocation layer) {
+	public LayeredSkullModel(ModelPart root, Identifier layer) {
 		super(root);
 		this.hat = root.getChild("hat");
-		this.OUTER_LAYER = RenderType.entityCutoutNoCullZOffset(layer);
+		this.OUTER_LAYER = RenderTypes.entityCutoutNoCullZOffset(layer);
 	}
 
 	public static MeshDefinition createHumanoidHead() {

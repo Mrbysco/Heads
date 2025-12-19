@@ -14,7 +14,7 @@ import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.renderer.special.SkullSpecialRenderer;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
 
@@ -27,7 +27,7 @@ public class HeadsModelProvider extends ModelProvider {
 
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-		ResourceLocation resourcelocation = ModelLocationUtils.decorateItemModelLocation("template_skull");
+		Identifier resourcelocation = ModelLocationUtils.decorateItemModelLocation("template_skull");
 		for (HeadReg reg : HeadsRegistry.headList) {
 			HeadTypes type = reg.getHeadType();
 			switch (type) {
@@ -214,7 +214,7 @@ public class HeadsModelProvider extends ModelProvider {
 
 	public void createHead(BlockModelGenerators blockModels,
 	                       Block headBlock, Block wallHeadBlock, HeadTypes type,
-	                       ResourceLocation modelLocation) {
+	                       Identifier modelLocation) {
 		MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation("skull"));
 		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(headBlock, multivariant));
 		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(wallHeadBlock, multivariant));
@@ -223,7 +223,7 @@ public class HeadsModelProvider extends ModelProvider {
 
 	public void createHead(BlockModelGenerators blockModels,
 	                       Block headBlock, Block wallHeadBlock, HeadTypes type,
-	                       ResourceLocation modelLocation, ResourceLocation texture2) {
+	                       Identifier modelLocation, Identifier texture2) {
 		MultiVariant multivariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation("skull"));
 		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(headBlock, multivariant));
 		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(wallHeadBlock, multivariant));

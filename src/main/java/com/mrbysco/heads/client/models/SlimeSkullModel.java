@@ -3,19 +3,20 @@ package com.mrbysco.heads.client.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.object.skull.SkullModelBase;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 
 public class SlimeSkullModel extends SkullModelBase {
-	private static final ResourceLocation SLIME_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/slime/slime.png");
+	private static final Identifier SLIME_LOCATION = Identifier.withDefaultNamespace("textures/entity/slime/slime.png");
 	protected final ModelPart cube;
 	protected final ModelPart cubeOuter;
 
@@ -65,7 +66,7 @@ public class SlimeSkullModel extends SkullModelBase {
 
 		Minecraft minecraft = Minecraft.getInstance();
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
-		final RenderType renderType = RenderType.entityTranslucent(SLIME_LOCATION);
+		final RenderType renderType = RenderTypes.entityTranslucent(SLIME_LOCATION);
 		VertexConsumer slimeConsumer = bufferSource.getBuffer(renderType);
 		this.cubeOuter.render(poseStack, slimeConsumer, packedLightIn, packedOverlayIn, color);
 		bufferSource.endBatch(renderType);

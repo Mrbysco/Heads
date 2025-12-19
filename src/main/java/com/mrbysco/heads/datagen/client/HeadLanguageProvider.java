@@ -141,7 +141,6 @@ public class HeadLanguageProvider extends LanguageProvider {
 		addMobConfig("mooshroom", "Mooshroom");
 		addMobConfig("ocelot", "Ocelot");
 		addMobConfig("pig", "Pig");
-		addMobConfig("piglin", "Piglin");
 		addMobConfig("piglinBrute", "Piglin Brute");
 		addMobConfig("pillager", "Pillager");
 		addMobConfig("salmon", "Salmon");

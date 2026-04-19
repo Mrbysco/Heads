@@ -1,6 +1,7 @@
 package com.mrbysco.heads.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,14 +14,11 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.SkullBlock;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class HeadsSpecialRenderer implements NoDataSpecialModelRenderer {
@@ -40,17 +38,20 @@ public class HeadsSpecialRenderer implements NoDataSpecialModelRenderer {
 	}
 
 	@Override
-	public void submit(
-			ItemDisplayContext displayContext, PoseStack poseStack, SubmitNodeCollector nodeCollector, int packedLight,
-			int packedOverlay, boolean hasFoil, int outlineColor
-	) {
-		HeadsBlockRenderer.submitSkull(null, 180.0F, this.animation, poseStack, nodeCollector,
+	public void submit(PoseStack poseStack, SubmitNodeCollector nodeCollector, int packedLight,
+	                   int packedOverlay, boolean hasFoil, int outlineColor) {
+		poseStack.pushPose();
+		poseStack.translate(0.5F, 0.0F, 0.5F);
+		poseStack.mulPose(Axis.XP.rotationDegrees(180.F));
+
+		HeadsBlockRenderer.submitSkull(this.animation, poseStack, nodeCollector,
 				packedLight, this.model, this.renderType, outlineColor, null);
 
 		if (this.model2 != null && this.renderType2 != null) {
-			HeadsBlockRenderer.submitSkull(null, 180.0F, this.animation, poseStack, nodeCollector,
+			HeadsBlockRenderer.submitSkull(this.animation, poseStack, nodeCollector,
 					packedLight, this.model2, this.renderType2, outlineColor, null);
 		}
+		poseStack.popPose();
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class HeadsSpecialRenderer implements NoDataSpecialModelRenderer {
 
 	public record Unbaked(SkullBlock.Type kind, Optional<Identifier> textureOverride,
 	                      Optional<Identifier> textureOverride2,
-	                      float animation) implements SpecialModelRenderer.Unbaked {
+	                      float animation) implements NoDataSpecialModelRenderer.Unbaked {
 		public static final MapCodec<HeadsSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
 				instance -> instance.group(
 								HeadTypes.CODEC.fieldOf("kind").forGetter(HeadsSpecialRenderer.Unbaked::kind),
@@ -97,7 +98,7 @@ public class HeadsSpecialRenderer implements NoDataSpecialModelRenderer {
 
 		@Nullable
 		@Override
-		public SpecialModelRenderer<?> bake(SpecialModelRenderer.BakingContext context) {
+		public HeadsSpecialRenderer bake(SpecialModelRenderer.BakingContext context) {
 			if (this.kind instanceof HeadTypes headType) {
 				SkullModelBase skullmodelbase = HeadsBlockRenderer.createModel(context.entityModelSet(), this.kind);
 

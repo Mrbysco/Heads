@@ -22,7 +22,7 @@ public class LayeredSkullModel extends HeadModelBase {
 	public LayeredSkullModel(ModelPart root, Identifier layer) {
 		super(root);
 		this.hat = root.getChild("hat");
-		this.OUTER_LAYER = RenderTypes.entityCutoutNoCullZOffset(layer);
+		this.OUTER_LAYER = RenderTypes.armorCutoutNoCull(layer);
 	}
 
 	public static MeshDefinition createHumanoidHead() {

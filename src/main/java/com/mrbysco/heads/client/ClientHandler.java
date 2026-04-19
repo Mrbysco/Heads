@@ -42,12 +42,13 @@ import com.mrbysco.heads.registry.HeadTypes;
 import com.mrbysco.heads.registry.HeadsRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.object.skull.SkullModel;
+import net.minecraft.client.renderer.block.BuiltInBlockModels;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterSpecialBlockModelRendererEvent;
+import net.neoforged.neoforge.client.event.RegisterBlockModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = Heads.MOD_ID)
@@ -115,10 +116,9 @@ public class ClientHandler {
 	}
 
 	@SubscribeEvent
-	static void registerSpecialBlockModelRenderer(RegisterSpecialBlockModelRendererEvent event) {
+	static void registerSpecialBlockModelRenderer(RegisterBlockModelsEvent event) {
 		for (HeadReg reg : HeadsRegistry.headList) {
-			event.register(reg.getHead().get(), new HeadsSpecialRenderer.Unbaked(reg.getHeadType()));
-			event.register(reg.getWallHead().get(), new HeadsSpecialRenderer.Unbaked(reg.getHeadType()));
+			BuiltInBlockModels.createMobHeads(event.getBuilder(), reg.getHeadType(), reg.getHead().get(), reg.getWallHead().get());
 		}
 	}
 
@@ -185,32 +185,32 @@ public class ClientHandler {
 		event.registerSkullModel(HeadTypes.AXOLOTL_GOLD, (entityModelSet) -> new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)), Identifier.withDefaultNamespace("textures/entity/axolotl/axolotl_gold.png"));
 		event.registerSkullModel(HeadTypes.AXOLOTL_LUCY, (entityModelSet) -> new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)), Identifier.withDefaultNamespace("textures/entity/axolotl/axolotl_lucy.png"));
 		event.registerSkullModel(HeadTypes.AXOLOTL_WILD, (entityModelSet) -> new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.AXOLOTL)), Identifier.withDefaultNamespace("textures/entity/axolotl/axolotl_wild.png"));
-		event.registerSkullModel(HeadTypes.BAT, (entityModelSet) -> new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.BAT)), Identifier.withDefaultNamespace("textures/entity/bat.png"));
+		event.registerSkullModel(HeadTypes.BAT, (entityModelSet) -> new BatSkullModel(entityModelSet.bakeLayer(ClientHandler.BAT)), Identifier.withDefaultNamespace("textures/entity/bat/bat.png"));
 		event.registerSkullModel(HeadTypes.BEE, (entityModelSet) -> new BeeSkullModel(entityModelSet.bakeLayer(ClientHandler.BEE)), Identifier.withDefaultNamespace("textures/entity/bee/bee.png"));
-		event.registerSkullModel(HeadTypes.BLAZE, (entityModelSet) -> new SkullModel(entityModelSet.bakeLayer(ClientHandler.BLAZE)), Identifier.withDefaultNamespace("textures/entity/blaze.png"));
-		event.registerSkullModel(HeadTypes.CAT_ALL_BLACK, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/all_black.png"));
-		event.registerSkullModel(HeadTypes.CAT_BLACK, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/black.png"));
-		event.registerSkullModel(HeadTypes.CAT_BRITISH_SHORTHAIR, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/british_shorthair.png"));
-		event.registerSkullModel(HeadTypes.CAT_CALICO, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/calico.png"));
-		event.registerSkullModel(HeadTypes.CAT_JELLIE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/jellie.png"));
-		event.registerSkullModel(HeadTypes.CAT_PERSIAN, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/persian.png"));
-		event.registerSkullModel(HeadTypes.CAT_RAGDOLL, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/ragdoll.png"));
-		event.registerSkullModel(HeadTypes.CAT_RED, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/red.png"));
-		event.registerSkullModel(HeadTypes.CAT_SIAMESE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/siamese.png"));
-		event.registerSkullModel(HeadTypes.CAT_TABBY, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/tabby.png"));
-		event.registerSkullModel(HeadTypes.CAT_WHITE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/white.png"));
+		event.registerSkullModel(HeadTypes.BLAZE, (entityModelSet) -> new SkullModel(entityModelSet.bakeLayer(ClientHandler.BLAZE)), Identifier.withDefaultNamespace("textures/entity/blaze/blaze.png"));
+		event.registerSkullModel(HeadTypes.CAT_ALL_BLACK, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_all_black.png"));
+		event.registerSkullModel(HeadTypes.CAT_BLACK, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_black.png"));
+		event.registerSkullModel(HeadTypes.CAT_BRITISH_SHORTHAIR, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_british_shorthair.png"));
+		event.registerSkullModel(HeadTypes.CAT_CALICO, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_calico.png"));
+		event.registerSkullModel(HeadTypes.CAT_JELLIE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_jellie.png"));
+		event.registerSkullModel(HeadTypes.CAT_PERSIAN, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_persian.png"));
+		event.registerSkullModel(HeadTypes.CAT_RAGDOLL, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_ragdoll.png"));
+		event.registerSkullModel(HeadTypes.CAT_RED, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_red.png"));
+		event.registerSkullModel(HeadTypes.CAT_SIAMESE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_siamese.png"));
+		event.registerSkullModel(HeadTypes.CAT_TABBY, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_tabby.png"));
+		event.registerSkullModel(HeadTypes.CAT_WHITE, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.CAT)), Identifier.withDefaultNamespace("textures/entity/cat/cat_white.png"));
 		event.registerSkullModel(HeadTypes.CAVE_SPIDER, (entityModelSet) -> new SpiderSkullModel(entityModelSet.bakeLayer(ClientHandler.CAVE_SPIDER)), Identifier.withDefaultNamespace("textures/entity/spider/cave_spider.png"));
-		event.registerSkullModel(HeadTypes.CHICKEN, (entityModelSet) -> new ChickenSkullModel(entityModelSet.bakeLayer(ClientHandler.CHICKEN)), Identifier.withDefaultNamespace("textures/entity/chicken.png"));
+		event.registerSkullModel(HeadTypes.CHICKEN, (entityModelSet) -> new ChickenSkullModel(entityModelSet.bakeLayer(ClientHandler.CHICKEN)), Identifier.withDefaultNamespace("textures/entity/chicken/chicken_temperate.png"));
 		event.registerSkullModel(HeadTypes.COD, (entityModelSet) -> new CodSkullModel(entityModelSet.bakeLayer(ClientHandler.COD)), Identifier.withDefaultNamespace("textures/entity/fish/cod.png"));
-		event.registerSkullModel(HeadTypes.COW, (entityModelSet) -> new CowSkullModel(entityModelSet.bakeLayer(ClientHandler.COW)), Identifier.withDefaultNamespace("textures/entity/cow/temperate_cow.png"));
-		event.registerSkullModel(HeadTypes.DOLPHIN, (entityModelSet) -> new DolphinSkullModel(entityModelSet.bakeLayer(ClientHandler.DOLPHIN)), Identifier.withDefaultNamespace("textures/entity/dolphin.png"));
+		event.registerSkullModel(HeadTypes.COW, (entityModelSet) -> new CowSkullModel(entityModelSet.bakeLayer(ClientHandler.COW)), Identifier.withDefaultNamespace("textures/entity/cow/cow_temperate.png"));
+		event.registerSkullModel(HeadTypes.DOLPHIN, (entityModelSet) -> new DolphinSkullModel(entityModelSet.bakeLayer(ClientHandler.DOLPHIN)), Identifier.withDefaultNamespace("textures/entity/dolphin/dolphin.png"));
 		event.registerSkullModel(HeadTypes.DONKEY, (entityModelSet) -> new HorseSkullModel(entityModelSet.bakeLayer(ClientHandler.DONKEY)), Identifier.withDefaultNamespace("textures/entity/horse/donkey.png"));
 		event.registerSkullModel(HeadTypes.DROWNED, (entityModelSet) -> new LayeredSkullModel(entityModelSet.bakeLayer(ClientHandler.DROWNED), Identifier.withDefaultNamespace("textures/entity/zombie/drowned_outer_layer.png")), Identifier.withDefaultNamespace("textures/entity/zombie/drowned.png"));
 		event.registerSkullModel(HeadTypes.ENDERMAN, (entityModelSet) -> new EndermanSkullModel(entityModelSet.bakeLayer(ClientHandler.ENDERMAN)), Identifier.withDefaultNamespace("textures/entity/enderman/enderman.png"));
-		event.registerSkullModel(HeadTypes.ENDERMITE, (entityModelSet) -> new EndermiteSkullModel(entityModelSet.bakeLayer(ClientHandler.ENDERMITE)), Identifier.withDefaultNamespace("textures/entity/endermite.png"));
+		event.registerSkullModel(HeadTypes.ENDERMITE, (entityModelSet) -> new EndermiteSkullModel(entityModelSet.bakeLayer(ClientHandler.ENDERMITE)), Identifier.withDefaultNamespace("textures/entity/endermite/endermite.png"));
 		event.registerSkullModel(HeadTypes.EVOKER, (entityModelSet) -> new IllagerSkullModel(entityModelSet.bakeLayer(ClientHandler.EVOKER)), Identifier.withDefaultNamespace("textures/entity/illager/evoker.png"));
 		event.registerSkullModel(HeadTypes.FOX, (entityModelSet) -> new FoxSkullModel(entityModelSet.bakeLayer(ClientHandler.FOX)), Identifier.withDefaultNamespace("textures/entity/fox/fox.png"));
-		event.registerSkullModel(HeadTypes.FOX_SNOW, (entityModelSet) -> new FoxSkullModel(entityModelSet.bakeLayer(ClientHandler.FOX)), Identifier.withDefaultNamespace("textures/entity/fox/snow_fox.png"));
+		event.registerSkullModel(HeadTypes.FOX_SNOW, (entityModelSet) -> new FoxSkullModel(entityModelSet.bakeLayer(ClientHandler.FOX)), Identifier.withDefaultNamespace("textures/entity/fox/fox_snow.png"));
 		event.registerSkullModel(HeadTypes.GHAST, (entityModelSet) -> new HeadModelBase(entityModelSet.bakeLayer(ClientHandler.GHAST)), Identifier.withDefaultNamespace("textures/entity/ghast/ghast.png"));
 		event.registerSkullModel(HeadTypes.GLOW_SQUID, (entityModelSet) -> new SquidSkullModel(entityModelSet.bakeLayer(ClientHandler.GLOW_SQUID), true), Identifier.withDefaultNamespace("textures/entity/squid/glow_squid.png"));
 		event.registerSkullModel(HeadTypes.GOAT, (entityModelSet) -> new GoatSkullModel(entityModelSet.bakeLayer(ClientHandler.GOAT)), Identifier.withDefaultNamespace("textures/entity/goat/goat.png"));
@@ -229,10 +229,10 @@ public class ClientHandler {
 		event.registerSkullModel(HeadTypes.IRON_GOLEM, (entityModelSet) -> new IronGolemSkullModel(entityModelSet.bakeLayer(ClientHandler.IRON_GOLEM)), Identifier.withDefaultNamespace("textures/entity/iron_golem/iron_golem.png"));
 		event.registerSkullModel(HeadTypes.MAGMA_CUBE, (entityModelSet) -> new MagmaCubeSkullModel(entityModelSet.bakeLayer(ClientHandler.MAGMA_CUBE)), Identifier.withDefaultNamespace("textures/entity/slime/magmacube.png"));
 		event.registerSkullModel(HeadTypes.MULE, (entityModelSet) -> new HorseSkullModel(entityModelSet.bakeLayer(ClientHandler.MULE)), Identifier.withDefaultNamespace("textures/entity/horse/mule.png"));
-		event.registerSkullModel(HeadTypes.MOOSHROOM_BROWN, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_BROWN), false), Identifier.withDefaultNamespace("textures/entity/cow/brown_mooshroom.png"));
-		event.registerSkullModel(HeadTypes.MOOSHROOM_RED, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_RED), true), Identifier.withDefaultNamespace("textures/entity/cow/red_mooshroom.png"));
+		event.registerSkullModel(HeadTypes.MOOSHROOM_BROWN, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_BROWN), false), Identifier.withDefaultNamespace("textures/entity/cow/mooshroom_brown.png"));
+		event.registerSkullModel(HeadTypes.MOOSHROOM_RED, (entityModelSet) -> new MooshroomSkullModel(entityModelSet.bakeLayer(ClientHandler.MOOSHROOM_RED), true), Identifier.withDefaultNamespace("textures/entity/cow/mooshroom_red.png"));
 		event.registerSkullModel(HeadTypes.OCELOT, (entityModelSet) -> new OcelotSkullModel(entityModelSet.bakeLayer(ClientHandler.OCELOT)), Identifier.withDefaultNamespace("textures/entity/cat/ocelot.png"));
-		event.registerSkullModel(HeadTypes.PIG, (entityModelSet) -> new PigSkullModel(entityModelSet.bakeLayer(ClientHandler.PIG)), Identifier.withDefaultNamespace("textures/entity/pig/temperate_pig.png"));
+		event.registerSkullModel(HeadTypes.PIG, (entityModelSet) -> new PigSkullModel(entityModelSet.bakeLayer(ClientHandler.PIG)), Identifier.withDefaultNamespace("textures/entity/pig/pig_temperate.png"));
 		event.registerSkullModel(HeadTypes.PIGLIN_BRUTE, (entityModelSet) -> new PiglinSkullModel(entityModelSet.bakeLayer(ClientHandler.PIGLIN_BRUTE)), Identifier.withDefaultNamespace("textures/entity/piglin/piglin_brute.png"));
 		event.registerSkullModel(HeadTypes.PILLAGER, (entityModelSet) -> new IllagerSkullModel(entityModelSet.bakeLayer(ClientHandler.PILLAGER)), Identifier.withDefaultNamespace("textures/entity/illager/pillager.png"));
 		event.registerSkullModel(HeadTypes.SALMON, (entityModelSet) -> new SalmonSkullModel(entityModelSet.bakeLayer(ClientHandler.SALMON)), Identifier.withDefaultNamespace("textures/entity/fish/salmon.png"));
@@ -253,17 +253,17 @@ public class ClientHandler {
 		event.registerSkullModel(HeadTypes.SHEEP_SHAVEN, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), Identifier.withDefaultNamespace("textures/entity/sheep/sheep.png"));
 		event.registerSkullModel(HeadTypes.SHEEP_WHITE, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), Identifier.withDefaultNamespace("textures/entity/sheep/sheep.png"));
 		event.registerSkullModel(HeadTypes.SHEEP_YELLOW, (entityModelSet) -> new SheepSkullModel(entityModelSet.bakeLayer(ClientHandler.SHEEP)), Identifier.withDefaultNamespace("textures/entity/sheep/sheep.png"));
-		event.registerSkullModel(HeadTypes.SILVERFISH, (entityModelSet) -> new SilverfishSkullModel(entityModelSet.bakeLayer(ClientHandler.SILVERFISH)), Identifier.withDefaultNamespace("textures/entity/silverfish.png"));
+		event.registerSkullModel(HeadTypes.SILVERFISH, (entityModelSet) -> new SilverfishSkullModel(entityModelSet.bakeLayer(ClientHandler.SILVERFISH)), Identifier.withDefaultNamespace("textures/entity/silverfish/silverfish.png"));
 		event.registerSkullModel(HeadTypes.SLIME, (entityModelSet) -> new SlimeSkullModel(entityModelSet.bakeLayer(ClientHandler.SLIME)), Identifier.withDefaultNamespace("textures/entity/slime/slime.png"));
-		event.registerSkullModel(HeadTypes.SNOW_GOLEM, (entityModelSet) -> new HeadModelBase(entityModelSet.bakeLayer(ClientHandler.SNOW_GOLEM)), Identifier.withDefaultNamespace("textures/entity/snow_golem.png"));
+		event.registerSkullModel(HeadTypes.SNOW_GOLEM, (entityModelSet) -> new HeadModelBase(entityModelSet.bakeLayer(ClientHandler.SNOW_GOLEM)), Identifier.withDefaultNamespace("textures/entity/snow_golem/snow_golem.png"));
 		event.registerSkullModel(HeadTypes.SPIDER, (entityModelSet) -> new SpiderSkullModel(entityModelSet.bakeLayer(ClientHandler.SPIDER)), Identifier.withDefaultNamespace("textures/entity/spider/spider.png"));
 		event.registerSkullModel(HeadTypes.SQUID, (entityModelSet) -> new SquidSkullModel(entityModelSet.bakeLayer(ClientHandler.SQUID), false), Identifier.withDefaultNamespace("textures/entity/squid/squid.png"));
 		event.registerSkullModel(HeadTypes.STRAY, (entityModelSet) -> new LayeredSkullModel(entityModelSet.bakeLayer(ClientHandler.STRAY), Identifier.withDefaultNamespace("textures/entity/skeleton/stray_overlay.png")), Identifier.withDefaultNamespace("textures/entity/skeleton/stray.png"));
-		event.registerSkullModel(HeadTypes.TURTLE, (entityModelSet) -> new TurtleSkullModel(entityModelSet.bakeLayer(ClientHandler.TURTLE)), Identifier.withDefaultNamespace("textures/entity/turtle/big_sea_turtle.png"));
+		event.registerSkullModel(HeadTypes.TURTLE, (entityModelSet) -> new TurtleSkullModel(entityModelSet.bakeLayer(ClientHandler.TURTLE)), Identifier.withDefaultNamespace("textures/entity/turtle/turtle.png"));
 		event.registerSkullModel(HeadTypes.VILLAGER, (entityModelSet) -> new VillagerSkullModel(entityModelSet.bakeLayer(ClientHandler.VILLAGER)), Identifier.withDefaultNamespace("textures/entity/villager/villager.png"));
 		event.registerSkullModel(HeadTypes.VINDICATOR, (entityModelSet) -> new IllagerSkullModel(entityModelSet.bakeLayer(ClientHandler.VINDICATOR)), Identifier.withDefaultNamespace("textures/entity/illager/vindicator.png"));
-		event.registerSkullModel(HeadTypes.WANDERING_TRADER, (entityModelSet) -> new VillagerSkullModel(entityModelSet.bakeLayer(ClientHandler.WANDERING_TRADER)), Identifier.withDefaultNamespace("textures/entity/wandering_trader.png"));
-		event.registerSkullModel(HeadTypes.WITCH, (entityModelSet) -> new WitchSkullModel(entityModelSet.bakeLayer(ClientHandler.WITCH)), Identifier.withDefaultNamespace("textures/entity/witch.png"));
+		event.registerSkullModel(HeadTypes.WANDERING_TRADER, (entityModelSet) -> new VillagerSkullModel(entityModelSet.bakeLayer(ClientHandler.WANDERING_TRADER)), Identifier.withDefaultNamespace("textures/entity/wandering_trader/wandering_trader.png"));
+		event.registerSkullModel(HeadTypes.WITCH, (entityModelSet) -> new WitchSkullModel(entityModelSet.bakeLayer(ClientHandler.WITCH)), Identifier.withDefaultNamespace("textures/entity/witch/witch.png"));
 		event.registerSkullModel(HeadTypes.WOLF, (entityModelSet) -> new WolfSkullModel(entityModelSet.bakeLayer(ClientHandler.WOLF)), Identifier.withDefaultNamespace("textures/entity/wolf/wolf.png"));
 		event.registerSkullModel(HeadTypes.ZOGLIN, (entityModelSet) -> new HoglinSkullModel(entityModelSet.bakeLayer(ClientHandler.ZOGLIN)), Identifier.withDefaultNamespace("textures/entity/hoglin/zoglin.png"));
 		event.registerSkullModel(HeadTypes.ZOMBIE_VILLAGER, (entityModelSet) -> new VillagerSkullModel(entityModelSet.bakeLayer(ClientHandler.ZOMBIE_VILLAGER)), Identifier.withDefaultNamespace("textures/entity/zombie_villager/zombie_villager.png"));

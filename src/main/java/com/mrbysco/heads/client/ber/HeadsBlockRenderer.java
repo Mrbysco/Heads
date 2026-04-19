@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.blockentity.state.SkullBlockRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SkullBlock;
@@ -50,8 +50,6 @@ public class HeadsBlockRenderer extends SkullBlockRenderer {
 		if (renderState.skullType instanceof HeadTypes type && type.isMultiModel() && renderState instanceof HeadBlockRenderState headRenderState) {
 			SkullModelBase model2 = createModel(entityModelSet, type, true);
 			submitSkull(
-					headRenderState.direction,
-					headRenderState.rotationDegrees,
 					headRenderState.animationProgress,
 					poseStack,
 					nodeCollector,

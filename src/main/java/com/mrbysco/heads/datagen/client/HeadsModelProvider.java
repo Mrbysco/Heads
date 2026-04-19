@@ -12,13 +12,9 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.renderer.special.SkullSpecialRenderer;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SkullBlock;
-
-import java.util.Optional;
 
 public class HeadsModelProvider extends ModelProvider {
 	public HeadsModelProvider(PackOutput packOutput) {
